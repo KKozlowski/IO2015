@@ -9,7 +9,12 @@ public class User {
 	private String nick;
 
 	private PersonalData personalData;
-
+	
+	public User(String nick, PersonalData pd){
+		this.nick = nick;
+		personalData = pd;
+	}
+	
 	public Collection<PermissionType> getAllPermissions() {
 		return null;
 	}
@@ -20,6 +25,10 @@ public class User {
 
 	public int getID() {
 		return 0;
+	}
+	
+	public String getNick(){
+		return nick;
 	}
 
 	public void serialize() {

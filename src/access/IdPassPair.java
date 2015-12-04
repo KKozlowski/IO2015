@@ -6,16 +6,21 @@ public class IdPassPair {
 
 	private String encryptedPass;
 
+	public IdPassPair(int id, String password){
+		
+	}
+	
 	public int getID() {
-		return 0;
+		return id;
 	}
 
 	public Boolean check(String encryption) {
-		return null;
+		if (encryption == encryptedPass) return true;
+		else return false;
 	}
 
-	public void setEncryption(String encryption) {
-
+	public void setPass(String pass) {
+		encryptedPass = PasswordStorage.encrypt(pass);
 	}
 
 }

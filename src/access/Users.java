@@ -1,28 +1,38 @@
 package access;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import crew.Employee;
 
 public class Users {
 
-	private List<User> users;
+	private ArrayList<User> users = new ArrayList<User>();
 
-	private List<NetUser> netUsers;
+	private ArrayList<NetUser> netUsers = new ArrayList<NetUser>();
 
-	private List<InnerUser> innerUsers;
+	private ArrayList<InnerUser> innerUsers = new ArrayList<InnerUser>();
 
-	private PasswordStorage passwordStorage;
+	private PasswordStorage passwordStorage = new PasswordStorage();
 
-	public boolean addInnerUser(PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
+	public boolean addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
 		return false;
 	}
 
-	public boolean addInnerUser(PersonalData personalInfo, Employee employmentInfo, String password) {
+	public boolean addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, String password) {
 		return false;
 	}
 
-	public NetUser registerNetUser(PersonalData personalInfo, String password) {
+	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
+		if (getUserByNick(nick) != null)
+			return null;
+		
+		User usr = new User(nick, personalInfo);
+		int newID = usr.getID();
+		passwordStorage.addIdPass(newID, password);
+		
+		users.add(usr);
+		
 		return null;
 	}
 
@@ -46,7 +56,7 @@ public class Users {
 		return null;
 	}
 
-	public User getUserByNick() {
+	public User getUserByNick(String n) {
 		return null;
 	}
 	

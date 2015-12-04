@@ -1,15 +1,12 @@
 package access;
 
-import crew.SkillType;
-import java.util.Collection;
+import java.util.List;
 
 public class Permissions {
 
-	private SkillType skillType;
-
 	private PermissionType permissionType;
 
-	public Collection<PermissionType> getAll() {
+	public List<PermissionType> getAll() {
 		return null;
 	}
 
