@@ -1,7 +1,8 @@
 package crew;
 
-public enum SkillType {
+public class SkillType {
 
-	
+	public int id;
+	public String Name;
 
 }
