@@ -7,7 +7,8 @@ public class IdPassPair {
 	private String encryptedPass;
 
 	public IdPassPair(int id, String password){
-		
+		this.id = id;
+		setPass(password);
 	}
 	
 	public int getID() {

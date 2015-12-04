@@ -4,6 +4,11 @@ public class LoginResult {
 
 	public boolean success;
 
-	private User loggedUser;
-
+	public User loggedUser;
+	
+	public LoginResult(User u, boolean s){
+		loggedUser = u;
+		success = s;
+	}
+	
 }

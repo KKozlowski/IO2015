@@ -14,6 +14,8 @@ public class Users {
 	private ArrayList<InnerUser> innerUsers = new ArrayList<InnerUser>();
 
 	private PasswordStorage passwordStorage = new PasswordStorage();
+	
+	private User currentUser;
 
 	public boolean addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
 		return false;
@@ -24,14 +26,15 @@ public class Users {
 	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
-		if (getUserByNick(nick) != null)
+		if (getNetUserByNick(nick) != null)
 			return null;
 		
-		User usr = new User(nick, personalInfo);
+		NetUser usr = new NetUser(nick, personalInfo);
 		int newID = usr.getID();
 		passwordStorage.addIdPass(newID, password);
 		
 		users.add(usr);
+		netUsers.add(usr);
 		
 		return null;
 	}
@@ -40,12 +43,28 @@ public class Users {
 		return false;
 	}
 
+	private LoginResult login(User u, String password){
+		if (u == null) 
+			return new LoginResult(null, false);
+		
+		int id = u.getID();
+		boolean success = passwordStorage.checkPassword(id, password);
+		if (success){
+			currentUser = u;
+			return new LoginResult(u, success);
+		}
+		else
+			return new LoginResult(null, false);
+	}
+	
 	public LoginResult netLogin(String nick, String password) {
-		return null;
+		User u = getNetUserByNick(nick);
+		return login(u, password);
 	}
 
 	public LoginResult innerLogin(String nick, String password) {
-		return null;
+		User u = getInnerUserByNick(nick);
+		return login(u, password);
 	}
 
 	public void serialize() {
@@ -56,16 +75,28 @@ public class Users {
 		return null;
 	}
 
-	public User getUserByNick(String n) {
+	public NetUser getNetUserByNick(String n) {
+		for(NetUser u : netUsers){
+			if (u.getNick() == n)
+				return u;
+		}
+		return null;
+	}
+	
+	public InnerUser getInnerUserByNick(String n) {
+		for(InnerUser u : innerUsers){
+			if (u.getNick() == n)
+				return u;
+		}
 		return null;
 	}
 	
 	public User getCurrentUser(){
-		return null;
+		return currentUser;
 	}
 	
-	public Boolean doesCurrentUserHavePermission(){
-		return true;
+	public Boolean doesCurrentUserHavePermission(PermissionType pt){
+		return currentUser.getAllPermissions().contains(pt);
 	}
 
 }

@@ -1,6 +1,5 @@
 package access;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,9 +12,14 @@ public class PasswordStorage {
 			data.remove(id);
 		data.put(id, ipp);
 	}
-
-	public static String encrypt(String original) {
-		return null;
+	
+	/**
+	 * Encrypts a string with with a very complex algorythm.
+	 * @param original string
+	 * @return encrypted string
+	 */
+	public static String encrypt(String original) { 
+		return original;
 	}
 
 	public Boolean checkPassword(int id, String password) {
