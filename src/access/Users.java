@@ -49,5 +49,13 @@ public class Users {
 	public User getUserByNick() {
 		return null;
 	}
+	
+	public User getCurrentUser(){
+		return null;
+	}
+	
+	public Boolean doesCurrentUserHavePermission(){
+		return true;
+	}
 
 }
