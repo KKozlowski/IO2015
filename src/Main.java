@@ -1,7 +1,10 @@
+import access.Users;
+
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.print("Hello World");
+		System.out.println("Hello World");
+		App.getInstance().singletonTest();
 	}
 
 }
