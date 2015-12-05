@@ -27,6 +27,14 @@ public class Employee {
 	public int getID() {
 		return 0;
 	}
+	
+	public User getUserAccount(){
+		return userAccount;
+	}
+	
+	public void setUserAccount(User u){
+		userAccount = u;
+	}
 
 	public List<EmployeeAssignment> getAssingments() {
 		return null;

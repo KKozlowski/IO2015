@@ -7,6 +7,11 @@ public class NetUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	private PermissionType permissionType;
-
+	@Override
+	public boolean hasPermission(PermissionType pt){
+		if (pt == PermissionType.netUser) 
+			return true;
+		else
+			return false;
+	}
 }

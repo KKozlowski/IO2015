@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import crew.Employee;
+import general.*;
 
 public class Users {
 
@@ -16,13 +17,38 @@ public class Users {
 	private PasswordStorage passwordStorage = new PasswordStorage();
 	
 	private User currentUser;
-
-	public boolean addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
-		return false;
+	
+	public InnerUser registerEmployee(String nick, PersonalData personalInfo, Permissions permissions, String password){
+		
+		Employee e = App.getInstance().getCrew().addEmployee();
+		InnerUser result = addInnerUser(nick, personalInfo, e, permissions, password);
+		if (result == null){
+			App.getInstance().getCrew().removeEmployee(e);
+		}
+		e.setUserAccount(result);
+		
+		return result;
+	}
+	
+	public InnerUser addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
+		if (getInnerUserByNick(nick) != null)
+			return null;
+		
+		InnerUser iu = new InnerUser(nick, personalInfo, employmentInfo, permissions);
+		
+		if (innerUsers.size() == 0) 
+			iu.getPermissions().addPermission(PermissionType.admin);
+		
+		passwordStorage.addIdPass(iu.getID(), password);
+		
+		users.add(iu);
+		innerUsers.add(iu);
+		
+		return iu;
 	}
 
-	public boolean addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, String password) {
-		return false;
+	public InnerUser addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, String password) {
+		return addInnerUser(nick, personalInfo, employmentInfo, new Permissions(), password);
 	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
@@ -53,8 +79,10 @@ public class Users {
 			currentUser = u;
 			return new LoginResult(u, success);
 		}
-		else
+		else{
+			currentUser = null;
 			return new LoginResult(null, false);
+		}
 	}
 	
 	public LoginResult netLogin(String nick, String password) {
@@ -65,6 +93,10 @@ public class Users {
 	public LoginResult innerLogin(String nick, String password) {
 		User u = getInnerUserByNick(nick);
 		return login(u, password);
+	}
+	
+	public void logout(){
+		currentUser = null;
 	}
 
 	public void serialize() {
@@ -95,8 +127,18 @@ public class Users {
 		return currentUser;
 	}
 	
-	public Boolean doesCurrentUserHavePermission(PermissionType pt){
-		return currentUser.getAllPermissions().contains(pt);
+	public boolean doesCurrentUserHavePermission(PermissionType pt){
+		if (currentUser == null)
+			return false;
+		return currentUser.hasPermission(pt);
+	}
+	
+	public boolean isCurrentUserAdmin(){
+		if (currentUser == null && innerUsers.size() == 0)
+			return true;
+		else if (currentUser == null)
+			return false;
+		else return currentUser.hasPermission(PermissionType.admin);
 	}
 
 }

@@ -1,9 +1,11 @@
 package access;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class User {
-
+	
+	private static int lastID;
+	
 	private int id;
 
 	private String nick;
@@ -13,18 +15,19 @@ public class User {
 	public User(String nick, PersonalData pd){
 		this.nick = nick;
 		personalData = pd;
+		id = ++lastID;
 	}
 	
-	public Collection<PermissionType> getAllPermissions() {
-		return null;
+	public boolean hasPermission(PermissionType pt){
+		return false;
 	}
 
 	public PersonalData getPersonalData() {
-		return null;
+		return personalData;
 	}
 
 	public int getID() {
-		return 0;
+		return id;
 	}
 	
 	public String getNick(){
