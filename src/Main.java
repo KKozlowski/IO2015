@@ -54,7 +54,7 @@ public class Main {
 		App.getInstance().getWorkshop().checkCurrentTasks();
 		App.getInstance().getWorkshop().removeServices();
 		System.out.println("Usuwanie zadanie(wykonane)");
-		System.out.println("Sprawdzanie aktualnych zadan serwisu (po wykonaniu 1)");
+		System.out.println("Sprawdzanie aktualnych zadan serwisu (po usunieciu zadania(skonczeniu pracy))");
 		App.getInstance().getWorkshop().checkCurrentTasks();
 		
 	}
