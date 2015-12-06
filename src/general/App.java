@@ -39,7 +39,7 @@ public class App {
     }
     
     public void singletonTest(){
-    	System.out.println("Singleton nazywa siê App.");
+    	System.out.println("Singleton nazywa siÃª App.");
     }
 
 	public Users getUsers() {
@@ -56,6 +56,10 @@ public class App {
 
 	public Storage getStorage() {
 		return storage;
+	}
+	
+	public Workshop getWorkshop() {
+		return workshop;
 	}
     
 }
