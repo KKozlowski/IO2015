@@ -1,5 +1,7 @@
 package workshop;
 
+import general.App;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,4 +63,23 @@ public class Workshop {
 
 	}
 
+	
+	
+	// TEST
+	public void addingCommisionsTest(){
+		
+		System.out.println();
+		System.out.println("--TEST SERWISU--");
+		addCommision();
+		System.out.println("Sprawdzanie wszystkich zadan serwisu(nawet wykonanych)");
+		checkAllTasks();
+		System.out.println("Sprawdzanie aktualnych zadan serwisu");
+		checkCurrentTasks();
+		removeServices();
+		System.out.println("Usuwanie zadanie(wykonane)");
+		System.out.println("Sprawdzanie aktualnych zadan serwisu (po wykonaniu 1)");
+		checkCurrentTasks();
+	}
+	
+	
 }
