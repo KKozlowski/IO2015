@@ -27,7 +27,7 @@ public class Storage {
 	public void showStorage() {
 	
 		for (int i = 0; i<Amount.size(); i++){
-			System.out.println(Amount.get(i));
+			System.out.println(Amount.get(i).getName() + " " + Amount.get(i).isAvailable() + " " + Amount.get(i).getDescription());
 		}
 	}
 

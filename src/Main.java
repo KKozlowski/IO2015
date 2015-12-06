@@ -2,6 +2,8 @@ import access.PermissionType;
 import access.Permissions;
 import access.Users;
 import general.*;
+import storage.ItemType;
+import storage.SingleItem;
 public class Main {
 
 	public static void main(String[] args) {
@@ -17,6 +19,9 @@ public class Main {
 		App.getInstance().getUsers().innerLogin("ADMIN", "hwila");
 		System.out.println(App.getInstance().getUsers().getCurrentUser().getNick());
 		System.out.println(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.admin));
+		SingleItem Gwozdz = new SingleItem ("M³otek", true, "m³otek Mirka", ItemType.tool);
+		App.getInstance().getStorage().addObject(Gwozdz);
+		App.getInstance().getStorage().showStorage();
 	}
 
 }
