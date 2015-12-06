@@ -20,14 +20,14 @@ public class Main {
 		}
 		App.getInstance().getUsers().logout();
 		
-<<<<<<< HEAD
+
 		App.getInstance().getUsers().innerLogin("ADMIN", "hwila");
 		System.out.println(App.getInstance().getUsers().getCurrentUser().getNick());
 		System.out.println(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.admin));
 		SingleItem Gwozdz = new SingleItem ("M³otek", true, "m³otek Mirka", ItemType.tool);
 		App.getInstance().getStorage().addObject(Gwozdz);
 		App.getInstance().getStorage().showStorage();
-=======
+
 		lr = App.getInstance().getUsers().innerLogin("ADMIN", "hwila");
 		if (lr.success){
 			System.out.println('\n' + App.getInstance().getUsers().getCurrentUser().getNick());
@@ -43,7 +43,6 @@ public class Main {
 			System.out.println("Has crewMaster permission: " + 
 					App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster));
 		}
->>>>>>> origin/master
 	}
 
 }
