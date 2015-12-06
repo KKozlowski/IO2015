@@ -16,10 +16,9 @@ public class StaffDeployment {
 	 * Róbcie z tym co chcecie.
 	 * @return Newly added employee.
 	 */
-	public Employee addEmployee(){
+	public void addEmployee(){
 		Employee e = new Employee();
 		employees.add(e);
-		return e;
 	}
 	
 	public void removeEmployee(Employee toRemove){

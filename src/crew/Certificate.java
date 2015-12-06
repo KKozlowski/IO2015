@@ -13,8 +13,6 @@ public class Certificate {
 
 	private int certificateID;
 
-	private SkillType skillType;
-
 	public void removeSkill() {
 
 	}

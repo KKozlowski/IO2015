@@ -42,6 +42,8 @@ public class EmployeeAssignment {
 	}
 
 	public void addEmployee(Employee employee) {
+		
+		this.employee = employee;
 
 	}
 
