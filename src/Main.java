@@ -3,6 +3,7 @@ import access.LoginResult;
 import access.PermissionType;
 import access.Permissions;
 import access.Users;
+import crew.Employee;
 import general.*;
 public class Main {
 
@@ -33,6 +34,7 @@ public class Main {
 			System.out.println("Has crewMaster permission: " + 
 					App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster));
 		}
+		
 	}
 
 }
