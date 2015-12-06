@@ -27,7 +27,7 @@ public class App {
           instance.users = new Users();
           instance.crew = new StaffDeployment();
           instance.services = new Services();
-          instance.storage = new Storage();
+          instance.storage = new Storage("Narzedzia");
           instance.workshop = new Workshop();
        }
 	}
