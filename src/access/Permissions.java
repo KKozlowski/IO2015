@@ -21,12 +21,14 @@ public class Permissions {
 		}
 	}
 
-	public Boolean removePermission(PermissionType toAdd) {
+	public Boolean removePermission(PermissionType toRemove) {
 		if (!App.getInstance().getUsers().isCurrentUserAdmin())
 			return false;
 		
-		if (permissions.contains(toAdd)){
-			permissions.remove(toAdd);
+		if (permissions.contains(toRemove)){
+			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfUsersWithPermission(toRemove) == 0)
+				return false;
+			permissions.remove(toRemove);
 			return true;
 		}
 		else {

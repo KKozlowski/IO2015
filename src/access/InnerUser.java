@@ -20,11 +20,14 @@ public class InnerUser extends User {
 	}
 	
 	public Employee getEmploymentInfo() {
-		return null;
+		return employmentInfo;
 	}
 
 	public Permissions getPermissions() {
 		return permissions;
+	}
+	public void setEmploymentInfo(Employee employee){
+		employmentInfo=employee;
 	}
 
 }

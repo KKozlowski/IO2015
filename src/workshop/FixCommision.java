@@ -15,28 +15,24 @@ public class FixCommision {
 
 	private Date DateEnded;
 
-	private int Item;
-
-	private Workshop workshop;
+	private SingleItem Item;
 
 	private NewItem newItem;
 
-	private SingleItem[] singleItem;
-
-	public void EditProgress() {
-
+	public void EditProgress(boolean Progress) {
+		InProgress = Progress;
 	}
 
-	public void EditInfo() {
-
+	public void EditInfo(String Info) {
+		AdditionalInfo = Info;
 	}
 
-	public void EditDateEnded() {
-
+	public void EditDateEnded(Date EndDate) {
+		DateEnded = EndDate;
 	}
 
-	public void ItemAssignment() {
-
+	public void ItemAssignment(SingleItem AssignedItem) {
+		Item = AssignedItem;
 	}
 
 	public void AddNewItem() {

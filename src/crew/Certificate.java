@@ -52,4 +52,9 @@ public class Certificate {
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+	@Override
+	public String toString() {
+		return "Certificate certificateID=" + certificateID + ", name=" + name
+				+ ", skills=" + skills + ", expirationDate=" + expirationDate;
+	}
 }

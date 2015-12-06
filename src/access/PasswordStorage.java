@@ -19,11 +19,11 @@ public class PasswordStorage {
 	 * @return encrypted string
 	 */
 	public static String encrypt(String original) { 
-		return original;
+		return original + "0";
 	}
 
 	public Boolean checkPassword(int id, String password) {
-		return data.get(id).check(encrypt(password));
+		return data.get(id).check(password);
 	}
 
 	public void serialize() {
