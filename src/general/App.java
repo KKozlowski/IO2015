@@ -27,7 +27,7 @@ public class App {
           instance.users = new Users();
           instance.crew = new StaffDeployment();
           instance.services = new Services();
-          instance.storage = new Storage("Narzedzia");
+          instance.storage = new Storage();
           instance.workshop = new Workshop();
        }
 	}
@@ -39,7 +39,7 @@ public class App {
     }
     
     public void singletonTest(){
-    	System.out.println("Singleton nazywa siê App.");
+    	System.out.println("Singleton nazywa się App.");
     }
 
 	public Users getUsers() {
