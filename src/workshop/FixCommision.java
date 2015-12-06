@@ -57,7 +57,7 @@ public class FixCommision {
 	}
 	
 	public void addNewItem(String name, int nrID, Date serviceDate, String client, String additionalInfo) {
-		//do pokazania, że działa
+		//na czas testu
 		NewItem newItem = new NewItem(name, nrID, serviceDate, client, additionalInfo);
 		
 	}
