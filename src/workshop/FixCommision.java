@@ -35,8 +35,16 @@ public class FixCommision {
 		Item = AssignedItem;
 	}
 
-	public void AddNewItem() {
-
+public void AddNewItem() {
+		//konstruktor parametrowy będzie, ale to z interfejsem
+		NewItem newItem = new NewItem();
+		
+	}
+	
+	public void AddNewItem(String Name, int nrID, Date ServiceDate, String Client, String AdditionalInfo) {
+		//do pokazania, że działa
+		NewItem newItem = new NewItem(Name, nrID, ServiceDate, Client, AdditionalInfo);
+		
 	}
 
 }

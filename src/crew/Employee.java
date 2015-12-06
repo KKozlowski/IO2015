@@ -11,35 +11,30 @@ import access.User;
 public class Employee {
 
 	private Date employmentDate;
-	private int employeeID;
 	private InnerUser userAccount;
 	private List<Certificate> certificates;
 
 	public Employee(){
-		//domyúlnie ustawione na czas obecny
+		//domy≈õlnie ustawione na czas obecny
 		employmentDate=new Date();
-		employeeID=0;
 		userAccount=null;
 		certificates=new ArrayList<Certificate>();
 	}
-	public Employee(int id, InnerUser userAcc){
-		//domyúlnie ustawione na czas obecny
+	public Employee(InnerUser userAcc){
+		//domy≈õlnie ustawione na czas obecny
 		employmentDate=new Date();
-		employeeID=id;
 		userAccount=userAcc;
+		userAccount.setEmploymentInfo(this);
 		certificates=new ArrayList<Certificate>();
 	}
-	public Employee(Date date, int id, InnerUser userAcc){
+	public Employee(Date date, InnerUser userAcc){
 		employmentDate=date;
-		employeeID=id;
 		userAccount=userAcc;
+		userAccount.setEmploymentInfo(this);
 		certificates=new ArrayList<Certificate>();
 	}
 	public Date getEmploymentDate() {
 		return employmentDate;
-	}
-	public int getEmployeeID() {
-		return employeeID;
 	}
 	public List<Certificate> getCertificates() {
 		return certificates;
@@ -67,21 +62,16 @@ public class Employee {
 		}
 		return skills;
 	}
-
-	public int getID() {
-		return employeeID;
-	}
-	
 	public User getUserAccount(){
 		return userAccount;
 	}
-	
+
 	public void setUserAccount(InnerUser u){
 		userAccount = u;
 	}
 
 	public List<EmployeeAssignment> getAssingments() {
-		//TODO metoda zwracajπca assingmenty pracownika
+		//TODO metoda zwracajƒÖca assingmenty pracownika
 		return null;
 	}
 
@@ -92,12 +82,17 @@ public class Employee {
 	{
 		return userAccount.getPersonalData().getPESEL();
 	}
-	
+
 	public void addCertificate(Certificate cert){
-		//TODO do wykonania zmiana zaleøna od wykonania reszty
+		//TODO do wykonania zmiana zale≈ºna od wykonania reszty
 		certificates.add(cert);
 	}
 	public void removeCertificate(int index){
 		certificates.remove(index);
+	}
+	@Override
+	public String toString() {
+		return "Employee employmentDate=" + employmentDate + ", userAccount="
+				+ userAccount + ", certificates=" + certificates;
 	}
 }
