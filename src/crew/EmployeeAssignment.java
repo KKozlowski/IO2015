@@ -62,5 +62,12 @@ public class EmployeeAssignment {
 	public void removeEmployee() {
 
 	}
+	
+	public Employee getEmployee(){
+		
+		return employee;
+		
+	}
+	
 
 }
