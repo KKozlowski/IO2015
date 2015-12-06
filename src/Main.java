@@ -25,7 +25,7 @@ public class Main {
 		App.getInstance().getUsers().innerLogin("ADMIN", "hwila");
 		System.out.println(App.getInstance().getUsers().getCurrentUser().getNick());
 		System.out.println(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.admin));
-		SingleItem Gwozdz = new SingleItem ("M³otek", true, "m³otek Mirka", ItemType.tool);
+		SingleItem Gwozdz = new SingleItem ("MÂ³otek", true, "mÂ³otek Mirka", ItemType.tool);
 		App.getInstance().getStorage().addObject(Gwozdz);
 		App.getInstance().getStorage().showStorage();
 
@@ -44,6 +44,18 @@ public class Main {
 			System.out.println("Has crewMaster permission: " + 
 					App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster));
 		}
+		// TEST SERWISU
+		System.out.println();
+		System.out.println("--TEST SERWISU--");
+		App.getInstance().getWorkshop().addCommision();
+		System.out.println("Sprawdzanie wszystkich zadan serwisu(nawet wykonanych)");
+		App.getInstance().getWorkshop().checkAllTasks();
+		System.out.println("Sprawdzanie aktualnych zadan serwisu");
+		App.getInstance().getWorkshop().checkCurrentTasks();
+		App.getInstance().getWorkshop().removeServices();
+		System.out.println("Usuwanie zadanie(wykonane)");
+		System.out.println("Sprawdzanie aktualnych zadan serwisu (po wykonaniu 1)");
+		App.getInstance().getWorkshop().checkCurrentTasks();
 		
 	}
 
