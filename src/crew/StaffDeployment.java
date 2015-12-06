@@ -2,7 +2,6 @@ package crew;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import services.Service;
 
@@ -12,8 +11,6 @@ import java.util.Collection;
 public class StaffDeployment {
 
 	private ArrayList<Employee> employees = new ArrayList<Employee>();
-	private ArrayList<EmployeeAssignment> assignments = new ArrayList<EmployeeAssignment>();
-	private ArrayList<SkillType> possibleSkills = new ArrayList<SkillType>();
 	
 	/**
 	 * Róbcie z tym co chcecie.
@@ -35,42 +32,23 @@ public class StaffDeployment {
 	}
 
 	public void assignEmployee(Employee employee, EmployeeAssignment assignment) {
-		
-		assignment.addEmployee(employee);
 
 	}
 
 	public List<Employee> returnEmployees() {
-		
-		return employees;
+		return null;
 	}
 
 	public Employee returnSpecifcEmployee(String pesel) {
-
-		Employee specificEmployee = employees.stream().filter(e -> e.getPesel().equalsIgnoreCase(pesel)).findFirst().get();
-		return specificEmployee;
-		
+		return null;
 	}
 
 	public List<EmployeeAssignment> returnEmployeeAssignments(String pesel) {
-
-		List<EmployeeAssignment> employeeAssignments = new ArrayList<EmployeeAssignment>();
-		
-		for(int i=0; i < assignments.size(); i++)
-		{
-			if(assignments.get(i).getEmployee().getPesel().equalsIgnoreCase(pesel))
-			{
-				employeeAssignments.add(assignments.get(i));
-			}
-		}
-		
-		return employeeAssignments;
+		return null;
 	}
 
 	public List<EmployeeAssignment> returnAssignments() {
-		
-		return assignments;
-		
+		return null;
 	}
 
 }

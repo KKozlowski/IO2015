@@ -42,8 +42,6 @@ public class EmployeeAssignment {
 	}
 
 	public void addEmployee(Employee employee) {
-		
-		this.employee = employee;
 
 	}
 
@@ -62,12 +60,5 @@ public class EmployeeAssignment {
 	public void removeEmployee() {
 
 	}
-	
-	public Employee getEmployee(){
-		
-		return employee;
-		
-	}
-	
 
 }
