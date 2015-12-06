@@ -12,6 +12,8 @@ public class NewItem {
 		this.AdditionalInfo = AdditionalInfo;
 		
 	}
+	
+	public NewItem(){}
 
 	private String Name;
 
