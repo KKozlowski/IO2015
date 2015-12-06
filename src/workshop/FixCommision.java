@@ -1,50 +1,67 @@
 package workshop;
 
 import java.util.Date;
+
 import storage.SingleItem;
 
 public class FixCommision {
 
-	private String Name;
+	private String name;
 
-	private Boolean InProgress;
+	private Boolean inProgress;
 
-	private String AdditionalInfo;
+	private String additionalInfo;
 
-	private Date DateStarted;
+	private Date dateStarted;
 
-	private Date DateEnded;
+	private Date dateEnded;
 
-	private SingleItem Item;
+	private SingleItem item;
+	
+	private NewItem newItem; 
 
-	private NewItem newItem;
-
-	public void EditProgress(boolean Progress) {
-		InProgress = Progress;
+	
+	// na czas testu
+	public FixCommision(String name, boolean inProgress){
+		this.name = name;
+		this.inProgress = inProgress;
+	}
+	
+	public String getName(){
+		return name;
 	}
 
-	public void EditInfo(String Info) {
-		AdditionalInfo = Info;
+	public void editProgress(boolean progress) {
+		inProgress = progress;
+	}
+	public boolean getProgress(){
+		return inProgress;
 	}
 
-	public void EditDateEnded(Date EndDate) {
-		DateEnded = EndDate;
+	public void editInfo(String info) {
+		additionalInfo = info;
 	}
 
-	public void ItemAssignment(SingleItem AssignedItem) {
-		Item = AssignedItem;
+	public void editDateEnded(Date endDate) {
+		dateEnded = endDate;
+	}
+	
+	public void itemAssignment(SingleItem assignedItem) {
+		item = assignedItem;
 	}
 
-public void AddNewItem() {
-		//konstruktor parametrowy będzie, ale to z interfejsem
+	public void addNewItem() {
+		//konstruktor bedzie parametrowy, ale to z interfejsem
 		NewItem newItem = new NewItem();
 		
 	}
 	
-	public void AddNewItem(String Name, int nrID, Date ServiceDate, String Client, String AdditionalInfo) {
+	public void addNewItem(String name, int nrID, Date serviceDate, String client, String additionalInfo) {
 		//do pokazania, że działa
-		NewItem newItem = new NewItem(Name, nrID, ServiceDate, Client, AdditionalInfo);
+		NewItem newItem = new NewItem(name, nrID, serviceDate, client, additionalInfo);
 		
 	}
+	
+	
 
 }
