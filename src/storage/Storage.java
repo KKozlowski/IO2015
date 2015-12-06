@@ -6,17 +6,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class Storage {
-
-	public Storage(String name) {
+	
+	public Storage() {
 		super();
-		Name = name;
 	}
 
-	
-
 	private ArrayList<SingleItem> Amount = new ArrayList<SingleItem>();
-
-	private String Name;
 
 	private SingleItem[] singleItem;
 
@@ -39,14 +34,6 @@ public class Storage {
 		return null;
 	}
 
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
 	public SingleItem[] getSingleItem() {
 		return singleItem;
 	}
@@ -57,7 +44,7 @@ public class Storage {
 
 	@Override
 	public String toString() {
-		return "Storage [Amount=" + Amount + ", Name=" + Name + ", singleItem=" + Arrays.toString(singleItem) + "]";
+		return "Storage [Amount=" + Amount + ", singleItem=" + Arrays.toString(singleItem) + "]";
 	}
 
 }
