@@ -2,27 +2,28 @@ package workshop;
 
 import java.util.Date;
 
+
 public class NewItem {
 	
-	public NewItem(String Name, int nrID, Date ServiceDate, String Client, String AdditionalInfo){
-		this.Name = Name;
+	public NewItem(String name, int nrID, Date serviceDate, String client, String additionalInfo){
+		this.name = name;
 		this.nrID = nrID;
-		this.ServiceDate = ServiceDate;
-		this.Client = Client;
-		this.AdditionalInfo = AdditionalInfo;
+		this.serviceDate = serviceDate;
+		this.client = client;
+		this.additionalInfo = additionalInfo;
 		
 	}
 	
 	public NewItem(){}
 
-	private String Name;
-
+	private String name;
+	
 	private int nrID;
 
-	private Date ServiceDate;
+	private Date serviceDate;
 
-	private String Client;
+	private String client;
 
-	private String AdditionalInfo;
+	private String additionalInfo;
 
 }
