@@ -15,8 +15,8 @@ public class IdPassPair {
 		return id;
 	}
 
-	public Boolean check(String encryption) {
-		if (encryption == encryptedPass) return true;
+	public Boolean check(String password) {
+		if (PasswordStorage.encrypt(password).equals(encryptedPass)) return true;
 		else return false;
 	}
 

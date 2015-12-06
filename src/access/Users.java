@@ -64,9 +64,34 @@ public class Users {
 		
 		return null;
 	}
+	
+	public boolean removeUserByNick(String nick){
+		User u = getNetUserByNick(nick);
+		return removeUser(u);
+	}
 
-	public boolean removeUserByID() {
-		return false;
+	public boolean removeUserByID(int id) {
+		User u = getUserByID(id);
+		return removeUser(u);
+	}
+	
+	private boolean removeUser(User u){
+		if(u == null)
+			return false;
+		if(u == getCurrentUser())
+			return false;
+		if(!users.contains(u))
+			return false;
+		else{
+			users.remove(u);
+			if((NetUser)u != null){
+				netUsers.remove(u);
+			}
+			if((InnerUser)u != null){
+				innerUsers.remove(u);
+			}
+			return true;
+		}
 	}
 
 	private LoginResult login(User u, String password){
@@ -103,7 +128,11 @@ public class Users {
 
 	}
 
-	public User getUserByID() {
+	public User getUserByID(int id) {
+		for(User u : users){
+			if (u.getID() == id)
+				return u;
+		}
 		return null;
 	}
 
@@ -139,6 +168,15 @@ public class Users {
 		else if (currentUser == null)
 			return false;
 		else return currentUser.hasPermission(PermissionType.admin);
+	}
+	
+	public int numberOfUsersWithPermission(PermissionType p){
+		int result = 0;
+		for(User u : users){
+			if (u.hasPermission(p))
+				result++;
+		}
+		return result;
 	}
 
 }
