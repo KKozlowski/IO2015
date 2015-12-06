@@ -26,5 +26,8 @@ public class InnerUser extends User {
 	public Permissions getPermissions() {
 		return permissions;
 	}
+	public void setEmploymentInfo(Employee employee){
+		employmentInfo=employee;
+	}
 
 }
