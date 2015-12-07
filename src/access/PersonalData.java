@@ -13,53 +13,66 @@ public class PersonalData {
 	private String idCardID;
 
 	private String mail;
+	
+	public PersonalData(String name, String surname, String pesel, String adress, String idCardID, String mail) {
+		this.name = name;
+		this.surname = surname;
+		this.pesel = pesel;
+		this.adress = adress;
+		this.idCardID = idCardID;
+		this.mail = mail;
+	}
+	
+	public PersonalData() {
+	
+	}
 
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	public String getSurname() {
-		return null;
+		return surname;
 	}
 
 	public String getPESEL() {
-		return null;
+		return pesel;
 	}
 
 	public String getAdress() {
-		return null;
+		return adress;
 	}
 
 	public String getCardID() {
-		return null;
+		return idCardID;
 	}
 
 	public String getMail() {
-		return null;
+		return mail;
 	}
 
 	public void setName(String data) {
-
+		this.name = data;
 	}
 
 	public void setSurname(String data) {
-
+		this.surname = data;
 	}
 
 	public void setPESEL(String data) {
-
+		this.pesel = data;
 	}
 
 	public void setAdress(String data) {
-
+		this.adress = data;
 	}
 
 	public void setCardID(String data) {
-
+		this.idCardID = data;
 	}
 
 	public void setMail(String data) {
-
+		this.mail = data;
 	}
 
 	public void serialize() {
