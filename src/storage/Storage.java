@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import access.PermissionType;
+import general.App;
+
 public class Storage {
 	
 	public Storage() {
@@ -27,6 +30,8 @@ public class Storage {
 	}
 
 	public void addObject(SingleItem SingleObject) {
+		if(!App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.storageWorker))
+			return;
 		Amount.add(SingleObject);
 	}
 
