@@ -29,7 +29,7 @@ public class EmployeeAssignment {
 
 	private StaffDeployment staffDeployment;
 	
-	EmployeeAssignment(Date beginDate, Date endDate, boolean timeIndp, List<SkillType> reqSkills, Service service, String notes)
+	public EmployeeAssignment(Date beginDate, Date endDate, boolean timeIndp, List<SkillType> reqSkills, Service service, String notes)
 	{
 		beginning = beginDate;
 		endDate = ending;
