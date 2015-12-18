@@ -11,7 +11,14 @@ public class MainController {
   @ResponseBody
   public String index() {
     return "Proudly handcrafted by " +
-        "<b>pankamil</b> :)";
+        "<b>pankamil</b> :)"+
+    	"<br /><a href='/about'>CLICK</a>";
+  }
+  
+  @RequestMapping("/about")
+  @ResponseBody
+  public String about() {
+    return "First try.";
   }
 
 }
