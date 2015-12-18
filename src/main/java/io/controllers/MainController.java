@@ -1,5 +1,7 @@
 package io.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,8 +11,8 @@ public class MainController {
 
   @RequestMapping("/")
   @ResponseBody
-  public String index() {
-    return "Proudly handcrafted by " +
+  public String index(HttpSession h) {
+    return "SESSION ID: " + h.getId() + "<br />Proudly handcrafted by " +
         "<b>pankamil</b> :)"+
     	"<br /><a href='/about'>CLICK</a>";
   }
