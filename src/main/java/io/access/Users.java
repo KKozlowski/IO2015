@@ -146,7 +146,7 @@ public class Users {
 
 	public NetUser getNetUserByNick(String n) {
 		for(NetUser u : netUsers){
-			if (u.getNick() == n)
+			if (u.getNick().equals(n))
 				return u;
 		}
 		return null;
@@ -154,7 +154,7 @@ public class Users {
 	
 	public InnerUser getInnerUserByNick(String n) {
 		for(InnerUser u : innerUsers){
-			if (u.getNick() == n)
+			if (u.getNick().equals(n))
 				return u;
 		}
 		return null;
