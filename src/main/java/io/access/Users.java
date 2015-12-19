@@ -1,6 +1,7 @@
 package io.access;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import io.access.InnerUser;
 import io.crew.Employee;
@@ -17,6 +18,8 @@ public class Users {
 	private PasswordStorage passwordStorage = new PasswordStorage();
 	
 	private User currentUser;
+	
+	private HashMap<String, User> logins = new HashMap<String, User>();
 	
 	public InnerUser registerEmployee(String nick, PersonalData personalInfo, Permissions permissions, String password){
 		

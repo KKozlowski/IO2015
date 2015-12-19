@@ -12,9 +12,9 @@ public class MainController {
   @RequestMapping("/")
   @ResponseBody
   public String index(HttpSession h) {
-    return "SESSION ID: " + h.getId() + "<br />Proudly handcrafted by " +
-        "<b>pankamil</b> :)"+
-    	"<br /><a href='/about'>CLICK</a>";
+    return "SESSION ID: " + h.getId() + "<br />"+
+    		"<a href='/netLogin'>Zaloguj się jako klient</a> - <a href='/innerLogin'>Zaloguj się jako pracownik</a>" +
+    		"<br /><a href='/about'>ABOUT</a>";
   }
   
   @RequestMapping("/about")

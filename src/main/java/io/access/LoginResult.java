@@ -11,4 +11,12 @@ public class LoginResult {
 		success = s;
 	}
 	
+	@Override
+	public String toString(){
+		if (success)
+			return "Login succeeded for user " + loggedUser.getNick();
+		else
+			return "Login failed";
+	}
+	
 }
