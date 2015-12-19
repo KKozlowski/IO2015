@@ -9,8 +9,8 @@ public class Permissions {
 	private ArrayList<PermissionType> permissions = new ArrayList<PermissionType>();
 
 	public Boolean addPermission(PermissionType toAdd) {
-		if (!App.getInstance().getUsers().isCurrentUserAdmin())
-			return false;
+		//if (!App.getInstance().getUsers().isCurrentUserAdmin()) //przenieś do Controllera
+			//return false;
 		
 		if (permissions.contains(toAdd))
 			return false;
@@ -21,8 +21,8 @@ public class Permissions {
 	}
 
 	public Boolean removePermission(PermissionType toRemove) {
-		if (!App.getInstance().getUsers().isCurrentUserAdmin())
-			return false;
+		//if (!App.getInstance().getUsers().isCurrentUserAdmin()) //przenieś do Controllera
+			//return false;
 		
 		if (permissions.contains(toRemove)){
 			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfUsersWithPermission(toRemove) == 0)

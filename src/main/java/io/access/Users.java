@@ -17,7 +17,10 @@ public class Users {
 
 	private PasswordStorage passwordStorage = new PasswordStorage();
 	
-	private User currentUser;
+	/**
+	 * Deprecated.
+	 */
+	private User currentUser; 
 	
 	private HashMap<String, User> logins = new HashMap<String, User>();
 	
@@ -101,7 +104,7 @@ public class Users {
 		}
 	}
 
-	private LoginResult login(User u, String password){
+	private LoginResult login(String sessionID, User u, String password){
 		if (u == null) 
 			return new LoginResult(null, false);
 		
@@ -109,6 +112,8 @@ public class Users {
 		boolean success = passwordStorage.checkPassword(id, password);
 		if (success){
 			currentUser = u;
+			logins.put(sessionID, u);
+			System.out.println("LOGGED SESSION: "+ sessionID);
 			return new LoginResult(u, success);
 		}
 		else{
@@ -117,18 +122,20 @@ public class Users {
 		}
 	}
 	
-	public LoginResult netLogin(String nick, String password) {
+	public LoginResult netLogin(String sessionID, String nick, String password) {
 		User u = getNetUserByNick(nick);
 		System.out.println(u);
-		return login(u, password);
+		return login(sessionID, u, password);
 	}
 
-	public LoginResult innerLogin(String nick, String password) {
+	public LoginResult innerLogin(String sessionID, String nick, String password) {
 		User u = getInnerUserByNick(nick);
-		return login(u, password);
+		return login(sessionID, u, password);
 	}
 	
-	public void logout(){
+	public void logout(String sessionID){
+		if (isUserLogged(sessionID))
+			logins.remove(sessionID);
 		currentUser = null;
 	}
 
@@ -170,12 +177,39 @@ public class Users {
 		return currentUser.hasPermission(pt);
 	}
 	
+	/**
+	 * TODO: Prawdziwa implementacja, z mapą sesja-user.
+	 * @param sessionID ID bieżącej sesji. Na jej podstawie jest sprawdzany zalogowany w przeglądarce użytkownik.
+	 * @param pt Typ uprawnienia dostępowego
+	 * @return Czy użytkownik posiada dane uprawnienie
+	 */
+	public boolean doesCurrentUserHavePermission(String sessionID, PermissionType pt){
+		if (getUserBySessionID(sessionID) == null)
+			return false;
+		return getUserBySessionID(sessionID).hasPermission(pt);
+	}
+	
 	public boolean isCurrentUserAdmin(){
 		if (currentUser == null && innerUsers.size() == 0)
 			return true;
 		else if (currentUser == null)
 			return false;
 		else return currentUser.hasPermission(PermissionType.admin);
+	}
+	
+	public boolean isCurrentUserAdmin(String sessionID){
+		if (innerUsers.size() == 0)
+			return true;
+		else if (getUserBySessionID(sessionID) == null)
+			return false;
+		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
+	}
+	
+	private User getUserBySessionID(String sessionID){
+		if (logins.containsKey(sessionID))
+			return logins.get(sessionID);
+		else 
+			return null;
 	}
 	
 	public int numberOfUsersWithPermission(PermissionType p){
@@ -185,6 +219,11 @@ public class Users {
 				result++;
 		}
 		return result;
+	}
+	
+	public boolean isUserLogged(String sessionID){
+		System.out.println("CHECKED SESSION: "+ sessionID);
+		return logins.containsKey(sessionID);
 	}
 
 }

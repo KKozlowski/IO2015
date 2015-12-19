@@ -33,17 +33,17 @@ public class Boot {
 		
 		
 		
-		LoginResult lr = App.getInstance().getUsers().netLogin("HUE", "password");
+		LoginResult lr = App.getInstance().getUsers().netLogin(null, "HUE", "password");
 		if (lr.success){
 			System.out.println(App.getInstance().getUsers().getCurrentUser().getNick() + " == " + lr.loggedUser.getNick());
 		}
-		App.getInstance().getUsers().logout();
+		App.getInstance().getUsers().logout(null);
 		
-		lr = App.getInstance().getUsers().innerLogin("ADMIN", "hwila");
+		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "hwila");
 		if (lr.success){
 			System.out.println('\n' + App.getInstance().getUsers().getCurrentUser().getNick());
 			System.out.println("Has admin permission: " + 
-			App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.admin));
+			App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.admin));
 			((InnerUser)(App.getInstance().getUsers().getCurrentUser())).getPermissions().addPermission(PermissionType.storageWorker);
 			SingleItem Gwozdz = new SingleItem ("Mlotek", true, "mlotek Mirka", ItemType.tool);
 	 		App.getInstance().getStorage().addObject(Gwozdz);		 		 		
@@ -53,10 +53,10 @@ public class Boot {
 		InnerUser iu = (InnerUser)(lr.loggedUser);
 		if (iu != null){
 			System.out.println("\nHas crewMaster permission: " + 
-					App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster));
+					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
 			iu.getPermissions().addPermission(PermissionType.crewMaster);
 			System.out.println("Has crewMaster permission: " + 
-					App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster));
+					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
 		}
 		App.getInstance().getWorkshop().addingCommisionsTest();
 		
