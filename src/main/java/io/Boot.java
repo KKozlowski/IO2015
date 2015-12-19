@@ -63,7 +63,12 @@ public class Boot {
 		new Boot().testConnect();
 		
 		
+		
+		
 		SpringApplication.run(Boot.class, args);
+		
+		App.getInstance().getUsers().registerNetUser("HW", null, "password");
+		App.getInstance().getUsers().registerNetUser("HW", null, "password");
   }
 	
 	public void testConnect() {

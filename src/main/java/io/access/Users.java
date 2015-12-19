@@ -65,7 +65,11 @@ public class Users {
 		users.add(usr);
 		netUsers.add(usr);
 		
-		return null;
+		System.out.println("---");
+		for (NetUser u : netUsers)
+			System.out.println(u.getNick());
+		
+		return usr;
 	}
 	
 	public boolean removeUserByNick(String nick){
@@ -115,6 +119,7 @@ public class Users {
 	
 	public LoginResult netLogin(String nick, String password) {
 		User u = getNetUserByNick(nick);
+		System.out.println(u);
 		return login(u, password);
 	}
 

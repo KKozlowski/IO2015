@@ -13,7 +13,8 @@ public class MainController {
   @ResponseBody
   public String index(HttpSession h) {
     return "SESSION ID: " + h.getId() + "<br />"+
-    		"<a href='/netLogin'>Zaloguj się jako klient</a> - <a href='/innerLogin'>Zaloguj się jako pracownik</a>" +
+    		"<a href='/netLogin'>Zaloguj się jako klient</a> - <a href='/innerLogin'>Zaloguj się jako pracownik</a><br />" +
+    		"<a href='/netRegister'>Zarejestruj się</a>" +
     		"<br /><a href='/about'>ABOUT</a>";
   }
   
