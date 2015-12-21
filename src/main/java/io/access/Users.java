@@ -2,6 +2,7 @@ package io.access;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import io.access.InnerUser;
 import io.crew.Employee;
@@ -112,6 +113,7 @@ public class Users {
 		boolean success = passwordStorage.checkPassword(id, password);
 		if (success){
 			currentUser = u;
+			logout(u.getID());
 			logins.put(sessionID, u);
 			System.out.println("LOGGED SESSION: "+ sessionID);
 			return new LoginResult(u, success);
@@ -125,6 +127,7 @@ public class Users {
 	public LoginResult netLogin(String sessionID, String nick, String password) {
 		User u = getNetUserByNick(nick);
 		System.out.println(u);
+		
 		return login(sessionID, u, password);
 	}
 
@@ -137,6 +140,15 @@ public class Users {
 		if (isUserLogged(sessionID))
 			logins.remove(sessionID);
 		currentUser = null;
+	}
+	
+	public void logout(int userID){
+		for (Entry<String, User> entry : logins.entrySet()) {
+            if (entry.getValue().getID() == userID) {
+                logout(entry.getKey());
+                return;
+            }
+        }
 	}
 
 	public void serialize() {
@@ -171,6 +183,11 @@ public class Users {
 		return currentUser;
 	}
 	
+	/**
+	 * DEPRECATED
+	 * @param pt
+	 * @return
+	 */
 	public boolean doesCurrentUserHavePermission(PermissionType pt){
 		if (currentUser == null)
 			return false;
