@@ -222,7 +222,7 @@ public class Users {
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
 	}
 	
-	private User getUserBySessionID(String sessionID){
+	public User getUserBySessionID(String sessionID){
 		if (logins.containsKey(sessionID))
 			return logins.get(sessionID);
 		else 

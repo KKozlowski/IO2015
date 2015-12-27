@@ -8,6 +8,7 @@ import io.access.InnerUser;
 import io.access.LoginResult;
 import io.access.PermissionType;
 import io.access.Permissions;
+import io.access.PersonalData;
 import io.access.Users;
 import io.general.*;
 import io.storage.ItemType;
@@ -26,8 +27,8 @@ public class Boot {
   public static void main(String[] args) {
 	    System.out.println("Hello World");
 		App.getInstance().singletonTest();
-		App.getInstance().getUsers().registerNetUser("HUE", null, "password");
-		App.getInstance().getUsers().registerEmployee("ADMIN", null, new Permissions(), "hwila");
+		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
+		App.getInstance().getUsers().registerEmployee("ADMIN", new PersonalData(), new Permissions(), "");
 		
 	
 		

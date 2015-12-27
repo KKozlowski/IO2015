@@ -33,6 +33,7 @@ public class LoginController {
     		+"Hasło: <input type='text' name='pass'><br>"
     		+"Imię: <input type='text' name='name'><br>"
     		+"Nazwisko: <input type='text' name='surname'><br>"
+    		+"e-mail: <input type='email' name='email'><br>"
 			+"<br><input type='button' onclick='myFunction()' value='Submit'></form>"
 			+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 			+"</body></html>";
@@ -62,14 +63,49 @@ public class LoginController {
  
   @RequestMapping("/netRegisterSend")
   @ResponseBody
-  public String innerRegisterSend(HttpSession h, String nick, String pass, String name, String surname) {
-	  PersonalData pd = new PersonalData(name, surname, null, null, null, null);
+  public String innerRegisterSend(HttpSession h, String nick, String pass, String name, String surname, String email) {
+	  PersonalData pd = new PersonalData(name, surname, "", "", "", email);
 	  User u = App.getInstance().getUsers().registerNetUser(nick, pd, pass);
 	  if (u == null)
 		  return "Niepowodzenie rejestracji. <a href='/netRegister'>Spróbuj jeszcze raz</a>";
 	  else{
 		  return u.getNick() + "<br /><a href='/netLogin'>Zaloguj się</a>";
 	  }
+  }
+  
+  @RequestMapping("/editPersonalData")
+  @ResponseBody
+  public String editPersonalData(HttpSession h) {
+	  if (App.getInstance().getUsers().isUserLogged(h.getId())){
+		  User u = App.getInstance().getUsers().getUserBySessionID(h.getId());
+		  return "<!DOCTYPE html><html><body><p>Logowanie pracowników:</p>"
+		  +"<form id='frm1' action='editPersonalDataSend'>"
+    	  +"Imię: <input type='text' name='name' value='"+u.getPersonalData().getName()+"'><br>"
+    	  +"Nazwisko: <input type='text' name='surname' value='"+u.getPersonalData().getSurname()+"'><br>"
+    	  +"e-mail: <input type='email' name='email' value='"+u.getPersonalData().getMail()+"'><br>"
+		  +"PESEL: <input type='text' name='PESEL' value='"+u.getPersonalData().getPESEL()+"'><br>"
+    	  +"Numer dowodu osobistego: <input type='text' name='idid' value='"+u.getPersonalData().getCardID()+"'><br>"
+		  +"Adres: <input type='text' name='adres' value='"+u.getPersonalData().getAdress()+"'><br>"
+		  
+		  +"<br><input type='button' onclick='myFunction()' value='Submit'></form>"
+		  
+		  +"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
+		  +"</body></html>";
+	  } else {
+		  return "You are not logged in";
+	  }
+  }
+  
+  @RequestMapping("/editPersonalDataSend")
+  @ResponseBody
+  public String editPersonalDataSend(HttpSession h, String name, String surname, String email, String idid, String PESEL, String adres) {
+	  System.out.println(PESEL);
+	  User u = App.getInstance().getUsers().getUserBySessionID(h.getId());
+	  if (u!=null){
+		  u.getPersonalData().updataData(name, surname, email, idid, PESEL, adres);
+	  }
+		  
+	  return editPersonalData(h);
   }
   
   @RequestMapping("/logout")

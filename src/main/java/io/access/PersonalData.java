@@ -23,6 +23,15 @@ public class PersonalData {
 		this.mail = mail;
 	}
 	
+	public void updataData(String name, String surname, String email, String idid, String pesel, String adres){
+		this.name = name;
+		this.surname = surname;
+		this.pesel = pesel;
+		this.adress = adres;
+		this.idCardID = idid;
+		this.mail = email;
+	}
+	
 	public PersonalData() {
 	
 	}
