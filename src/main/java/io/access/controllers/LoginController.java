@@ -19,7 +19,7 @@ public class LoginController {
   public String netLogin(HttpSession h) {
     return 
     		"<!DOCTYPE html><html><body><p>Logowanie klientów:</p>"
-			+"<form id='frm1' action='netLoginSend'> Nick: <input type='text' name='nick' value='NICK'><br>Hasło: <input type='text' name='pass' value='PASSWORD'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
+			+"<form id='frm1' action='netLoginSend'> Nick: <input type='text' name='nick' value='NICK'><br>Hasło: <input type='password' name='pass' value='PASSWORD'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
 			+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 			+"</body></html>";
   }
@@ -30,7 +30,7 @@ public class LoginController {
     return 
     		"<!DOCTYPE html><html><body><p>Rejestracja klientów:</p>"
 			+"<form id='frm1' action='netRegisterSend'> Nick: <input type='text' name='nick'><br>"
-    		+"Hasło: <input type='text' name='pass'><br>"
+    		+"Hasło: <input type='password' name='pass'><br>"
     		+"Imię: <input type='text' name='name'><br>"
     		+"Nazwisko: <input type='text' name='surname'><br>"
     		+"e-mail: <input type='email' name='email'><br>"
@@ -44,7 +44,7 @@ public class LoginController {
   public String innerLogin(HttpSession h) {
 	  return 
 		"<!DOCTYPE html><html><body><p>Logowanie pracowników:</p>"
-		+"<form id='frm1' action='innerLoginSend'> Nick: <input type='text' name='nick'><br>Hasło: <input type='text' name='pass'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
+		+"<form id='frm1' action='innerLoginSend'> Nick: <input type='text' name='nick'><br>Hasło: <input type='password' name='pass'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
 		+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 		+"</body></html>";
   }

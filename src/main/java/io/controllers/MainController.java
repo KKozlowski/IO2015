@@ -30,7 +30,9 @@ public class MainController {
 			  		"<br /><a href='/about'>ABOUT</a>";
 		  if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.admin) 
 				  && App.getInstance().getUsers().isCurrentUserAdmin(h.getId()))
-			  	result+="<br>Witaj Lordzie Administratorze! Chwała wielkiej administraturze!";
+			  	result+="<br>Witaj Lordzie Administratorze! Chwała wielkiej administraturze!<br>Oto twoje specjalne uprawnienia:<br>"
+			  	+"<a href='/addEmployee'>Dodaj pracownika</a><br>"
+		  		+"<a href='/permissionEdit'>Edytuj uprawnienia dostępowe pracowników</a>";
 		  return result;
 	  }
   }
