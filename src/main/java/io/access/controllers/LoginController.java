@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.access.PersonalData;
 import io.access.User;
 import io.general.App;
 
@@ -18,7 +19,7 @@ public class LoginController {
   public String netLogin(HttpSession h) {
     return 
     		"<!DOCTYPE html><html><body><p>Logowanie klientów:</p>"
-			+"<form id='frm1' action='netLoginSend'> Nick: <input type='text' name='nick'><br>Hasło: <input type='text' name='pass'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
+			+"<form id='frm1' action='netLoginSend'> Nick: <input type='text' name='nick' value='NICK'><br>Hasło: <input type='text' name='pass' value='PASSWORD'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
 			+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 			+"</body></html>";
   }
@@ -28,7 +29,11 @@ public class LoginController {
   public String netRegister(HttpSession h) {
     return 
     		"<!DOCTYPE html><html><body><p>Rejestracja klientów:</p>"
-			+"<form id='frm1' action='netRegisterSend'> Nick: <input type='text' name='nick'><br>Hasło: <input type='text' name='pass'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
+			+"<form id='frm1' action='netRegisterSend'> Nick: <input type='text' name='nick'><br>"
+    		+"Hasło: <input type='text' name='pass'><br>"
+    		+"Imię: <input type='text' name='name'><br>"
+    		+"Nazwisko: <input type='text' name='surname'><br>"
+			+"<br><input type='button' onclick='myFunction()' value='Submit'></form>"
 			+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 			+"</body></html>";
   }
@@ -57,8 +62,9 @@ public class LoginController {
  
   @RequestMapping("/netRegisterSend")
   @ResponseBody
-  public String innerRegisterSend(HttpSession h, String nick, String pass) {
-	  User u = App.getInstance().getUsers().registerNetUser(nick, null, pass);
+  public String innerRegisterSend(HttpSession h, String nick, String pass, String name, String surname) {
+	  PersonalData pd = new PersonalData(name, surname, null, null, null, null);
+	  User u = App.getInstance().getUsers().registerNetUser(nick, pd, pass);
 	  if (u == null)
 		  return "Niepowodzenie rejestracji. <a href='/netRegister'>Spróbuj jeszcze raz</a>";
 	  else{
