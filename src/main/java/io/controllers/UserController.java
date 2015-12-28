@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.models.User;
-import io.models.UserDao;
+import io.models.Testuser;
+import io.models.TestuserDao;
 
 /**
  * Class UserController
@@ -24,10 +24,10 @@ public class UserController {
    */
   @RequestMapping(value="/create")
   @ResponseBody
-  public User create(String email, String name) {
-	  User user = null;
+  public Testuser create(String email, String name) {
+	  Testuser user = null;
     try {
-      user = new User(email, name);
+      user = new Testuser(email, name);
       userDao.create(user);
     }
     catch (Exception ex) {
@@ -43,13 +43,13 @@ public class UserController {
   @ResponseBody
   public String delete(long id) {
     try {
-      User user = new User(id);
+      Testuser user = new Testuser(id);
       userDao.delete(user);
     }
     catch (Exception ex) {
       return "Error deleting the user: " + ex.toString();
     }
-    return "User succesfully deleted!";
+    return "Testuser succesfully deleted!";
   }
   
   /**
@@ -60,11 +60,11 @@ public class UserController {
   public String getByEmail(String email) {
     String userId;
     try {
-      User user = userDao.getByEmail(email);
+      Testuser user = userDao.getByEmail(email);
       userId = String.valueOf(user.getId());
     }
     catch (Exception ex) {
-      return "User not found: " + ex.toString();
+      return "Testuser not found: " + ex.toString();
     }
     return "The user id is: " + userId;
   }
@@ -76,7 +76,7 @@ public class UserController {
   @ResponseBody
   public String updateName(long id, String email, String name) {
     try {
-      User user = userDao.getById(id);
+      Testuser user = userDao.getById(id);
       user.setEmail(email);
       user.setName(name);
       userDao.update(user);
@@ -84,15 +84,15 @@ public class UserController {
     catch (Exception ex) {
       return "Error updating the user: " + ex.toString();
     }
-    return "User succesfully updated!";
+    return "Testuser succesfully updated!";
   } 
 
   // ------------------------
   // PRIVATE FIELDS
   // ------------------------
   
-  // Wire the UserDao used inside this controller.
+  // Wire the TestuserDao used inside this controller.
   @Autowired
-  private UserDao userDao;
+  private TestuserDao userDao;
   
 } // class UserController

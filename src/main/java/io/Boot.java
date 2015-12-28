@@ -74,7 +74,7 @@ public class Boot {
 	    String dbClass = "com.mysql.jdbc.Driver";
 	    String query = "Select distinct(table_name) from INFORMATION_SCHEMA.TABLES";
 	    String username = "root";
-	    String password = "ultramaryna";
+	    String password = "MyNewPass";
 	    try {
 
 	        Class.forName(dbClass);

@@ -8,11 +8,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents an User for this web application.
+ * Represents an Testuser for this web application.
  */
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "testusers")
+public class Testuser {
 
   // ------------------------
   // PRIVATE FIELDS
@@ -32,13 +32,13 @@ public class User {
   // PUBLIC METHODS
   // ------------------------
   
-  public User() { }
+  public Testuser() { }
 
-  public User(long id) { 
+  public Testuser(long id) { 
     this.id = id;
   }
 
-  public User(String email, String name) {
+  public Testuser(String email, String name) {
     this.email = email;
     this.name = name;
   }
@@ -67,4 +67,4 @@ public class User {
     this.name = value;
   }
   
-} // class User
+} // class Testuser
