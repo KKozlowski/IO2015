@@ -16,6 +16,7 @@ public class IdPassPair {
 	}
 
 	public Boolean check(String password) {
+		System.out.println("INNER CHECK: stored " + encryptedPass + " candidate: " + PasswordStorage.encrypt(password));
 		if (PasswordStorage.encrypt(password).equals(encryptedPass)) return true;
 		else return false;
 	}

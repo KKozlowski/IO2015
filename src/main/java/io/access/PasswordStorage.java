@@ -23,7 +23,10 @@ public class PasswordStorage {
 	}
 
 	public Boolean checkPassword(int id, String password) {
-		return data.get(id).check(password);
+		System.out.println("CHECKING PASSWORD for ID " + id +" : " + password);
+		boolean result = data.get(id).check(password);
+		System.out.println("CHECKING RESULT: " + result);
+		return result;
 	}
 
 	public void serialize() {

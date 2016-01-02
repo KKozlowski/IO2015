@@ -3,8 +3,12 @@ package io.access;
 public class NetUser extends User {
 
 	public NetUser(String nick, PersonalData pd) {
-		super(nick, pd);
+		super(nick, pd, true);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public NetUser(User u){
+		super(u);
 	}
 
 	@Override

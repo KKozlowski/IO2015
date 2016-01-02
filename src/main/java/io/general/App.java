@@ -2,6 +2,7 @@ package io.general;
 
 
 import io.access.Users;
+import io.controllers.Controllers;
 import io.crew.EmployeeAssignment;
 import io.crew.StaffDeployment;
 import io.services.Services;
@@ -16,6 +17,7 @@ public class App {
 	private Services services;
 	private Storage storage;
 	private Workshop workshop;
+	private Controllers controllers = new Controllers();
 	
 	protected App() {
 	      // Exists only to defeat instantiation.
@@ -29,6 +31,7 @@ public class App {
           instance.services = new Services();
           instance.storage = new Storage();
           instance.workshop = new Workshop();
+          instance.controllers = new Controllers();
        }
 	}
 	
@@ -60,6 +63,10 @@ public class App {
 	
 	public Workshop getWorkshop() {
 		return workshop;
+	}
+	
+	public Controllers getControllers(){
+		return controllers;
 	}
     
 }

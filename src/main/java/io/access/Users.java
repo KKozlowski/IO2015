@@ -2,6 +2,7 @@ package io.access;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import io.access.InnerUser;
@@ -19,6 +20,11 @@ public class Users {
 	private PasswordStorage passwordStorage = new PasswordStorage();
 	
 	/**
+	 * It will be moved to database
+	 */
+	public Map<Integer, Permissions> permissions = new HashMap<Integer, Permissions>();
+	
+	/**
 	 * Deprecated.
 	 */
 	private User currentUser; 
@@ -26,10 +32,12 @@ public class Users {
 	private HashMap<String, User> logins = new HashMap<String, User>();
 	
 	public InnerUser registerEmployee(String nick, PersonalData personalInfo, Permissions permissions, String password){
-		
+		System.out.println(nick);
 		Employee e = App.getInstance().getCrew().addEmployee();
 		InnerUser result = addInnerUser(nick, personalInfo, e, permissions, password);
+		
 		if (result == null){
+			System.out.println("NULLOLO");
 			App.getInstance().getCrew().removeEmployee(e);
 		}
 		e.setUserAccount(result);
@@ -38,10 +46,19 @@ public class Users {
 	}
 	
 	public InnerUser addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, Permissions permissions, String password) {
-		if (getInnerUserByNick(nick) != null)
-			return null;
+		InnerUser iu;
 		
-		InnerUser iu = new InnerUser(nick, personalInfo, employmentInfo, permissions);
+		if (getInnerUserByNick(nick) != null){
+			System.out.println("NOTNULL");
+			return null;
+		}
+		iu = new InnerUser(nick, personalInfo, employmentInfo, permissions);
+		try{
+			iu.create();
+		} catch (DuplicateNickException dne){
+			System.out.println("DUPLICATE EXCEPTION");
+			return null;
+		}
 		
 		if (innerUsers.size() == 0) 
 			iu.getPermissions().addPermission(PermissionType.admin);
@@ -59,10 +76,15 @@ public class Users {
 	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
+		NetUser usr;
 		if (getNetUserByNick(nick) != null)
 			return null;
-		
-		NetUser usr = new NetUser(nick, personalInfo);
+		usr = new NetUser(nick, personalInfo);
+		try{
+			usr.create();
+		} catch (DuplicateNickException dne) {
+			return null;
+		}
 		int newID = usr.getID();
 		passwordStorage.addIdPass(newID, password);
 		
@@ -172,11 +194,8 @@ public class Users {
 	}
 	
 	public InnerUser getInnerUserByNick(String n) {
-		for(InnerUser u : innerUsers){
-			if (u.getNick().equals(n))
-				return u;
-		}
-		return null;
+		
+		return InnerUser.retrieveInnerUserByNick(n);
 	}
 	
 	public User getCurrentUser(){

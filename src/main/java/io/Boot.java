@@ -32,13 +32,13 @@ public class Boot {
 		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
 		App.getInstance().getUsers().registerEmployee("ADMIN", new PersonalData(), new Permissions(), "");
 
-		LoginResult lr = App.getInstance().getUsers().netLogin(null, "HUE", "password");
+		LoginResult lr = App.getInstance().getUsers().netLogin(null, "HUE", "");
 		if (lr.success){
 			System.out.println(App.getInstance().getUsers().getCurrentUser().getNick() + " == " + lr.loggedUser.getNick());
 		}
 		App.getInstance().getUsers().logout(null);
 		
-		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "hwila");
+		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "");
 		if (lr.success){
 			System.out.println('\n' + App.getInstance().getUsers().getCurrentUser().getNick());
 			System.out.println("Has admin permission: " + 

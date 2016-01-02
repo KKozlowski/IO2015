@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.general.App;
 import io.models.Testuser;
 import io.models.TestuserDao;
 import io.models.UserDao;
@@ -50,6 +51,8 @@ public class UserController {
   /**
    * Retrieve the id for the user with the passed email address.
    */
+  @RequestMapping(value="/getu-by-nick")
+  @ResponseBody
   public UserEntity getByNick(String nick) {
 	  UserEntity user;
     try {
@@ -73,6 +76,10 @@ public class UserController {
     }
     return true;
   } 
+  
+  public UserController() {
+	App.getInstance().getControllers().users = this;
+  }
 
   // ------------------------
   // PRIVATE FIELDS

@@ -1,5 +1,7 @@
 package io.access;
 
+import io.access.controllers.UserController;
+import io.general.App;
 import io.models.UserEntity;
 
 public class User {
@@ -11,12 +13,37 @@ public class User {
 
 	private PersonalData personalData;
 	
-	private UserEntity entity;
+	protected UserEntity entity;
 	
-	public User(String nick, PersonalData pd){
-		entity = new UserEntity(nick, true);
+	public static User retrieveUserByNick(String nick){
+		UserController uc = App.getInstance().getControllers().users;
+		UserEntity ue = uc.getByNick(nick);
+		if (ue == null) return null;
+		PersonalData pd = new PersonalData();
+		
+		return new User(ue, pd);
+	}
+	
+	public User(String nick, PersonalData pd, boolean isNet) {
+		entity = new UserEntity(nick, isNet);
 		personalData = pd;
-		id = ++lastID;
+	}
+	
+	public User(UserEntity ue, PersonalData pd){
+		entity = ue;
+		personalData = pd;
+	}
+	
+	protected User(User u){
+		entity = u.entity;
+		personalData = u.personalData;
+	}
+	
+	public void create() throws DuplicateNickException{
+		UserController uc = App.getInstance().getControllers().users;
+		if (uc.getByNick(entity.getNick()) != null)
+			throw new DuplicateNickException();
+		entity = App.getInstance().getControllers().users.create(entity);
 	}
 	
 	public boolean hasPermission(PermissionType pt){
@@ -28,7 +55,7 @@ public class User {
 	}
 
 	public int getID() {
-		return id;
+		return entity.getId();
 	}
 	
 	public String getNick(){
