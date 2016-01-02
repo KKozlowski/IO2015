@@ -48,9 +48,19 @@ public class UserController {
     return true;
   }
   
-  /**
-   * Retrieve the id for the user with the passed email address.
-   */
+  @RequestMapping(value="/getu-by-id")
+  @ResponseBody
+  public UserEntity getById(int id) {
+	  UserEntity user;
+    try {
+    	user = userDao.getById(id);
+    }
+    catch (Exception ex) {
+      return null;
+    }
+    return user;
+  }
+  
   @RequestMapping(value="/getu-by-nick")
   @ResponseBody
   public UserEntity getByNick(String nick) {
@@ -63,10 +73,7 @@ public class UserController {
     }
     return user;
   }
-  
-  /**
-   * Update the email and the name for the user indentified by the passed id.
-   */
+ 
   public boolean update(UserEntity user) {
     try {
       userDao.update(user);

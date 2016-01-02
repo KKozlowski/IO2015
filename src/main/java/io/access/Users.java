@@ -23,6 +23,10 @@ public class Users {
 	 * It will be moved to database
 	 */
 	public Map<Integer, Permissions> permissions = new HashMap<Integer, Permissions>();
+	/**
+	 * It will be moved to database
+	 */
+	public Map<Integer, PersonalData> personalDatas = new HashMap<Integer, PersonalData>();
 	
 	/**
 	 * Deprecated.
@@ -195,11 +199,7 @@ public class Users {
 	}
 
 	public NetUser getNetUserByNick(String n) {
-		for(NetUser u : netUsers){
-			if (u.getNick().equals(n))
-				return u;
-		}
-		return null;
+		return NetUser.retrieveNetUserByNick(n);
 	}
 	
 	public InnerUser getInnerUserByNick(String n) {

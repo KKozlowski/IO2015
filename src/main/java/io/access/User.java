@@ -19,7 +19,16 @@ public class User {
 		UserController uc = App.getInstance().getControllers().users;
 		UserEntity ue = uc.getByNick(nick);
 		if (ue == null) return null;
-		PersonalData pd = new PersonalData();
+		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
+		
+		return new User(ue, pd);
+	}
+	
+	public static User retrieveUserById(int id){
+		UserController uc = App.getInstance().getControllers().users;
+		UserEntity ue = uc.getById(id);
+		if (ue == null) return null;
+		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
 		
 		return new User(ue, pd);
 	}
@@ -44,6 +53,7 @@ public class User {
 		if (uc.getByNick(entity.getNick()) != null)
 			throw new DuplicateNickException();
 		entity = App.getInstance().getControllers().users.create(entity);
+		App.getInstance().getUsers().personalDatas.put(entity.getId(), personalData);
 	}
 	
 	public boolean hasPermission(PermissionType pt){
