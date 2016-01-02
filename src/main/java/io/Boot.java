@@ -25,15 +25,13 @@ import java.sql.Statement;
 public class Boot {
 
   public static void main(String[] args) {
+	  SpringApplication.run(Boot.class, args);
 	    System.out.println("Hello World");
+	    new Boot().testConnect();
 		App.getInstance().singletonTest();
 		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
 		App.getInstance().getUsers().registerEmployee("ADMIN", new PersonalData(), new Permissions(), "");
-		
-	
-		
-		
-		
+
 		LoginResult lr = App.getInstance().getUsers().netLogin(null, "HUE", "password");
 		if (lr.success){
 			System.out.println(App.getInstance().getUsers().getCurrentUser().getNick() + " == " + lr.loggedUser.getNick());
@@ -61,12 +59,12 @@ public class Boot {
 		}
 		App.getInstance().getWorkshop().addingCommisionsTest();
 		
-		new Boot().testConnect();
 		
 		
 		
 		
-		SpringApplication.run(Boot.class, args);
+		
+		
   }
 	
 	public void testConnect() {

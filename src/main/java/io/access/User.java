@@ -1,5 +1,6 @@
 package io.access;
 
+import io.models.UserEntity;
 
 public class User {
 	
@@ -7,12 +8,13 @@ public class User {
 	
 	private int id;
 
-	private String nick;
 
 	private PersonalData personalData;
 	
+	private UserEntity entity;
+	
 	public User(String nick, PersonalData pd){
-		this.nick = nick;
+		entity = new UserEntity(nick, true);
 		personalData = pd;
 		id = ++lastID;
 	}
@@ -30,7 +32,7 @@ public class User {
 	}
 	
 	public String getNick(){
-		return nick;
+		return entity.getNick();
 	}
 
 	public void serialize() {

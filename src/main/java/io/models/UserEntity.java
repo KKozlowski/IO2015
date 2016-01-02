@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
  * Represents an Testuser for this web application.
  */
 @Entity
-@Table(name = "netUsers")
-public class NetUserEntity {
+@Table(name = "users")
+public class UserEntity {
 
   // ------------------------
   // PRIVATE FIELDS
@@ -20,26 +20,27 @@ public class NetUserEntity {
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  protected long id;
+  protected int id;
   
   @NotNull
+  
   protected String nick;
+  
+  @NotNull
+  protected boolean netUser;
 
   // ------------------------
   // PUBLIC METHODS
   // ------------------------
   
-  public NetUserEntity() { }
+  public UserEntity() { }
 
-  public NetUserEntity(long id) { 
-    this.id = id;
-  }
-
-  public NetUserEntity(String nick) {
+  public UserEntity(String nick, boolean net) {
     this.nick = nick;
+    this.netUser = net;
   }
 
-  public long getId() {
+  public int getId() {
     return id;
   }
 
@@ -49,6 +50,10 @@ public class NetUserEntity {
   
   public String getNick() {
     return nick;
+  }
+  
+  public boolean isNetUser(){
+	  return netUser;
   }
 
   /*public void setNick(String value) {

@@ -35,7 +35,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Transactional
-public class InnerUserDao {
+public class UserDao {
   
   // ------------------------
   // PUBLIC METHODS
@@ -44,7 +44,7 @@ public class InnerUserDao {
   /**
    * Save the user in the database.
    */
-  public void create(InnerUserEntity user) {
+  public void create(UserEntity user) {
     entityManager.persist(user);
     return;
   }
@@ -52,7 +52,7 @@ public class InnerUserDao {
   /**
    * Delete the user from the database.
    */
-  public void delete(InnerUserEntity user) {
+  public void delete(UserEntity user) {
     if (entityManager.contains(user))
       entityManager.remove(user);
     else
@@ -64,23 +64,23 @@ public class InnerUserDao {
    * Return all the users stored in the database.
    */
   @SuppressWarnings("unchecked")
-  public List<InnerUserEntity> getAll() {
-    return entityManager.createQuery("from InnerUserEntity").getResultList();
+  public List<UserEntity> getAll() {
+    return entityManager.createQuery("from Testuser").getResultList();
   }
   
   /**
    * Return the user having the passed email.
    */
-  public InnerUserEntity getByNick(String nick) {
-    return (InnerUserEntity) entityManager.createQuery(
-        "from InnerUserEntity where nick = :nick")
+  public UserEntity getByNick(String nick) {
+    return (UserEntity) entityManager.createQuery(
+        "from UserEntity where nick = :nick")
         .setParameter("nick", nick)
         .getSingleResult();
   }
   
   public int getMaxID (){
 	  org.hibernate.Session s = (org.hibernate.Session) (entityManager.unwrap(Session.class));
-	  Criteria c = s.createCriteria(InnerUserEntity.class).setProjection(Projections.max("id"));
+	  Criteria c = s.createCriteria(UserEntity.class).setProjection(Projections.max("id"));
 	  int max = (int)c.uniqueResult();
 	  return max;
   }
@@ -88,14 +88,14 @@ public class InnerUserDao {
   /**
    * Return the user having the passed id.
    */
-  public InnerUserEntity getById(long id) {
-    return entityManager.find(InnerUserEntity.class, id);
+  public UserEntity getById(long id) {
+    return entityManager.find(UserEntity.class, id);
   }
 
   /**
    * Update the passed user in the database.
    */
-  public void update(InnerUserEntity user) {
+  public void update(UserEntity user) {
     entityManager.merge(user);
     return;
   }
