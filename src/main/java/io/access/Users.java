@@ -31,6 +31,18 @@ public class Users {
 	
 	private HashMap<String, User> logins = new HashMap<String, User>();
 	
+	public InnerUser registerADMIN(){
+		Employee e = App.getInstance().getCrew().addEmployee();
+		InnerUser result = addInnerUser("ADMIN", new PersonalData(), e, new Permissions(), "password");
+		if (result == null){
+			System.out.println("NULLOLO");
+			App.getInstance().getCrew().removeEmployee(e);
+		}
+		e.setUserAccount(result);
+		result.getPermissions().addPermission(PermissionType.admin);
+		return result;
+	}
+	
 	public InnerUser registerEmployee(String nick, PersonalData personalInfo, Permissions permissions, String password){
 		System.out.println(nick);
 		Employee e = App.getInstance().getCrew().addEmployee();
@@ -59,9 +71,6 @@ public class Users {
 			System.out.println("DUPLICATE EXCEPTION");
 			return null;
 		}
-		
-		if (innerUsers.size() == 0) 
-			iu.getPermissions().addPermission(PermissionType.admin);
 		
 		passwordStorage.addIdPass(iu.getID(), password);
 		
@@ -225,18 +234,18 @@ public class Users {
 		return getUserBySessionID(sessionID).hasPermission(pt);
 	}
 	
+	/**
+	 * DEPRECATED
+	 * @return
+	 */
 	public boolean isCurrentUserAdmin(){
-		if (currentUser == null && innerUsers.size() == 0)
-			return true;
-		else if (currentUser == null)
+		if (currentUser == null)
 			return false;
 		else return currentUser.hasPermission(PermissionType.admin);
 	}
 	
 	public boolean isCurrentUserAdmin(String sessionID){
-		if (innerUsers.size() == 0)
-			return true;
-		else if (getUserBySessionID(sessionID) == null)
+		if (getUserBySessionID(sessionID) == null)
 			return false;
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
 	}
@@ -248,10 +257,10 @@ public class Users {
 			return null;
 	}
 	
-	public int numberOfUsersWithPermission(PermissionType p){
+	public int numberOfADMINS(){
 		int result = 0;
 		for(User u : users){
-			if (u.hasPermission(p))
+			if (u.hasPermission(PermissionType.admin))
 				result++;
 		}
 		return result;

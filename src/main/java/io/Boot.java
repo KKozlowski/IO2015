@@ -29,16 +29,17 @@ public class Boot {
 	    System.out.println("Hello World");
 	    new Boot().testConnect();
 		App.getInstance().singletonTest();
+		App.getInstance().getUsers().registerADMIN();
 		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
-		App.getInstance().getUsers().registerEmployee("ADMIN", new PersonalData(), new Permissions(), "");
+		
 
-		LoginResult lr = App.getInstance().getUsers().netLogin(null, "HUE", "");
+		LoginResult lr = App.getInstance().getUsers().netLogin(null, "USER", "");
 		if (lr.success){
 			System.out.println(App.getInstance().getUsers().getCurrentUser().getNick() + " == " + lr.loggedUser.getNick());
 		}
 		App.getInstance().getUsers().logout(null);
 		
-		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "");
+		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "password");
 		if (lr.success){
 			System.out.println('\n' + App.getInstance().getUsers().getCurrentUser().getNick());
 			System.out.println("Has admin permission: " + 

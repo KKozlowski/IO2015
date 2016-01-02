@@ -25,7 +25,7 @@ public class Permissions {
 			//return false;
 		
 		if (permissions.contains(toRemove)){
-			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfUsersWithPermission(toRemove) == 0)
+			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfADMINS() == 0)
 				return false;
 			permissions.remove(toRemove);
 			return true;
