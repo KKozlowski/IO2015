@@ -14,7 +14,7 @@ public class InnerUser extends User {
 	}
 	
 	public static InnerUser retrieveInnerUserByNick(String nick){
-		UserController uc = App.getInstance().getControllers().users;
+		UserController uc = App.getInstance().getUsers().getUserController();
 		User u = retrieveUserByNick(nick);
 		if (u == null)
 			return null;

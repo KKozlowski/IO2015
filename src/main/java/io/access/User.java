@@ -16,7 +16,7 @@ public class User {
 	protected UserEntity entity;
 	
 	public static User retrieveUserByNick(String nick){
-		UserController uc = App.getInstance().getControllers().users;
+		UserController uc = App.getInstance().getUsers().getUserController();
 		UserEntity ue = uc.getByNick(nick);
 		if (ue == null) return null;
 		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
@@ -25,7 +25,7 @@ public class User {
 	}
 	
 	public static User retrieveUserById(int id){
-		UserController uc = App.getInstance().getControllers().users;
+		UserController uc = App.getInstance().getUsers().getUserController();
 		UserEntity ue = uc.getById(id);
 		if (ue == null) return null;
 		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
@@ -49,10 +49,10 @@ public class User {
 	}
 	
 	public void create() throws DuplicateNickException{
-		UserController uc = App.getInstance().getControllers().users;
+		UserController uc = App.getInstance().getUsers().getUserController();
 		if (uc.getByNick(entity.getNick()) != null)
 			throw new DuplicateNickException();
-		entity = App.getInstance().getControllers().users.create(entity);
+		entity = App.getInstance().getUsers().getUserController().create(entity);
 		App.getInstance().getUsers().personalDatas.put(entity.getId(), personalData);
 	}
 	

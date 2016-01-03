@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import io.access.InnerUser;
+import io.access.controllers.UserController;
 import io.crew.Employee;
 import io.general.*;
 
@@ -18,6 +19,8 @@ public class Users {
 	private ArrayList<InnerUser> innerUsers = new ArrayList<InnerUser>();
 
 	private PasswordStorage passwordStorage = new PasswordStorage();
+	
+	private io.access.controllers.UserController userController = null;
 	
 	/**
 	 * It will be moved to database
@@ -86,6 +89,20 @@ public class Users {
 
 	public InnerUser addInnerUser(String nick, PersonalData personalInfo, Employee employmentInfo, String password) {
 		return addInnerUser(nick, personalInfo, employmentInfo, new Permissions(), password);
+	}
+	
+	public boolean setUserController(io.access.controllers.UserController uc){
+		if (userController == null){
+			userController = uc;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public UserController getUserController(){
+		return userController;
 	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {

@@ -85,7 +85,7 @@ public class UserController {
   } 
   
   public UserController() {
-	App.getInstance().getControllers().users = this;
+	App.getInstance().getUsers().setUserController(this);
   }
 
   // ------------------------
