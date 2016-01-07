@@ -27,7 +27,7 @@ public class Boot {
   public static void main(String[] args) {
 	  SpringApplication.run(Boot.class, args);
 	    System.out.println("Hello World");
-	    new Boot().testConnect();
+	    //new Boot().testConnect();
 		App.getInstance().singletonTest();
 		App.getInstance().getUsers().registerADMIN();
 		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
@@ -59,13 +59,6 @@ public class Boot {
 					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
 		}
 		App.getInstance().getWorkshop().addingCommisionsTest();
-		
-		
-		
-		
-		
-		
-		
   }
 	
 	public void testConnect() {
@@ -92,11 +85,4 @@ public class Boot {
 	        e.printStackTrace();
 	    }
 	    }
-	
-	  
-	  
-	  
-	  
-    
-
 }
