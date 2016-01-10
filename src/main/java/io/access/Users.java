@@ -50,6 +50,18 @@ public class Users {
 		return result;
 	}
 	
+	public InnerUser registerServiceMan(){
+		Employee e = App.getInstance().getCrew().addEmployee();
+		InnerUser result = addInnerUser("Serwisant", new PersonalData(), e, new Permissions(), "serwisant");
+		if (result == null){
+			System.out.println("NULLOLO");
+			App.getInstance().getCrew().removeEmployee(e);
+		}
+		e.setUserAccount(result);
+		result.getPermissions().addPermission(PermissionType.serviceMan);
+		return result;
+	}
+	
 	public InnerUser registerEmployee(String nick, PersonalData personalInfo, Permissions permissions, String password){
 		System.out.println(nick);
 		Employee e = App.getInstance().getCrew().addEmployee();
@@ -261,10 +273,22 @@ public class Users {
 		else return currentUser.hasPermission(PermissionType.admin);
 	}
 	
+	public boolean isCurrentUserServiceMan(){
+		if (currentUser == null)
+			return false;
+		else return currentUser.hasPermission(PermissionType.serviceMan);
+	}
+	
 	public boolean isCurrentUserAdmin(String sessionID){
 		if (getUserBySessionID(sessionID) == null)
 			return false;
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
+	}
+	
+	public boolean isCurrentUserServiceMan(String sessionID){
+		if (getUserBySessionID(sessionID) == null)
+			return false;
+		else return getUserBySessionID(sessionID).hasPermission(PermissionType.serviceMan);
 	}
 	
 	public User getUserBySessionID(String sessionID){

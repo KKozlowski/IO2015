@@ -30,6 +30,7 @@ public class Boot {
 	    //new Boot().testConnect();
 		App.getInstance().singletonTest();
 		App.getInstance().getUsers().registerADMIN();
+		App.getInstance().getUsers().registerServiceMan();
 		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
 		
 
