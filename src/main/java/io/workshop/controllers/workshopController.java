@@ -38,10 +38,8 @@ public class workshopController {
 		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
 				   || App.getInstance().getUsers().isCurrentUserServiceMan((h.getId())))
-			
-			
-		
 		return null;
+		return "";
 		
 	}
 	
