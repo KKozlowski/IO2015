@@ -23,6 +23,7 @@ public class Permissions {
 			return false;
 		else {
 			entity.add(toAdd);
+			App.getInstance().getUsers().getPermissionsController().update(entity);
 			return true;
 		}
 	}
@@ -35,6 +36,7 @@ public class Permissions {
 			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfADMINS() == 0)
 				return false;
 			entity.remove(toRemove);
+			App.getInstance().getUsers().getPermissionsController().update(entity);
 			return true;
 		}
 		else {

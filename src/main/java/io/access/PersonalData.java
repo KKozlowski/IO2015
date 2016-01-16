@@ -30,6 +30,7 @@ public class PersonalData {
 		entity.setAdress(adres);
 		entity.setCardID(idid);
 		entity.setMail(email);	
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 	
 	public PersonalData() {
@@ -62,26 +63,32 @@ public class PersonalData {
 
 	public void setName(String data) {
 		entity.setName(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setSurname(String data) {
 		entity.setName(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setPESEL(String data) {
 		entity.setPESEL(data);	
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setAdress(String data) {
 		entity.setAdress(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setCardID(String data) {
 		entity.setCardID(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setMail(String data) {
 		entity.setMail(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void serialize() {
