@@ -240,12 +240,19 @@ public class Users {
 	}
 
 	public NetUser getNetUserByNick(String n) {
-		return NetUser.retrieveNetUserByNick(n);
+		NetUser u = NetUser.retrieveNetUserByNick(n);
+		if (u != null && u.isNetUser())
+			return u;
+		else
+			return null;
 	}
 	
 	public InnerUser getInnerUserByNick(String n) {
-		
-		return InnerUser.retrieveInnerUserByNick(n);
+		InnerUser u = InnerUser.retrieveInnerUserByNick(n);
+		if (u != null && !u.isNetUser())
+			return u;
+		else
+			return null;
 	}
 	
 	public User getCurrentUser(){
