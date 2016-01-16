@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import io.access.InnerUser;
 import io.access.controllers.UserController;
 import io.access.controllers.PersonalDataController;
+import io.access.controllers.IdPassPairController;
 import io.access.controllers.PermissionsController;
 import io.crew.Employee;
 import io.general.*;
@@ -25,6 +26,7 @@ public class Users {
 	private UserController userController = null;
 	private PersonalDataController personalDataController = null;
 	private PermissionsController permissionsController = null;
+	private IdPassPairController idPassPairController = null;
 	
 	/**
 	 * Deprecated.
@@ -125,6 +127,20 @@ public class Users {
 	
 	public PermissionsController getPermissionsController(){
 		return permissionsController;
+	}
+	
+	public boolean setIdPassPairController(io.access.controllers.IdPassPairController ippc){
+		if (idPassPairController == null){
+			idPassPairController = ippc;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public IdPassPairController getIdPassPairController(){
+		return idPassPairController;
 	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
