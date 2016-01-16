@@ -44,7 +44,7 @@ public class UserEntity {
     return id;
   }
 
-  /*public void setId(long value) {
+  /*public void setId(int value) {
     this.id = value;
   }*/
   

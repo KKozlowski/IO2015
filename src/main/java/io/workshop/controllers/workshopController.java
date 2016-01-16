@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import io.access.PermissionType;
 import io.general.App;
 
 
@@ -16,7 +16,7 @@ public class workshopController {
 	 @ResponseBody
 	public String workshop(HttpSession h){
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().isCurrentUserServiceMan((h.getId())))
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
 		
 			return "Witaj w serwisie"
 					+"<br><br><a href='/addCommision'>Dodaj usługę</a>"
@@ -37,7 +37,7 @@ public class workshopController {
 	public String addCommison(HttpSession h){
 		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().isCurrentUserServiceMan((h.getId())))
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
 		return null;
 		return "";
 		

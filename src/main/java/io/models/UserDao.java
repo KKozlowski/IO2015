@@ -76,6 +76,7 @@ public class UserDao {
         "from UserEntity where nick = :nick")
         .setParameter("nick", nick)
         .getSingleResult();
+//	  return entityManager.find(UserEntity.class, nick);
   }
   
   public int getMaxID (){
@@ -88,7 +89,7 @@ public class UserDao {
   /**
    * Return the user having the passed id.
    */
-  public UserEntity getById(long id) {
+  public UserEntity getById(int id) {
     return entityManager.find(UserEntity.class, id);
   }
 

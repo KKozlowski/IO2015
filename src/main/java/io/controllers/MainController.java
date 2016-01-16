@@ -33,10 +33,6 @@ public class MainController {
 			  	result+="<br>Witaj Lordzie Administratorze! Chwała wielkiej administraturze!<br>Oto twoje specjalne uprawnienia:<br>"
 			  	+"<a href='/addEmployee'>Dodaj pracownika</a><br>"
 		  		+"<a href='/permissionEdit'>Edytuj uprawnienia dostępowe pracowników</a>";
-		  if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)
-				  && (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().isCurrentUserServiceMan((h.getId()))))
-				  result +="<br><br><a href='/workshop'>Zarządzaj serwisem</a>";
 		  return result;
 	  }
   }

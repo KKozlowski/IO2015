@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.general.App;
-import io.models.Testuser;
-import io.models.TestuserDao;
 import io.models.UserDao;
 import io.models.UserEntity;
 

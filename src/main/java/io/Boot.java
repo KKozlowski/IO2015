@@ -11,6 +11,7 @@ import io.access.Permissions;
 import io.access.PersonalData;
 import io.access.Users;
 import io.general.*;
+import io.models.PermissionsEntity;
 import io.storage.ItemType;
 import io.storage.SingleItem;
 
@@ -30,21 +31,30 @@ public class Boot {
 	    //new Boot().testConnect();
 		App.getInstance().singletonTest();
 		App.getInstance().getUsers().registerADMIN();
-		App.getInstance().getUsers().registerServiceMan();
-		App.getInstance().getUsers().registerNetUser("USER", new PersonalData(), "");
-		
+		App.getInstance().getUsers().registerNetUser("USER", new PersonalData("imie", "nazwisko", "123456", "adres", "654321", "mail@mail.com"), "");
+		App.getInstance().getUsers().registerEmployee("EMPLOYEE", new PersonalData("imie2", "nazwisko2", "2123456", "adres2", "2654321", "mail2@mail.com"), new Permissions(new PermissionsEntity("010100")), "pass2");
 
-		LoginResult lr = App.getInstance().getUsers().netLogin(null, "USER", "");
+		LoginResult lr = App.getInstance().getUsers().innerLogin("A", "EMPLOYEE", "pass2");
 		if (lr.success){
-			System.out.println(App.getInstance().getUsers().getCurrentUser().getNick() + " == " + lr.loggedUser.getNick());
+			System.out.println(App.getInstance().getUsers().getUserBySessionID("A").getNick() + " == " + lr.loggedUser.getNick());
+			System.out.println("check" + lr.loggedUser.getPersonalData().getName());
+			System.out.println("check" + App.getInstance().getUsers().getUserBySessionID("A").getPersonalData().getName());
 		}
-		App.getInstance().getUsers().logout(null);
+				
+
+		lr = App.getInstance().getUsers().netLogin("A", "USER", "pass");
+		if (lr.success){
+			System.out.println(App.getInstance().getUsers().getUserBySessionID("A").getNick() + " == " + lr.loggedUser.getNick());
+			System.out.println("check" + lr.loggedUser.getPersonalData().getName());
+			System.out.println("check" + App.getInstance().getUsers().getUserBySessionID("A").getPersonalData().getName());
+		}
+		App.getInstance().getUsers().logout("A");
 		
-		lr = App.getInstance().getUsers().innerLogin(null, "ADMIN", "password");
+		lr = App.getInstance().getUsers().innerLogin("A", "ADMIN", "password");
 		if (lr.success){
 			System.out.println('\n' + App.getInstance().getUsers().getCurrentUser().getNick());
 			System.out.println("Has admin permission: " + 
-			App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.admin));
+			App.getInstance().getUsers().doesCurrentUserHavePermission("A", PermissionType.admin));
 			((InnerUser)(App.getInstance().getUsers().getCurrentUser())).getPermissions().addPermission(PermissionType.storageWorker);
 			SingleItem Gwozdz = new SingleItem ("Mlotek", true, "mlotek Mirka", ItemType.tool);
 	 		App.getInstance().getStorage().addObject(Gwozdz);		 		 		
@@ -54,10 +64,10 @@ public class Boot {
 		InnerUser iu = (InnerUser)(lr.loggedUser);
 		if (iu != null){
 			System.out.println("\nHas crewMaster permission: " + 
-					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
+					App.getInstance().getUsers().doesCurrentUserHavePermission("A", PermissionType.crewMaster));
 			iu.getPermissions().addPermission(PermissionType.crewMaster);
 			System.out.println("Has crewMaster permission: " + 
-					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
+					App.getInstance().getUsers().doesCurrentUserHavePermission("A", PermissionType.crewMaster));
 		}
 		App.getInstance().getWorkshop().addingCommisionsTest();
   }
