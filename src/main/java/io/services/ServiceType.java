@@ -1,26 +1,36 @@
 package io.services;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "service_types")
 public class ServiceType {
 
-	public ServiceType(int typeID, String schema, String name) {
+	public ServiceType(int id, String schema, String name) {
 		super();
-		this.typeID = typeID;
+		this.id = id;
 		this.schema = schema;
 		this.name = name;
 	}
 
-	private int typeID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	private String schema;
 
 	private String name;
 
-	public int getTypeID() {
-		return typeID;
+	public int getId() {
+		return id;
 	}
 
-	public void setTypeID(int typeID) {
-		this.typeID = typeID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getSchema() {
@@ -38,5 +48,4 @@ public class ServiceType {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }
