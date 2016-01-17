@@ -331,6 +331,16 @@ public class Users {
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
 	}
 	
+	
+
+	public boolean isCurrentUserNetUser(String sessionID) {
+		if (getUserBySessionID(sessionID) == null) {
+			return false;
+		} else {
+			return getUserBySessionID(sessionID).hasPermission(PermissionType.netUser);
+		}
+	}
+	
 	public User getUserBySessionID(String sessionID){
 		if (logins.containsKey(sessionID))
 			return logins.get(sessionID);
