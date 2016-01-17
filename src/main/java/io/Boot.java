@@ -35,7 +35,8 @@ public class Boot {
 		NetUser nu1 = App.getInstance().getUsers().registerNetUser("USER", new PersonalData("imie", "nazwisko", "123456", "adres", "654321", "mail@mail.com"), "pass");
 		App.getInstance().getUsers().changePassword(nu1.getID(), "");
 		App.getInstance().getUsers().registerEmployee("EMPLOYEE", new PersonalData("imie2", "nazwisko2", "2123456", "adres2", "2654321", "mail2@mail.com"), new Permissions(new PermissionsEntity("010100")), "pass2");
-
+		App.getInstance().getUsers().registerEmployee("serwisant", new PersonalData("Marcin", "Majewski", "2123457", "adres2", "2654323", "mail3@mail.com"), new Permissions(new PermissionsEntity("000001")), "serwisant");
+		
 		LoginResult lr = App.getInstance().getUsers().innerLogin("A", "EMPLOYEE", "pass2");
 		if (lr.success){
 			System.out.println(App.getInstance().getUsers().getUserBySessionID("A").getNick() + " == " + lr.loggedUser.getNick());
