@@ -52,6 +52,15 @@ public class MainController {
 	@RequestMapping("/about")
 	@ResponseBody
 	public String about() {
-		return "First try.";
+		return "<b>Autorzy:</b><br>"+
+				"Kamil Kozłowski - architektura<br>" +
+				"Kamil Kozłowski, Maciej Michalski - moduł dostępu<br>" +
+				"Eryk Dubrowin, Sebastian Karalus - moduł usług<br>" +
+				"Monika Sobiecka, Wojciech Kowalczyk - moduł magazynu<br>" +
+				"Łukasz Sobczyk, Darek Bartczak - moduł kadry<br>" +
+				"Marcin Majewski - moduł serwisu<br>"+
+				"<a href='/'>Wróć</a>";
+
+				
 	}
 }
