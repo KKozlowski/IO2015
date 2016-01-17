@@ -60,8 +60,8 @@ public class Storage {
 		for (int i = 0; i < Amount.size(); i++) {
 			currtype = Amount.get(i).getItemType();
 			if (currtype.equals(typeOfItem)) {
-				showing += "Nazwa: " + Amount.get(i).getName() + " dostêpny: " + Amount.get(i).isAvailable() + " opis: "
-						+ Amount.get(i).getDescription() + '\n' + System.lineSeparator();
+				showing += "Nazwa: " + Amount.get(i).getName() + " dostï¿½pny: " + Amount.get(i).isAvailable() + " opis: "
+						+ Amount.get(i).getDescription() + '\n' + System.lineSeparator() + "<br>";
 			}
 
 		}
@@ -72,8 +72,8 @@ public class Storage {
 	public String toString() {
 		String showing = new String();
 		for (int i = 0; i < Amount.size(); i++) {
-			showing += "Nazwa: " + Amount.get(i).getName() + " dostêpny: " + Amount.get(i).isAvailable() + " opis: "
-					+ Amount.get(i).getDescription() + " typ: " + Amount.get(i).getItemType() + '\n' + System.lineSeparator();
+			showing += "Nazwa: " + Amount.get(i).getName() + " dostï¿½pny: " + Amount.get(i).isAvailable() + " opis: "
+					+ Amount.get(i).getDescription() + " typ: " + Amount.get(i).getItemType() + '\n' + System.lineSeparator() + "<br>";
 		}
 		return showing;
 	}
