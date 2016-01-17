@@ -6,8 +6,6 @@ import java.util.function.Predicate;
 
 import io.access.InnerUser;
 import io.access.PermissionType;
-import io.crew.exceptions.DuplicateCertificateException;
-import io.crew.exceptions.UnassignableEmployeeException;
 import io.general.App;
 import io.services.Service;
 
@@ -31,8 +29,6 @@ public class StaffDeployment {
 		return e;
 	}
 	
-	
-	
 	public void removeEmployee(Employee toRemove){
 		if (employees.contains(toRemove))
 			employees.remove(toRemove);
@@ -47,72 +43,15 @@ public class StaffDeployment {
 		}
 		
 	}
-	
-	public boolean isEmployeeAssignable(Employee employee, EmployeeAssignment assignment)
-	{
-		List<SkillType> skills = assignment.getReqSkills();
-		List<Certificate> employeeCert= employee.getCertificates();
-		List<SkillType> certSkills;
-		List<Boolean> skillCheck = new ArrayList<Boolean>();
-		
-		for(int z=0; z<skills.size(); z++)
-		{
-			skillCheck.add(false);
-		}
-		
-		
-		for(int i=0;i<skills.size();i++)
-		{
-			for(int j=0; j<employeeCert.size();j++)
-			{
-				certSkills = employeeCert.get(j).getSkills();
-				for(int k=0; k<certSkills.size();k++)
-				{
-					if(certSkills.get(k).getId()==skills.get(i).getId())
-					{
-						skillCheck.set(i, true);
-						break;
-					}
-				}
-			}
-		}
-		
-		return skillCheck.contains(false);
-	}
-	
-	public void assignEmployee(Employee employee, EmployeeAssignment assignment) throws UnassignableEmployeeException {
+
+	public void assignEmployee(Employee employee, EmployeeAssignment assignment) {
 		
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster))
 		{
-			
-			if(isEmployeeAssignable(employee, assignment))
-			{
-				throw new UnassignableEmployeeException();
-			}
-			else
-			{
-				assignment.addEmployee(employee);
-			}
-				
+			assignment.addEmployee(employee);
 		}
 
 	}
-	
-	public void addCertToEmployee(int index, Certificate cert) throws DuplicateCertificateException
-	{
-		List<Certificate> certs = employees.get(index).getCertificates();
-		if(certs.contains(cert))
-		{
-			throw new DuplicateCertificateException();
-		}
-		else
-		{
-			employees.get(index).addCertificate(cert);
-		}
-		
-	}
-	
-
 
 	public List<Employee> returnEmployees() {
 		
@@ -190,6 +129,5 @@ public class StaffDeployment {
 	{
 		assignments.remove(nr);
 	}
-	
 
 }
