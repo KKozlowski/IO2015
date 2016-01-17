@@ -20,11 +20,23 @@ import io.storage.ItemAssignment;
 @Table(name = "services")
 public class Service {
 
+	public Service() {}
+	
 	public Service(int id, ServiceType serviceType, String name, Date begginingDate, Date endingDate,
 			float price, int usersLimit) {
 		super();
-		this.id = id;
 		this.serviceType = serviceType;
+		this.name = name;
+		this.endingDate = endingDate;
+		this.price = price;
+		this.begginingDate = begginingDate;
+		this.usersLimit = usersLimit;
+	}
+	
+	public Service(int serviceTypeID, String name, Date begginingDate, Date endingDate,
+			float price, int usersLimit) {
+		super();
+		this.serviceType = new ServiceType(serviceTypeID);
 		this.name = name;
 		this.endingDate = endingDate;
 		this.price = price;
