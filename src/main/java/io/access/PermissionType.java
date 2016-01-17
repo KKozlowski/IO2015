@@ -2,7 +2,7 @@ package io.access;
 
 public enum PermissionType {
 	netUser,
-	employee,
+	workshopMan,
 	admin,
 	storageWorker,
 	crewMaster,

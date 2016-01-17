@@ -90,10 +90,6 @@ public class PersonalData {
 		entity.setMail(data);
 		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
-
-	public void serialize() {
-
-	}
 	
 	public void create(){
 		App.getInstance().getUsers().getPersonalDataController().create(entity);

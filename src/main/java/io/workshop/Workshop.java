@@ -17,6 +17,8 @@ public class Workshop {
 	private List<SingleItem> itemAssignment;
 
 	private List<EmployeeAssignment> employeeAssignment;
+	
+	public Workshop(){}
 
 	
 	// na czas testu
@@ -41,7 +43,7 @@ public class Workshop {
 
 	public void checkCurrentTasks() {
 		for (int i = 0; i < amount.size(); i++){
-			if(amount.get(i).getProgress()){
+			if(amount.get(i).getInProgress()){
 				System.out.println(amount.get(i).getName());
 			}
 		}

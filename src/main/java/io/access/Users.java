@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import io.access.InnerUser;
+import io.access.PermissionType;
+import io.access.Permissions;
+import io.access.PersonalData;
 import io.access.controllers.UserController;
 import io.access.models.PermissionsEntity;
 import io.access.controllers.PersonalDataController;
@@ -57,6 +60,17 @@ public class Users {
 		}
 		e.setUserAccount(result);
 		
+		return result;
+	}
+	
+	public InnerUser registerStorageWorker(){
+		Employee e = App.getInstance().getCrew().addEmployee();
+		InnerUser result = addInnerUser("Worker", new PersonalData(), e, new Permissions(new PermissionsEntity("001111")), "haslo");
+		if (result == null){
+			System.out.println("sth");
+			App.getInstance().getCrew().removeEmployee(e);
+		}
+		e.setUserAccount(result);
 		return result;
 	}
 	
@@ -243,10 +257,6 @@ public class Users {
         }
 	}
 
-	public void serialize() {
-
-	}
-
 	public User getUserByID(int id) {
 		for(User u : users){
 			if (u.getID() == id)
@@ -307,6 +317,13 @@ public class Users {
 			return false;
 		else return currentUser.hasPermission(PermissionType.admin);
 	}
+	
+	public boolean isCurrentUserStorageWorker(String sessionID){
+		if (getUserBySessionID(sessionID) == null)
+			return false;
+		else return getUserBySessionID(sessionID).hasPermission(PermissionType.storageWorker);
+	}
+	
 	
 	public boolean isCurrentUserAdmin(String sessionID){
 		if (getUserBySessionID(sessionID) == null)
