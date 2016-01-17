@@ -37,7 +37,18 @@ public class MainController {
 		  if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan))
 			  	result+="<br>Witaj Lordzie Administratorze! Chwała wielkiej administraturze!<br>Oto twoje specjalne uprawnienia:<br>"
 			  	+"<br><a href='/workshop'>Przejdź do serwisu</a><br>";
-		  return result;
+		  if (App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.storageWorker)
+					&& (App.getInstance().getUsers().isCurrentUserAdmin(h.getId())
+							|| App.getInstance().getUsers().isCurrentUserStorageWorker(h.getId()))) {
+				result += "<br><br><a href='/storage'>Zarzadzaj magazynem</a>";
+			}
+
+		  if (App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.netUser)
+					&& (App.getInstance().getUsers().isCurrentUserAdmin(h.getId())
+							|| App.getInstance().getUsers().isCurrentUserNetUser(h.getId()))) {
+				result += "<br><br><a href='/storage'>Kliknij aby dokonac rezerwacji</a>";
+			}
+		return result;
 	  }
   }
   
