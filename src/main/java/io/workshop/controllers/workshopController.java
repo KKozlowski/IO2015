@@ -1,17 +1,33 @@
 package io.workshop.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.access.InnerUser;
 import io.access.PermissionType;
+import io.access.Permissions;
+import io.access.PersonalData;
 import io.general.App;
+import io.workshop.FixCommision;
+import io.workshop.FixCommisionDao;
+
 
 
 @Controller
 public class workshopController {
+	@Autowired
+	private FixCommisionDao repository;
+	
 	@RequestMapping(value = "/workshop")
 	 @ResponseBody
 	public String workshop(HttpSession h){
@@ -32,6 +48,7 @@ public class workshopController {
 	
 	}
 	
+	
 	@RequestMapping(value = "/addCommision")
 	@ResponseBody
 	public String addCommison(HttpSession h){
@@ -45,10 +62,36 @@ public class workshopController {
 				+"<br>Data Rozpoczoczecia: <input type='text' name='dateStarted'>"
 				+"<br>Data Zakonczenia: <input type='text' name='dateEnded'><br>"
 				
-				+"<br><input type='button' value='Submit'></form>";
-		return "";
+				+"<br><input type='button' value='Submit'></a href='/addCommisionSend'>";
+		else
+			return "YOU DON'T HAVE MATCHING PERMISSIONS";
 		
 	}
+	
+	@RequestMapping("/addCommisionSend")
+	  @ResponseBody
+	  public String addEmployeeSend(HttpSession h, String name, String inProgress, String additionalInfo, String dateStarted, String dateEnded) throws ParseException {
+		if(App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)){
+			System.out.println("asd");
+					FixCommision fixCommision = new FixCommision();
+					fixCommision.setName(name);
+					fixCommision.setInProgress(Boolean.valueOf(inProgress));
+					fixCommision.setAdditionalInfo(additionalInfo);
+					DateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+					Date dateS = format.parse(dateStarted);
+					fixCommision.setDateStarted(dateS);
+					Date dateE = format.parse(dateEnded);
+					fixCommision.setDateEnded(dateE);
+					repository.create(fixCommision);
+					System.out.println("dodawanie serwisu zakonczone sukcesem");
+					
+					return "Dodowanie zakończone sukcesem";
+		}
+		else 
+			return "YOU DON'T HAVE MATCHING PERMISSIONS";
+		
+	  }
 	
 	@RequestMapping(value = "/removeServices")
 	@ResponseBody
