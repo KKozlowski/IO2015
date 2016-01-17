@@ -81,10 +81,6 @@ public class User {
 	public String getNick(){
 		return entity.getNick();
 	}
-
-	public void serialize() {
-
-	}
 	
 	public boolean isNetUser(){
 		return entity.isNetUser();

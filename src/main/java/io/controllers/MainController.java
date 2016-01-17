@@ -26,7 +26,8 @@ public class MainController {
 	  else {
 		  String result = "SESSION ID: " + h.getId() + "<br />"+
 			  		"<a href='/logout'>Wyloguj się</a>  -  " +
-			  		"<a href='/editPersonalData'>Edytuj swoje dane</a>" +
+			  		"<a href='/editPersonalData'>Edytuj swoje dane</a>  -  " +
+			  		"<a href='/changePass'>Zmien haslo</a>" +
 			  		"<br /><a href='/about'>ABOUT</a>";
 		  if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.admin) 
 				  && App.getInstance().getUsers().isCurrentUserAdmin(h.getId()))

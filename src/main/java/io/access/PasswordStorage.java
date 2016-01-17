@@ -34,8 +34,16 @@ public class PasswordStorage {
 		return result;
 	}
 
-	public void serialize() {
-
+	public boolean changePassword(int id, String password){
+		IdPassPairController ippc = App.getInstance().getUsers().getIdPassPairController();
+		IdPassPair idp = ippc.getById(id);
+		if (idp == null){
+			return false;
+		} else {
+			idp.setPass(password);
+			ippc.update(idp);
+			return true;
+		}
 	}
 
 }

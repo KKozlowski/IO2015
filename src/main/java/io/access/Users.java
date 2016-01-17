@@ -334,5 +334,9 @@ public class Users {
 		System.out.println("CHECKED SESSION: "+ sessionID);
 		return logins.containsKey(sessionID);
 	}
+	
+	public boolean changePassword(int id, String password){
+		return passwordStorage.changePassword(id, password);
+	}
 
 }

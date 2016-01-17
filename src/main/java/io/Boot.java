@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.workshop.FixCommision;
 import io.access.InnerUser;
 import io.access.LoginResult;
+import io.access.NetUser;
 import io.access.PermissionType;
 import io.access.Permissions;
 import io.access.PersonalData;
@@ -31,7 +32,8 @@ public class Boot {
 	    //new Boot().testConnect();
 		App.getInstance().singletonTest();
 		App.getInstance().getUsers().registerADMIN();
-		App.getInstance().getUsers().registerNetUser("USER", new PersonalData("imie", "nazwisko", "123456", "adres", "654321", "mail@mail.com"), "pass");
+		NetUser nu1 = App.getInstance().getUsers().registerNetUser("USER", new PersonalData("imie", "nazwisko", "123456", "adres", "654321", "mail@mail.com"), "pass");
+		App.getInstance().getUsers().changePassword(nu1.getID(), "");
 		App.getInstance().getUsers().registerEmployee("EMPLOYEE", new PersonalData("imie2", "nazwisko2", "2123456", "adres2", "2654321", "mail2@mail.com"), new Permissions(new PermissionsEntity("010100")), "pass2");
 
 		LoginResult lr = App.getInstance().getUsers().innerLogin("A", "EMPLOYEE", "pass2");
