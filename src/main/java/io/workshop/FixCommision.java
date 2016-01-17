@@ -21,21 +21,71 @@ public class FixCommision {
 	private NewItem newItem; 
 
 	
-	// na czas testu
-	public FixCommision(String name, boolean inProgress){
-		this.name = name;
+	public Boolean getInProgress() {
+		return inProgress;
+	}
+
+	public void setInProgress(Boolean inProgress) {
 		this.inProgress = inProgress;
+	}
+
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public Date getDateStarted() {
+		return dateStarted;
+	}
+
+	public void setDateStarted(Date dateStarted) {
+		this.dateStarted = dateStarted;
+	}
+
+	public Date getDateEnded() {
+		return dateEnded;
+	}
+
+	public void setDateEnded(Date dateEnded) {
+		this.dateEnded = dateEnded;
+	}
+
+	public SingleItem getItem() {
+		return item;
+	}
+
+	public void setItem(SingleItem item) {
+		this.item = item;
+	}
+
+	public NewItem getNewItem() {
+		return newItem;
+	}
+
+	public void setNewItem(NewItem newItem) {
+		this.newItem = newItem;
 	}
 	
 	public String getName(){
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	// na czas testu
+	public FixCommision(String name, boolean inProgress){
+		this.name = name;
+		this.inProgress = inProgress;
+	}
+	
+	
 	public void editProgress(boolean progress) {
 		inProgress = progress;
-	}
-	public boolean getProgress(){
-		return inProgress;
 	}
 
 	public void editInfo(String info) {
