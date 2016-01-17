@@ -4,17 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import io.access.NetUser;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import io.access.models.UserEntity;
 import io.crew.EmployeeAssignment;
 import io.storage.ItemAssignment;
 
+@Entity
+@Table(name = "services")
 public class Service {
 
-	public Service(int serviceID, int typeID, String name, Date begginingDate, Date endingDate,
+	public Service(int id, ServiceType serviceType, String name, Date begginingDate, Date endingDate,
 			float price, int usersLimit) {
 		super();
-		this.serviceID = serviceID;
-		this.typeID = typeID;
+		this.id = id;
+		this.serviceType = serviceType;
 		this.name = name;
 		this.endingDate = endingDate;
 		this.price = price;
@@ -22,9 +32,12 @@ public class Service {
 		this.usersLimit = usersLimit;
 	}
 
-	private int serviceID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-	private int typeID;
+	@ManyToOne
+	private ServiceType serviceType;
 
 	private String name;
 	
@@ -36,26 +49,35 @@ public class Service {
 
 	private int usersLimit;
 	
-	private List<NetUser> reservations = new ArrayList<NetUser>();
+	private int cruiseId;
+
+	private String ticketClass;
+
+	private int roomID;
 	
-	private List<EmployeeAssignment> assignments = new ArrayList<EmployeeAssignment>();
+	@ManyToMany
+	private List<UserEntity> reservations = new ArrayList<UserEntity>();
+	
+//	@ManyToMany
+//	private List<EmployeeAssignment> assignments = new ArrayList<EmployeeAssignment>();
 
-	private List<ItemAssignment> rentEntries = new ArrayList<ItemAssignment>();
+//	@ManyToMany
+//	private List<ItemAssignment> rentEntries = new ArrayList<ItemAssignment>();
 
-	public int getServiceID() {
-		return serviceID;
+	public int getId() {
+		return id;
 	}
 
-	public void setServiceID(int serviceID) {
-		this.serviceID = serviceID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getTypeID() {
-		return typeID;
+	public ServiceType getServiceType() {
+		return serviceType;
 	}
 
-	public void setTypeID(int typeID) {
-		this.typeID = typeID;
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
 	}
 
 	public String getName() {
@@ -98,23 +120,47 @@ public class Service {
 		this.usersLimit = usersLimit;
 	}
 
-	public List<EmployeeAssignment> getAssignments() {
-		return assignments;
+	public int getCruiseId() {
+		return cruiseId;
 	}
 
-	public List<ItemAssignment> getRentEntries() {
-		return rentEntries;
+	public void setCruiseId(int cruiseId) {
+		this.cruiseId = cruiseId;
 	}
 
-	public List<NetUser> getReservations() {
+	public String getTicketClass() {
+		return ticketClass;
+	}
+
+	public void setTicketClass(String ticketClass) {
+		this.ticketClass = ticketClass;
+	}
+
+	public int getRoomID() {
+		return roomID;
+	}
+
+	public void setRoomID(int roomID) {
+		this.roomID = roomID;
+	}
+
+//	public List<EmployeeAssignment> getAssignments() {
+//		return assignments;
+//	}
+
+//	public List<ItemAssignment> getRentEntries() {
+//		return rentEntries;
+//	}
+
+	public List<UserEntity> getReservations() {
 		return reservations;
 	}
 
 	@Override
 	public String toString() {
-		return "Service [serviceID=" + serviceID + ", typeID=" + typeID + ", name=" + name + ", endingDate="
-				+ endingDate + ", price=" + price + ", begginingDate=" + begginingDate + ", usersLimit=" + usersLimit
-				+ ", assignmentCount=" + assignments.size() + ", reservationCount=" + reservations.size() + "]";
+		return "Service [id=" + id + ", serviceType=" + serviceType + ", name=" + name + ", endingDate=" + endingDate
+				+ ", price=" + price + ", begginingDate=" + begginingDate + ", usersLimit=" + usersLimit + ", cruiseId="
+				+ cruiseId + ", ticketClass=" + ticketClass + ", roomID=" + roomID + ", reservations=" + reservations
+				+ "]";
 	}
-
 }
