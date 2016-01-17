@@ -47,10 +47,6 @@ public class Permissions {
 	public boolean contains(PermissionType pt){
 		return entity.contains(pt);
 	}
-
-	public void serialize() {
-
-	}
 	
 	public Permissions(){
 		entity = new PermissionsEntity();

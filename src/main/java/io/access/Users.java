@@ -257,10 +257,6 @@ public class Users {
         }
 	}
 
-	public void serialize() {
-
-	}
-
 	public User getUserByID(int id) {
 		for(User u : users){
 			if (u.getID() == id)
