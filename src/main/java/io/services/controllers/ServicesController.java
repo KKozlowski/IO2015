@@ -1,5 +1,6 @@
 package io.services.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ public class ServicesController {
 	}
 	
 	@RequestMapping("/get-by-id")
-	public String getByID(@RequestParam(value="id") int id) {
+	public String getByID(int id) {
 		Service service = serviceDao.getById(id);
 		return service.getName();
 	}
@@ -81,6 +82,29 @@ public class ServicesController {
 			return result;
 		} else {
 			return result;
+		}
+	}
+
+	@RequestMapping("/insert")
+	public String insert(int serviceType, String name, int begginingDate, int endingDate,
+			float price, int usersLimit, HttpSession h) {
+		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
+			Service service = new Service(serviceType, name, new Date(begginingDate), new Date(endingDate), price,  usersLimit);
+			serviceDao.create(service);
+			return "OK";
+		} else {
+			return "";
+		}
+	}
+	
+	@RequestMapping("/insert-type")
+	public String insertType(String name, HttpSession h) {
+		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
+			ServiceType serviceType = new ServiceType(name);
+			serviceTypeDao.create(serviceType);
+			return "OK";
+		} else {
+			return "";
 		}
 	}
 }
