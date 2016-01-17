@@ -2,26 +2,54 @@ package io.workshop;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import io.storage.SingleItem;
 
+@Entity
+@Table(name = "Workshop")
 public class FixCommision {
 
+	@Id @GeneratedValue
+	  @Column(name = "id")
+	   private int id;
+
+	@Column(name = "name")
 	private String name;
 
+	@Column(name = "inProgress;")
 	private Boolean inProgress;
 
+	@Column(name = "additionalInfo")
 	private String additionalInfo;
 
+	@Column(name = "dateStarted")
 	private Date dateStarted;
 
+	@Column(name = "dateEnded")
 	private Date dateEnded;
 
+	@Transient
 	private SingleItem item;
-	
-	private NewItem newItem; 
-	
+
+	@Transient
+	private NewItem newItem;
+ 	
 	public FixCommision() {}
 
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public Boolean getInProgress() {
 		return inProgress;
