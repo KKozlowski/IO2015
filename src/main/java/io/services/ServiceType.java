@@ -10,18 +10,25 @@ import javax.persistence.Table;
 @Table(name = "service_types")
 public class ServiceType {
 
-	public ServiceType(int id, String schema, String name) {
+	public ServiceType() {}
+	public ServiceType(int id, String name) {
 		super();
 		this.id = id;
-		this.schema = schema;
 		this.name = name;
+	}
+	public ServiceType(String name) {
+		super();
+		this.name = name;
+	}
+
+	public ServiceType(int id) {
+		this.id = id;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	private String schema;
 
 	private String name;
 
@@ -32,15 +39,7 @@ public class ServiceType {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getSchema() {
-		return schema;
-	}
-
-	public void setSchema(String schema) {
-		this.schema = schema;
-	}
-
+	
 	public String getName() {
 		return name;
 	}

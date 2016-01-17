@@ -37,8 +37,7 @@ public class ServiceDao {
 	}	
 
 	public List<Service> findAll() {
-	    return entityManager.createQuery(
-	            "SELECT s FROM services s").getResultList();
+	    return entityManager.createQuery("from Service").getResultList();
 	}
 	
 	@PersistenceContext
