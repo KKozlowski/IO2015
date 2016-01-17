@@ -3,9 +3,19 @@ package io.crew;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import io.services.Service;
 import io.workshop.Workshop;
 
+@Entity
+@Table(name="assignments")
 public class EmployeeAssignment {
 
 	private Date beginning;
@@ -19,16 +29,20 @@ public class EmployeeAssignment {
 	private List<SkillType> requiredSkills;
 
 	private String notes;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+	
+	@ManyToOne
 	private Service service;
-
+	
+	@ManyToOne
 	private Workshop workshop;
-
+	
+	@ManyToMany
 	private SkillType[] skillType;
-
-	private StaffDeployment staffDeployment;
+	
 	
 	public EmployeeAssignment(Date beginDate, Date endDate, boolean timeIndp, List<SkillType> reqSkills, Service service, String notes)
 	{
