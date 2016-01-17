@@ -119,4 +119,37 @@ public class ServicesController {
 		}
 		return "";
 	}
+	
+	@RequestMapping("/update-service")
+	public String updateService(int serviceId, int serviceTypeId, String name, int beginningDate, int endingDate,
+			float price, int usersLimit, int cruiseId, String ticketClass, int roomId, HttpSession h) {
+		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
+			Service service = serviceDao.getById(serviceId);
+			service.setServiceType(serviceTypeDao.getById(serviceTypeId));
+			service.setName(name);
+			service.setBegginingDate(new Date(beginningDate));
+			service.setEndingDate(new Date(endingDate));
+			service.setPrice(price);
+			service.setUsersLimit(usersLimit);
+			service.setCruiseId(cruiseId);
+			service.setTicketClass(ticketClass);
+			service.setRoomID(roomId);
+			serviceDao.update(service);
+			return "OK";
+		} else {
+			return "";
+		}
+	}
+	
+	@RequestMapping("/update-service-type")
+	public String updateServiceType(int id, String name, HttpSession h) {
+		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
+			ServiceType serviceType = serviceTypeDao.getById(id);
+			serviceType.setName(name);
+			serviceTypeDao.update(serviceType);
+			return "OK";
+		} else {
+			return "";
+		}
+	}
 }
