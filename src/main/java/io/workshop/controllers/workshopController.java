@@ -38,7 +38,82 @@ public class workshopController {
 		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
 				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
-		return null;
+		return "Dodawanie usług"
+				+"<br><br>Nazwa: <input type='text' name='name'>"
+				+"<br>W trakcie pracy: <input type='text' name='inProgress'>"
+				+"<br>Dodatkowe informacje: <input type='text' name='additionalInfo'>"
+				+"<br>Data Rozpoczoczecia: <input type='text' name='dateStarted'>"
+				+"<br>Data Zakonczenia: <input type='text' name='dateEnded'><br>"
+				
+				+"<br><input type='button' value='Submit'></form>";
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/removeServices")
+	@ResponseBody
+	public String removeServices(HttpSession h){
+		
+		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
+		return "Usuwanie usługi"
+				+"<br><br>Podaj id usługi: <input type='text' name='id'>"
+		
+				+"<br><input type='button' value='Submit'></form>";
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/checkCurrentTasks")
+	@ResponseBody
+	public String checkCurrentTasks(HttpSession h){
+		
+		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
+		return  "Aktualne zadania:";
+
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/checkAllTasks")
+	@ResponseBody
+	public String checkAllTasks(HttpSession h){
+		
+		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
+		return "Wszystkie zadania:";
+
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/employeeAssignment")
+	@ResponseBody
+	public String employeeAssignment(HttpSession h){
+		
+		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
+		return "Przypisz pracownika do zadania"
+				+"<br><br>NICK pracownika: <input type='text' name='name'>"
+				+"<br>ID zadania <input type='text' name='id'>"
+				
+				+"<br><input type='button' value='Submit'></form>";
+		return "";
+		
+	}
+	
+	@RequestMapping(value = "/itemAssignment")
+	@ResponseBody
+	public String itemAssignment(HttpSession h){
+		
+		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
+		return "Dodaj przedmiot do zlecenia"
+				+"<br><br>Nazwa przedmiu(unikalna): <input type='text' name='name'>"
+				+"<br>W ID zadania <input type='text' name='id'>"
+				
+				+"<br><input type='button' value='Submit'></form>";
 		return "";
 		
 	}
