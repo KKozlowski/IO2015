@@ -1,7 +1,7 @@
 package io.access;
 
+import io.access.models.PermissionsEntity;
 import io.general.App;
-import io.models.PermissionsEntity;
 
 public class Permissions {
 	

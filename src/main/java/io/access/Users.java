@@ -6,12 +6,12 @@ import java.util.Map.Entry;
 
 import io.access.InnerUser;
 import io.access.controllers.UserController;
+import io.access.models.PermissionsEntity;
 import io.access.controllers.PersonalDataController;
 import io.access.controllers.IdPassPairController;
 import io.access.controllers.PermissionsController;
 import io.crew.Employee;
 import io.general.*;
-import io.models.PermissionsEntity;
 
 public class Users {
 
@@ -333,6 +333,10 @@ public class Users {
 	public boolean isUserLogged(String sessionID){
 		System.out.println("CHECKED SESSION: "+ sessionID);
 		return logins.containsKey(sessionID);
+	}
+	
+	public boolean changePassword(int id, String password){
+		return passwordStorage.changePassword(id, password);
 	}
 
 }

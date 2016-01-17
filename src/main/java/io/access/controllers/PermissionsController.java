@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.access.models.PermissionsDao;
+import io.access.models.PermissionsEntity;
 import io.general.App;
-import io.models.PermissionsDao;
-import io.models.PermissionsEntity;
 
 @Controller
 public class PermissionsController {

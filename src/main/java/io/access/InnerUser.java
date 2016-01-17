@@ -2,10 +2,10 @@ package io.access;
 
 import io.access.controllers.PermissionsController;
 import io.access.controllers.UserController;
+import io.access.models.PermissionsEntity;
+import io.access.models.UserEntity;
 import io.crew.Employee;
 import io.general.App;
-import io.models.PermissionsEntity;
-import io.models.UserEntity;
 
 public class InnerUser extends User {
 

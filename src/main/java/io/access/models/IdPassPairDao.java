@@ -1,4 +1,4 @@
-package io.models;
+package io.access.models;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

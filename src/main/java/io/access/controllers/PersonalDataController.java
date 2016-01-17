@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.access.models.PersonalDataDao;
+import io.access.models.PersonalDataEntity;
 import io.general.App;
-import io.models.PersonalDataDao;
-import io.models.PersonalDataEntity;
 
 @Controller
 public class PersonalDataController {

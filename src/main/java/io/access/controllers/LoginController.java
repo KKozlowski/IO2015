@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.access.PersonalData;
 import io.access.User;
+import io.access.Users;
 import io.general.App;
 
 @Controller
@@ -47,6 +48,31 @@ public class LoginController {
 		+"<form id='frm1' action='innerLoginSend'> Nick: <input type='text' name='nick'><br>Hasło: <input type='password' name='pass'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
 		+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
 		+"</body></html>";
+  }
+  
+  @RequestMapping("/changePass")
+  @ResponseBody
+  public String changePass(HttpSession h, String password) {
+	  if (!App.getInstance().getUsers().isUserLogged(h.getId()))
+		  return "Nie jesteś zalogowany";
+	  else
+		  return 
+    		"<!DOCTYPE html><html><body><p>Zmien haslo:</p>"
+			+"<form id='frm1' action='changePassSend'>Nowe hasło: <input type='password' name='password'><br><br><input type='button' onclick='myFunction()' value='Submit'></form>"
+			+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>"
+			+"</body></html>";
+  }
+  
+  @RequestMapping("/changePassSend")
+  @ResponseBody
+  public String changePassSend(HttpSession h, String password) {
+	  Users us = App.getInstance().getUsers();
+	  User u = us.getUserBySessionID(h.getId());
+	  boolean success = us.changePassword(u.getID(), password);
+	if (success)
+		return "<!DOCTYPE html><html><body><p>Zmiana zakonczona powodzeniem</p><p><a href='/'>Wróc</a></p></body></html>";
+	else
+		return "<!DOCTYPE html><html><body><p>Zmiana zakonczona niepowodzeniem :(</p><p><a href='/'>Wróc</a></p></body></html>";
   }
   
   @RequestMapping("/netLoginSend")
