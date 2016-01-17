@@ -1,7 +1,7 @@
 package io.access;
 
+import io.access.models.PersonalDataEntity;
 import io.general.App;
-import io.models.PersonalDataEntity;
 
 public class PersonalData {
 

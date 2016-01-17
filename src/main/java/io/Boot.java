@@ -11,8 +11,8 @@ import io.access.PermissionType;
 import io.access.Permissions;
 import io.access.PersonalData;
 import io.access.Users;
+import io.access.models.PermissionsEntity;
 import io.general.*;
-import io.models.PermissionsEntity;
 import io.storage.ItemType;
 import io.storage.SingleItem;
 

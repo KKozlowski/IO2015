@@ -2,9 +2,9 @@ package io.access;
 
 import io.access.controllers.PersonalDataController;
 import io.access.controllers.UserController;
+import io.access.models.PersonalDataEntity;
+import io.access.models.UserEntity;
 import io.general.App;
-import io.models.PersonalDataEntity;
-import io.models.UserEntity;
 
 public class User {
 	

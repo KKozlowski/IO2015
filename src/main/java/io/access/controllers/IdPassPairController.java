@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.access.IdPassPair;
+import io.access.models.IdPassPairDao;
 import io.general.App;
-import io.models.IdPassPairDao;
 
 @Controller
 public class IdPassPairController {
