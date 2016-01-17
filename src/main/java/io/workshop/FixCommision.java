@@ -19,6 +19,8 @@ public class FixCommision {
 	private SingleItem item;
 	
 	private NewItem newItem; 
+	
+	public FixCommision() {}
 
 	
 	public Boolean getInProgress() {

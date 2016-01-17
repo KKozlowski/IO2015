@@ -17,6 +17,8 @@ public class Workshop {
 	private List<SingleItem> itemAssignment;
 
 	private List<EmployeeAssignment> employeeAssignment;
+	
+	public Workshop(){}
 
 	
 	// na czas testu
