@@ -37,7 +37,7 @@ public class ServiceTypeDao {
 		return;
 	}	
 
-	public List<Service> findAll() {
+	public List<ServiceType> findAll() {
 	    return entityManager.createQuery(
 	            "SELECT s FROM service_types s").getResultList();
 	}
