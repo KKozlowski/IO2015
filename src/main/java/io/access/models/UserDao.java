@@ -1,11 +1,26 @@
-package io.models;
+package io.access.models;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.websocket.Session;
 
+import org.hibernate.CacheMode;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.FlushMode;
+import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
+import org.hibernate.ScrollMode;
+import org.hibernate.ScrollableResults;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.sql.JoinType;
+import org.hibernate.transform.ResultTransformer;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,7 +35,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Transactional
-public class TestuserDao {
+public class UserDao {
   
   // ------------------------
   // PUBLIC METHODS
@@ -29,7 +44,7 @@ public class TestuserDao {
   /**
    * Save the user in the database.
    */
-  public void create(Testuser user) {
+  public void create(UserEntity user) {
     entityManager.persist(user);
     return;
   }
@@ -37,7 +52,7 @@ public class TestuserDao {
   /**
    * Delete the user from the database.
    */
-  public void delete(Testuser user) {
+  public void delete(UserEntity user) {
     if (entityManager.contains(user))
       entityManager.remove(user);
     else
@@ -49,31 +64,39 @@ public class TestuserDao {
    * Return all the users stored in the database.
    */
   @SuppressWarnings("unchecked")
-  public List<Testuser> getAll() {
+  public List<UserEntity> getAll() {
     return entityManager.createQuery("from Testuser").getResultList();
   }
   
   /**
    * Return the user having the passed email.
    */
-  public Testuser getByEmail(String email) {
-    return (Testuser) entityManager.createQuery(
-        "from Testuser where email = :email")
-        .setParameter("email", email)
+  public UserEntity getByNick(String nick) {
+    return (UserEntity) entityManager.createQuery(
+        "from UserEntity where nick = :nick")
+        .setParameter("nick", nick)
         .getSingleResult();
+//	  return entityManager.find(UserEntity.class, nick);
+  }
+  
+  public int getMaxID (){
+	  org.hibernate.Session s = (org.hibernate.Session) (entityManager.unwrap(Session.class));
+	  Criteria c = s.createCriteria(UserEntity.class).setProjection(Projections.max("id"));
+	  int max = (int)c.uniqueResult();
+	  return max;
   }
 
   /**
    * Return the user having the passed id.
    */
-  public Testuser getById(long id) {
-    return entityManager.find(Testuser.class, id);
+  public UserEntity getById(int id) {
+    return entityManager.find(UserEntity.class, id);
   }
 
   /**
    * Update the passed user in the database.
    */
-  public void update(Testuser user) {
+  public void update(UserEntity user) {
     entityManager.merge(user);
     return;
   }

@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import io.access.InnerUser;
 import io.access.PermissionType;
+import io.crew.exceptions.DuplicateCertificateException;
+import io.crew.exceptions.UnassignableEmployeeException;
 import io.general.App;
 import io.services.Service;
 
@@ -28,6 +30,8 @@ public class StaffDeployment {
 		employees.add(e);
 		return e;
 	}
+	
+	
 	
 	public void removeEmployee(Employee toRemove){
 		if (employees.contains(toRemove))
@@ -94,9 +98,18 @@ public class StaffDeployment {
 
 	}
 	
-	public void addCertToEmployee(int index, Certificate cert)
+	public void addCertToEmployee(int index, Certificate cert) throws DuplicateCertificateException
 	{
-		employees.get(index).addCertificate(cert);
+		List<Certificate> certs = employees.get(index).getCertificates();
+		if(certs.contains(cert))
+		{
+			throw new DuplicateCertificateException();
+		}
+		else
+		{
+			employees.get(index).addCertificate(cert);
+		}
+		
 	}
 	
 
@@ -177,5 +190,6 @@ public class StaffDeployment {
 	{
 		assignments.remove(nr);
 	}
+	
 
 }

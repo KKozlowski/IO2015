@@ -2,6 +2,9 @@ package io.crew;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.crew.exceptions.DuplicateSkillException;
+
 import java.util.Date;
 
 public class Certificate {
@@ -40,15 +43,27 @@ public class Certificate {
 	public List<SkillType> getSkills() {
 		return skills;
 	}
-	public void addSkill(SkillType skill) {
+	public void addSkill(SkillType skill) throws DuplicateSkillException{
+		
+		for(int i=0;i<skills.size();i++)
+		{
+			if(skills.get(i).getName().equalsIgnoreCase(skill.getName()))
+			{
+				throw new DuplicateSkillException();
+			}
+		}
+		
 		this.skills.add(skill);
 	}
+	
 	public void removeSkill(int index) {
 		this.skills.remove(index);
 	}
+	
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
+	
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}

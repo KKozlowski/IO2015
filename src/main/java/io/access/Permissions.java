@@ -1,21 +1,29 @@
 package io.access;
 
-import java.util.ArrayList;
-
+import io.access.models.PermissionsEntity;
 import io.general.App;
 
 public class Permissions {
+	
+	protected PermissionsEntity entity = new PermissionsEntity();
 
-	private ArrayList<PermissionType> permissions = new ArrayList<PermissionType>();
+	public PermissionsEntity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(PermissionsEntity entity) {
+		this.entity = entity;
+	}
 
 	public Boolean addPermission(PermissionType toAdd) {
 		//if (!App.getInstance().getUsers().isCurrentUserAdmin()) //przenieś do Controllera
 			//return false;
 		
-		if (permissions.contains(toAdd))
+		if (entity.contains(toAdd))
 			return false;
 		else {
-			permissions.add(toAdd);
+			entity.add(toAdd);
+			App.getInstance().getUsers().getPermissionsController().update(entity);
 			return true;
 		}
 	}
@@ -24,10 +32,11 @@ public class Permissions {
 		//if (!App.getInstance().getUsers().isCurrentUserAdmin()) //przenieś do Controllera
 			//return false;
 		
-		if (permissions.contains(toRemove)){
+		if (entity.contains(toRemove)){
 			if (toRemove == PermissionType.admin && App.getInstance().getUsers().numberOfADMINS() == 0)
 				return false;
-			permissions.remove(toRemove);
+			entity.remove(toRemove);
+			App.getInstance().getUsers().getPermissionsController().update(entity);
 			return true;
 		}
 		else {
@@ -36,7 +45,7 @@ public class Permissions {
 	}
 	
 	public boolean contains(PermissionType pt){
-		return permissions.contains(pt);
+		return entity.contains(pt);
 	}
 
 	public void serialize() {
@@ -44,7 +53,15 @@ public class Permissions {
 	}
 	
 	public Permissions(){
-		
+		entity = new PermissionsEntity();
+	}
+	
+	public Permissions(PermissionsEntity pe) {
+		entity = pe;
+	}
+	
+	public void create(){
+		App.getInstance().getUsers().getPermissionsController().create(entity);
 	}
 
 }

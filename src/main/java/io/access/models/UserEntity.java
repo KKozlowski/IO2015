@@ -1,4 +1,4 @@
-package io.models;
+package io.access.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
  * Represents an Testuser for this web application.
  */
 @Entity
-@Table(name = "testusers")
-public class Testuser {
+@Table(name = "users")
+public class UserEntity {
 
   // ------------------------
   // PRIVATE FIELDS
@@ -20,51 +20,44 @@ public class Testuser {
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  protected int id;
   
   @NotNull
-  private String email;
+  
+  protected String nick;
   
   @NotNull
-  private String name;
+  protected boolean netUser;
 
   // ------------------------
   // PUBLIC METHODS
   // ------------------------
   
-  public Testuser() { }
+  public UserEntity() { }
 
-  public Testuser(long id) { 
-    this.id = id;
+  public UserEntity(String nick, boolean net) {
+    this.nick = nick;
+    this.netUser = net;
   }
 
-  public Testuser(String email, String name) {
-    this.email = email;
-    this.name = name;
-  }
-
-  public long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(long value) {
+  /*public void setId(int value) {
     this.id = value;
-  }
-
-  public String getEmail() {
-    return email;
+  }*/
+  
+  public String getNick() {
+    return nick;
   }
   
-  public void setEmail(String value) {
-    this.email = value;
-  }
-  
-  public String getName() {
-    return name;
+  public boolean isNetUser(){
+	  return netUser;
   }
 
-  public void setName(String value) {
-    this.name = value;
-  }
+  /*public void setNick(String value) {
+    this.nick = value;
+  }*/
   
 } // class Testuser

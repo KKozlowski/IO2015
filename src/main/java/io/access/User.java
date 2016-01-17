@@ -1,34 +1,42 @@
 package io.access;
 
+import io.access.controllers.PersonalDataController;
 import io.access.controllers.UserController;
+import io.access.models.PersonalDataEntity;
+import io.access.models.UserEntity;
 import io.general.App;
-import io.models.UserEntity;
 
 public class User {
 	
 	private static int lastID;
 	
 	private int id;
-
-
+	
 	private PersonalData personalData;
 	
 	protected UserEntity entity;
 	
 	public static User retrieveUserByNick(String nick){
 		UserController uc = App.getInstance().getUsers().getUserController();
+		PersonalDataController pdc = App.getInstance().getUsers().getPersonalDataController();
 		UserEntity ue = uc.getByNick(nick);
-		if (ue == null) return null;
-		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
+		if (ue == null) 
+			return null;
+		int id = ue.getId();
+		PersonalDataEntity pde = pdc.getById(id);
+		PersonalData pd = new PersonalData(pde);
 		
 		return new User(ue, pd);
 	}
 	
 	public static User retrieveUserById(int id){
 		UserController uc = App.getInstance().getUsers().getUserController();
+		PersonalDataController pdc = App.getInstance().getUsers().getPersonalDataController();
 		UserEntity ue = uc.getById(id);
-		if (ue == null) return null;
-		PersonalData pd = App.getInstance().getUsers().personalDatas.get(ue.getId());
+		if (ue == null) 
+			return null;
+		PersonalDataEntity pde = pdc.getById(id);
+		PersonalData pd = new PersonalData(pde);
 		
 		return new User(ue, pd);
 	}
@@ -52,8 +60,10 @@ public class User {
 		UserController uc = App.getInstance().getUsers().getUserController();
 		if (uc.getByNick(entity.getNick()) != null)
 			throw new DuplicateNickException();
-		entity = App.getInstance().getUsers().getUserController().create(entity);
-		App.getInstance().getUsers().personalDatas.put(entity.getId(), personalData);
+		entity = uc.create(entity);
+		//App.getInstance().getUsers().personalDatas.put(entity.getId(), personalData);
+		personalData.getEntity().setUserID(entity.getId());
+		personalData.create();
 	}
 	
 	public boolean hasPermission(PermissionType pt){
@@ -71,9 +81,9 @@ public class User {
 	public String getNick(){
 		return entity.getNick();
 	}
-
-	public void serialize() {
-
+	
+	public boolean isNetUser(){
+		return entity.isNetUser();
 	}
 
 }

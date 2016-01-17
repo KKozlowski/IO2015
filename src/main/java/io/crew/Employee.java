@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import io.access.InnerUser;
 import io.access.PersonalData;
 import io.access.User;
 
+@Entity
+@Table(name="employees")
 public class Employee {
-
+	
+	@id
+	private int id;
 	private Date employmentDate;
 	private InnerUser userAccount;
 	public List<Certificate> certificates;
@@ -39,6 +46,7 @@ public class Employee {
 	public List<Certificate> getCertificates() {
 		return certificates;
 	}
+	
 	public List<SkillType> getAllSkills() {
 		List<SkillType> skills = new ArrayList<SkillType>();
 		for(Certificate cert : certificates)
@@ -70,10 +78,7 @@ public class Employee {
 		userAccount = u;
 	}
 
-	public List<EmployeeAssignment> getAssingments() {
-		//TODO metoda zwracająca assingmenty pracownika
-		return null;
-	}
+	
 
 	public PersonalData getPersonalData() {
 		return userAccount.getPersonalData();

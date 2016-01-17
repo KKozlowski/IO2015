@@ -1,91 +1,102 @@
 package io.access;
 
+import io.access.models.PersonalDataEntity;
+import io.general.App;
+
 public class PersonalData {
 
-	private String name;
-
-	private String surname;
-
-	private String pesel;
-
-	private String adress;
-
-	private String idCardID;
-
-	private String mail;
+	protected PersonalDataEntity entity;
 	
+	public PersonalDataEntity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(PersonalDataEntity entity) {
+		this.entity = entity;
+	}
+
 	public PersonalData(String name, String surname, String pesel, String adress, String idCardID, String mail) {
-		this.name = name;
-		this.surname = surname;
-		this.pesel = pesel;
-		this.adress = adress;
-		this.idCardID = idCardID;
-		this.mail = mail;
+		entity = new PersonalDataEntity(name, surname, pesel, adress, idCardID, mail);
+	}
+	
+	public PersonalData(PersonalDataEntity pde) {
+		entity = pde;
 	}
 	
 	public void updataData(String name, String surname, String email, String idid, String pesel, String adres){
-		this.name = name;
-		this.surname = surname;
-		this.pesel = pesel;
-		this.adress = adres;
-		this.idCardID = idid;
-		this.mail = email;
+		entity.setName(name);
+		entity.setSurname(surname);
+		entity.setPESEL(pesel);
+		entity.setAdress(adres);
+		entity.setCardID(idid);
+		entity.setMail(email);	
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 	
 	public PersonalData() {
-	
+		entity = new PersonalDataEntity();
 	}
 
 	public String getName() {
-		return name;
+		return entity.getName();
 	}
 
 	public String getSurname() {
-		return surname;
+		return entity.getSurname();
 	}
 
 	public String getPESEL() {
-		return pesel;
+		return entity.getPESEL();
 	}
 
 	public String getAdress() {
-		return adress;
+		return entity.getAdress();
 	}
 
 	public String getCardID() {
-		return idCardID;
+		return entity.getCardID();
 	}
 
 	public String getMail() {
-		return mail;
+		return entity.getMail();
 	}
 
 	public void setName(String data) {
-		this.name = data;
+		entity.setName(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setSurname(String data) {
-		this.surname = data;
+		entity.setName(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setPESEL(String data) {
-		this.pesel = data;
+		entity.setPESEL(data);	
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setAdress(String data) {
-		this.adress = data;
+		entity.setAdress(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setCardID(String data) {
-		this.idCardID = data;
+		entity.setCardID(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void setMail(String data) {
-		this.mail = data;
+		entity.setMail(data);
+		App.getInstance().getUsers().getPersonalDataController().update(entity);
 	}
 
 	public void serialize() {
 
+	}
+	
+	public void create(){
+		App.getInstance().getUsers().getPersonalDataController().create(entity);
 	}
 
 }

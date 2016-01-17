@@ -5,11 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.access.models.UserDao;
+import io.access.models.UserEntity;
 import io.general.App;
-import io.models.Testuser;
-import io.models.TestuserDao;
-import io.models.UserDao;
-import io.models.UserEntity;
 
 /**
  * Class TestuserController

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.access.PermissionType;
-import io.crew.EmployeeAssignment;
 import io.general.App;
 
 @Controller
@@ -22,7 +21,7 @@ public class CrewMasterController {
 	public String ManagerPanel(HttpSession h)
 	{
 		
-		if(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster))
+		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.crewMaster))
 		{
 				return "<!DOCTYPE html><html><body>"
 						+ "<p>Wybierz zadanie</p>"

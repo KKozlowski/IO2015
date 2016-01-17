@@ -1,4 +1,4 @@
-package io.crew;
+package io.crew.exceptions;
 
 public class UnassignableEmployeeException extends Exception {
 	/**

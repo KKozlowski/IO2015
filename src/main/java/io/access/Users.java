@@ -2,11 +2,14 @@ package io.access;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import io.access.InnerUser;
 import io.access.controllers.UserController;
+import io.access.models.PermissionsEntity;
+import io.access.controllers.PersonalDataController;
+import io.access.controllers.IdPassPairController;
+import io.access.controllers.PermissionsController;
 import io.crew.Employee;
 import io.general.*;
 
@@ -20,16 +23,10 @@ public class Users {
 
 	private PasswordStorage passwordStorage = new PasswordStorage();
 	
-	private io.access.controllers.UserController userController = null;
-	
-	/**
-	 * It will be moved to database
-	 */
-	public Map<Integer, Permissions> permissions = new HashMap<Integer, Permissions>();
-	/**
-	 * It will be moved to database
-	 */
-	public Map<Integer, PersonalData> personalDatas = new HashMap<Integer, PersonalData>();
+	private UserController userController = null;
+	private PersonalDataController personalDataController = null;
+	private PermissionsController permissionsController = null;
+	private IdPassPairController idPassPairController = null;
 	
 	/**
 	 * Deprecated.
@@ -40,25 +37,12 @@ public class Users {
 	
 	public InnerUser registerADMIN(){
 		Employee e = App.getInstance().getCrew().addEmployee();
-		InnerUser result = addInnerUser("ADMIN", new PersonalData(), e, new Permissions(), "password");
+		InnerUser result = addInnerUser("ADMIN", new PersonalData(), e, new Permissions(new PermissionsEntity("001000")), "password");
 		if (result == null){
 			System.out.println("NULLOLO");
 			App.getInstance().getCrew().removeEmployee(e);
 		}
 		e.setUserAccount(result);
-		result.getPermissions().addPermission(PermissionType.admin);
-		return result;
-	}
-	
-	public InnerUser registerServiceMan(){
-		Employee e = App.getInstance().getCrew().addEmployee();
-		InnerUser result = addInnerUser("Serwisant", new PersonalData(), e, new Permissions(), "serwisant");
-		if (result == null){
-			System.out.println("NULLOLO");
-			App.getInstance().getCrew().removeEmployee(e);
-		}
-		e.setUserAccount(result);
-		result.getPermissions().addPermission(PermissionType.serviceMan);
 		return result;
 	}
 	
@@ -116,6 +100,48 @@ public class Users {
 	public UserController getUserController(){
 		return userController;
 	}
+	
+	public boolean setPersonalDataController(io.access.controllers.PersonalDataController pdc){
+		if (personalDataController == null){
+			personalDataController = pdc;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public PersonalDataController getPersonalDataController(){
+		return personalDataController;
+	}
+	
+	public boolean setPermissionsController(io.access.controllers.PermissionsController pc){
+		if (permissionsController == null){
+			permissionsController = pc;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public PermissionsController getPermissionsController(){
+		return permissionsController;
+	}
+	
+	public boolean setIdPassPairController(io.access.controllers.IdPassPairController ippc){
+		if (idPassPairController == null){
+			idPassPairController = ippc;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public IdPassPairController getIdPassPairController(){
+		return idPassPairController;
+	}
 
 	public NetUser registerNetUser(String nick, PersonalData personalInfo, String password) {
 		NetUser usr;
@@ -170,9 +196,10 @@ public class Users {
 	}
 
 	private LoginResult login(String sessionID, User u, String password){
-		if (u == null) 
+		if (u == null) {
+			System.out.println("LoginResult u==null");
 			return new LoginResult(null, false);
-		
+		}
 		int id = u.getID();
 		boolean success = passwordStorage.checkPassword(id, password);
 		if (success){
@@ -197,6 +224,7 @@ public class Users {
 
 	public LoginResult innerLogin(String sessionID, String nick, String password) {
 		User u = getInnerUserByNick(nick);
+		//if ()
 		return login(sessionID, u, password);
 	}
 	
@@ -228,12 +256,19 @@ public class Users {
 	}
 
 	public NetUser getNetUserByNick(String n) {
-		return NetUser.retrieveNetUserByNick(n);
+		NetUser u = NetUser.retrieveNetUserByNick(n);
+		if (u != null && u.isNetUser())
+			return u;
+		else
+			return null;
 	}
 	
 	public InnerUser getInnerUserByNick(String n) {
-		
-		return InnerUser.retrieveInnerUserByNick(n);
+		InnerUser u = InnerUser.retrieveInnerUserByNick(n);
+		if (u != null && !u.isNetUser())
+			return u;
+		else
+			return null;
 	}
 	
 	public User getCurrentUser(){
@@ -273,22 +308,10 @@ public class Users {
 		else return currentUser.hasPermission(PermissionType.admin);
 	}
 	
-	public boolean isCurrentUserServiceMan(){
-		if (currentUser == null)
-			return false;
-		else return currentUser.hasPermission(PermissionType.serviceMan);
-	}
-	
 	public boolean isCurrentUserAdmin(String sessionID){
 		if (getUserBySessionID(sessionID) == null)
 			return false;
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
-	}
-	
-	public boolean isCurrentUserServiceMan(String sessionID){
-		if (getUserBySessionID(sessionID) == null)
-			return false;
-		else return getUserBySessionID(sessionID).hasPermission(PermissionType.serviceMan);
 	}
 	
 	public User getUserBySessionID(String sessionID){
@@ -310,6 +333,10 @@ public class Users {
 	public boolean isUserLogged(String sessionID){
 		System.out.println("CHECKED SESSION: "+ sessionID);
 		return logins.containsKey(sessionID);
+	}
+	
+	public boolean changePassword(int id, String password){
+		return passwordStorage.changePassword(id, password);
 	}
 
 }
