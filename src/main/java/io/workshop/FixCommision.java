@@ -22,7 +22,7 @@ public class FixCommision {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "inProgress;")
+	@Column(name = "inProgress")
 	private Boolean inProgress;
 
 	@Column(name = "additionalInfo")
