@@ -23,12 +23,14 @@ public class Storage {
 	}
 
 	public void showStorage() {
-	
+	//String showing = new String();
 		for (int i = 0; i<Amount.size(); i++){
+			//showing += Amount.get(i).getName() + " " + Amount.get(i).isAvailable() + " " + Amount.get(i).getDescription();
 			System.out.println(Amount.get(i).getName() + " " + Amount.get(i).isAvailable() + " " + Amount.get(i).getDescription());
 		}
 	}
-
+	
+	
 	public void addObject(SingleItem SingleObject) {
 		if(!App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.storageWorker))
 			return;
@@ -49,7 +51,11 @@ public class Storage {
 
 	@Override
 	public String toString() {
-		return "Storage [Amount=" + Amount + ", singleItem=" + Arrays.toString(singleItem) + "]";
+		String showing = new String();
+		for (int i = 0; i<Amount.size(); i++){
+			showing += "Nazwa: " + Amount.get(i).getName() + " " + "dostêpny: " +  Amount.get(i).isAvailable() + " " + "opis: "+ Amount.get(i).getDescription() + '\n' + System.lineSeparator();	
+		}
+		return showing;
 	}
 
 }
