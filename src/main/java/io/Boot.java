@@ -10,6 +10,11 @@ import io.access.PermissionType;
 import io.access.Permissions;
 import io.access.PersonalData;
 import io.access.Users;
+import io.crew.Certificate;
+import io.crew.Employee;
+import io.crew.EmployeeAssignment;
+import io.crew.SkillType;
+import io.crew.UnassignableEmployeeException;
 import io.general.*;
 import io.storage.ItemType;
 import io.storage.SingleItem;
@@ -20,6 +25,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class Boot {
@@ -60,6 +67,28 @@ public class Boot {
 					App.getInstance().getUsers().doesCurrentUserHavePermission(null, PermissionType.crewMaster));
 		}
 		App.getInstance().getWorkshop().addingCommisionsTest();
+		
+		//Testy crew assignEmployee
+		List<SkillType> skille = new ArrayList<SkillType>();
+		skille.add(new SkillType(1, "Skill1"));
+		skille.add(new SkillType(2, "Skill2"));
+		
+		SkillType skill = new SkillType(3, "Skill3");
+		
+		EmployeeAssignment test = new EmployeeAssignment(null, null, false, skille, null, null);
+		Employee pracownik = new Employee();
+		Certificate cert = new Certificate();
+		cert.addSkill(skille.get(0));
+		cert.addSkill(skille.get(1));
+		
+		pracownik.certificates.add(cert);
+		try {
+			App.getInstance().getCrew().assignEmployee(pracownik, test);
+		} catch (UnassignableEmployeeException e) {
+			System.err.println("Pracownik nie spelnia wymagan");
+			e.printStackTrace();
+		}
+		System.out.println(test);
   }
 	
 	public void testConnect() {

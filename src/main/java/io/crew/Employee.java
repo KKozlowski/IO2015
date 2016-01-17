@@ -12,7 +12,7 @@ public class Employee {
 
 	private Date employmentDate;
 	private InnerUser userAccount;
-	private List<Certificate> certificates;
+	public List<Certificate> certificates;
 
 	public Employee(){
 		//domyślnie ustawione na czas obecny

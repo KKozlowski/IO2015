@@ -80,7 +80,15 @@ public class EmployeeAssignment {
 		
 	}
 	
+	public SkillType[] getSkillType()
+	{
+		return skillType;
+	}
 	
+	public List<SkillType> getReqSkills()
+	{
+		return requiredSkills;
+	}
 	
 	@Override
 	public String toString(){
