@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "SkillTypes")
+@Entity
+@Table(name = "SkillTypes")
 public class SkillType {
 
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String Name;
 	

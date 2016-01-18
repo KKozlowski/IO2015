@@ -4,32 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import io.access.InnerUser;
 import io.access.PersonalData;
 import io.access.User;
-//@Entity
-//@Table(name="employees")
+
 public class Employee {
-	
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
+
 	private Date employmentDate;
-	
-	//@OneToOne
 	private InnerUser userAccount;
-	
-	//@ManyToMany
-	public List<Certificate> certificates;
+	private List<Certificate> certificates;
 
 	public Employee(){
 		//domyślnie ustawione na czas obecny
@@ -56,7 +39,6 @@ public class Employee {
 	public List<Certificate> getCertificates() {
 		return certificates;
 	}
-	
 	public List<SkillType> getAllSkills() {
 		List<SkillType> skills = new ArrayList<SkillType>();
 		for(Certificate cert : certificates)
@@ -88,7 +70,10 @@ public class Employee {
 		userAccount = u;
 	}
 
-	
+	public List<EmployeeAssignment> getAssingments() {
+		//TODO metoda zwracająca assingmenty pracownika
+		return null;
+	}
 
 	public PersonalData getPersonalData() {
 		return userAccount.getPersonalData();

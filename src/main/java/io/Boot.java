@@ -59,9 +59,19 @@ public class Boot {
 			System.out.println("Has admin permission: " + 
 			App.getInstance().getUsers().doesCurrentUserHavePermission("A", PermissionType.admin));
 			((InnerUser)(App.getInstance().getUsers().getCurrentUser())).getPermissions().addPermission(PermissionType.storageWorker);
-			SingleItem Gwozdz = new SingleItem ("Mlotek", true, "mlotek Mirka", ItemType.tool);
-	 		App.getInstance().getStorage().addObject(Gwozdz);		 		 		
-	 		App.getInstance().getStorage().showStorage();
+			SingleItem Gwozdz = new SingleItem("Mlotek", true, "mlotek Mirka", ItemType.tool);
+			SingleItem mp1 = new SingleItem("Miejsce A", true, "miejsce na mala lodke", ItemType.mooringPlace);
+			SingleItem mp2 = new SingleItem("Miejsce B", true, "miejsce na srednia lodke", ItemType.mooringPlace);
+			SingleItem mp3 = new SingleItem("Miejsce C", true, "miejsce na duza lodke", ItemType.mooringPlace);
+			SingleItem b1 = new SingleItem("Posejdon", true, "mala lodka", ItemType.boat);
+			SingleItem b2 = new SingleItem("Neptun", true, "duza lodka", ItemType.boat);
+			App.getInstance().getStorage().addObject(Gwozdz);
+			App.getInstance().getStorage().addObject(mp1);
+			App.getInstance().getStorage().addObject(mp2);
+			App.getInstance().getStorage().addObject(mp3);
+			App.getInstance().getStorage().addObject(b1);
+			App.getInstance().getStorage().addObject(b2);
+			App.getInstance().getStorage().showStorage();
 		}
 		
 		InnerUser iu = (InnerUser)(lr.loggedUser);

@@ -2,27 +2,12 @@ package io.crew;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-import io.crew.exceptions.DuplicateSkillException;
-
 import java.util.Date;
 
-//@Entity
-//@Table(name="certyficates")
 public class Certificate {
 	
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int certificateID;
 	private String name;
-	//@ManyToMany
 	private List<SkillType> skills;
 	private Date expirationDate;
 	
@@ -55,27 +40,15 @@ public class Certificate {
 	public List<SkillType> getSkills() {
 		return skills;
 	}
-	public void addSkill(SkillType skill) throws DuplicateSkillException{
-		
-		for(int i=0;i<skills.size();i++)
-		{
-			if(skills.get(i).getName().equalsIgnoreCase(skill.getName()))
-			{
-				throw new DuplicateSkillException();
-			}
-		}
-		
+	public void addSkill(SkillType skill) {
 		this.skills.add(skill);
 	}
-	
 	public void removeSkill(int index) {
 		this.skills.remove(index);
 	}
-	
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
-	
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}

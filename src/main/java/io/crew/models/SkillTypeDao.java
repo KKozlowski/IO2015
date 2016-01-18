@@ -9,7 +9,7 @@ import io.crew.SkillType;
 
 
 public class SkillTypeDao {
-	/*
+	
 	public void create(SkillType skill) {
 	    entityManager.persist(skill);
 	    return;
@@ -39,5 +39,5 @@ public class SkillTypeDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	*/
+
 }
