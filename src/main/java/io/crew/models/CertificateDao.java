@@ -10,6 +10,7 @@ import io.crew.SkillType;
 
 public class CertificateDao {
 	
+	/*
 	public void create(Certificate cert) {
 	    entityManager.persist(cert);
 	    return;
@@ -19,8 +20,8 @@ public class CertificateDao {
 		return entityManager.find(Certificate.class, id);
 	}
 	
-	public void update(SkillType skill) {
-		entityManager.merge(skill);
+	public void update(Certificate cert) {
+		entityManager.merge(cert);
 		return;
 	}	
 	
@@ -39,4 +40,5 @@ public class CertificateDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	*/
 }

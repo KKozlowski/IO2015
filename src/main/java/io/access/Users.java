@@ -40,7 +40,7 @@ public class Users {
 	
 	public InnerUser registerADMIN(){
 		Employee e = App.getInstance().getCrew().addEmployee();
-		InnerUser result = addInnerUser("ADMIN", new PersonalData(), e, new Permissions(new PermissionsEntity("001001")), "password");
+		InnerUser result = addInnerUser("ADMIN", new PersonalData(), e, new Permissions(new PermissionsEntity("001000")), "password");
 		if (result == null){
 			System.out.println("NULLOLO");
 			App.getInstance().getCrew().removeEmployee(e);
@@ -329,16 +329,6 @@ public class Users {
 		if (getUserBySessionID(sessionID) == null)
 			return false;
 		else return getUserBySessionID(sessionID).hasPermission(PermissionType.admin);
-	}
-	
-	
-
-	public boolean isCurrentUserNetUser(String sessionID) {
-		if (getUserBySessionID(sessionID) == null) {
-			return false;
-		} else {
-			return getUserBySessionID(sessionID).hasPermission(PermissionType.netUser);
-		}
 	}
 	
 	public User getUserBySessionID(String sessionID){

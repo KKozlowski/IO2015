@@ -1,12 +1,15 @@
 package io.storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import io.access.PermissionType;
 import io.general.App;
 
 public class Storage {
-
+	
 	public Storage() {
 		super();
 	}
@@ -20,21 +23,17 @@ public class Storage {
 	}
 
 	public void showStorage() {
-		//String showing = new String();
-		for (int i = 0; i < Amount.size(); i++) {
+	//String showing = new String();
+		for (int i = 0; i<Amount.size(); i++){
 			//showing += Amount.get(i).getName() + " " + Amount.get(i).isAvailable() + " " + Amount.get(i).getDescription();
 			System.out.println(Amount.get(i).getName() + " " + Amount.get(i).isAvailable() + " " + Amount.get(i).getDescription());
 		}
 	}
-
-	public SingleItem GetObject(int i) {
-		return Amount.get(i);
-	}
-
+	
+	
 	public void addObject(SingleItem SingleObject) {
-		if (!App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.storageWorker)) {
+		if(!App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.storageWorker))
 			return;
-		}
 		Amount.add(SingleObject);
 	}
 
@@ -50,30 +49,11 @@ public class Storage {
 		this.singleItem = singleItem;
 	}
 
-	public int size() {
-		return Amount.size();
-	}
-
-	public String showSpecifyItems(String typeOfItem) {
-		String showing = new String();
-		String currtype = new String();
-		for (int i = 0; i < Amount.size(); i++) {
-			currtype = Amount.get(i).getItemType();
-			if (currtype.equals(typeOfItem)) {
-				showing += "Nazwa: " + Amount.get(i).getName() + " dostêpny: " + Amount.get(i).isAvailable() + " opis: "
-						+ Amount.get(i).getDescription() + '\n' + System.lineSeparator();
-			}
-
-		}
-		return showing;
-	}
-
 	@Override
 	public String toString() {
 		String showing = new String();
-		for (int i = 0; i < Amount.size(); i++) {
-			showing += "Nazwa: " + Amount.get(i).getName() + " dostêpny: " + Amount.get(i).isAvailable() + " opis: "
-					+ Amount.get(i).getDescription() + " typ: " + Amount.get(i).getItemType() + '\n' + System.lineSeparator();
+		for (int i = 0; i<Amount.size(); i++){
+			showing += "Nazwa: " + Amount.get(i).getName() + " " + "dostêpny: " +  Amount.get(i).isAvailable() + " " + "opis: "+ Amount.get(i).getDescription() + '\n' + System.lineSeparator();	
 		}
 		return showing;
 	}

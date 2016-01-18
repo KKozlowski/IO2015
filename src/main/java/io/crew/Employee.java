@@ -15,20 +15,20 @@ import javax.persistence.Table;
 import io.access.InnerUser;
 import io.access.PersonalData;
 import io.access.User;
-@Entity
-@Table(name="employees")
+//@Entity
+//@Table(name="employees")
 public class Employee {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private Date employmentDate;
 	
-	@OneToOne
+	//@OneToOne
 	private InnerUser userAccount;
 	
-	@ManyToMany
+	//@ManyToMany
 	public List<Certificate> certificates;
 
 	public Employee(){

@@ -21,14 +21,15 @@ public class SingleItem {
 
 	private ItemAssignment[] itemAssignment;
 
-	public SingleItem(String startName, boolean startAvailable, String startDescription, ItemType startItemType) {
-
+	public SingleItem (String startName, boolean startAvailable, String startDescription, ItemType startItemType){
+		
 		this.setName(startName);
 		this.setAvailable(startAvailable);
 		this.setDescription(startDescription);
 		this.setItemType(startItemType);
-	}
-
+		}
+	
+	
 	public Void addObject() {
 		return null;
 	}
@@ -55,65 +56,81 @@ public class SingleItem {
 		return null;
 	}
 
+
 	public ItemAssignment[] getItemAssignment() {
 		return itemAssignment;
 	}
+
 
 	public void setItemAssignment(ItemAssignment[] itemAssignment) {
 		this.itemAssignment = itemAssignment;
 	}
 
-	public String getItemType() {
-		return itemType.toString();
+
+	public ItemType getItemType() {
+		return itemType;
 	}
+
 
 	public void setItemType(ItemType itemType) {
 		this.itemType = itemType;
 	}
 
+
 	public Storage getStorage() {
 		return storage;
 	}
+
 
 	public void setStorage(Storage storage) {
 		this.storage = storage;
 	}
 
+
 	public String getDescription() {
 		return Description;
 	}
+
 
 	public void setDescription(String description) {
 		Description = description;
 	}
 
+
 	public List<FixCommision> getFixingHistory() {
 		return fixingHistory;
 	}
+
 
 	public void setFixingHistory(List<FixCommision> fixingHistory) {
 		this.fixingHistory = fixingHistory;
 	}
 
+
 	public List<ItemAssignment> getHistory() {
 		return History;
 	}
+
 
 	public void setHistory(List<ItemAssignment> history) {
 		History = history;
 	}
 
+
 	public boolean isAvailable() {
 		return Available;
 	}
+
 
 	public void setAvailable(boolean available) {
 		Available = available;
 	}
 
+
 	public String getName() {
 		return Name;
 	}
+
 
 	public void setName(String name) {
 		Name = name;

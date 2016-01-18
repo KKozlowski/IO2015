@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.access.PermissionType;
-import io.access.models.UserEntity;
 import io.general.App;
 import io.services.Service;
 import io.services.ServiceType;
@@ -107,16 +106,5 @@ public class ServicesController {
 		} else {
 			return "";
 		}
-	}
-
-	@RequestMapping("/make-reservation")
-	public String makeReservation(HttpSession h, @RequestParam(value="serviceid") int serviceID) {
-		if(App.getInstance().getUsers().isUserLogged(h.getId())) {
-			Service service = serviceDao.getById(serviceID);
-			service.getReservations().add(new UserEntity(App.getInstance().getUsers().getUserBySessionID(h.getId()).getID()));
-			serviceDao.update(service);
-			return "OK";
-		}
-		return "";
 	}
 }

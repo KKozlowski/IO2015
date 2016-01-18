@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import io.services.Service;
 import io.workshop.Workshop;
 
-@Entity
-@Table(name="assignments")
+//@Entity
+//@Table(name="assignments")
 public class EmployeeAssignment {
 
 	private Date beginning;
@@ -30,17 +30,17 @@ public class EmployeeAssignment {
 
 	private String notes;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne
+	//@ManyToOne
 	private Service service;
 	
-	@ManyToOne
+	//@ManyToOne
 	private Workshop workshop;
 	
-	@ManyToMany
+	//@ManyToMany
 	private SkillType[] skillType;
 	
 	

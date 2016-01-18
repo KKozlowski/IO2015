@@ -14,15 +14,15 @@ import io.crew.exceptions.DuplicateSkillException;
 
 import java.util.Date;
 
-@Entity
-@Table(name="certyficates")
+//@Entity
+//@Table(name="certyficates")
 public class Certificate {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int certificateID;
 	private String name;
-	@ManyToMany
+	//@ManyToMany
 	private List<SkillType> skills;
 	private Date expirationDate;
 	

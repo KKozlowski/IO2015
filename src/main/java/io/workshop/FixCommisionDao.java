@@ -1,7 +1,5 @@
 package io.workshop;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -50,16 +48,6 @@ public class FixCommisionDao {
 	public void update(FixCommision fc) {
 		entityManager.merge(fc);
 		return;
-	}
-	
-	public List<FixCommision> findAll() {
-	    return entityManager.createQuery(
-	            "FROM FixCommision").getResultList();
-	}
-	
-	public List<FixCommision> findTrue() {
-	    return entityManager.createQuery(
-	    		"FROM FixCommision WHERE inProgress = TRUE").getResultList();
 	}
 	
 	// ------------------------

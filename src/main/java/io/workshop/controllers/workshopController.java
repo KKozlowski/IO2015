@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -100,23 +99,15 @@ public class workshopController {
 	@RequestMapping(value = "/removeServices")
 	@ResponseBody
 	public String removeServices(HttpSession h){
+		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
 				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan))
-		return "<!DOCTYPE html><html><body><p>Usuwanie usługi:</p>"
-				+"<form id='frm1' action='/removeServicesSend' method='POST'>"
-				+"<br />Identyfikator: <input type='text' name='id'/><br />"
-				+"<br /><button type='submit'>Submit</button></form>"
-				+"</body></html>";
+		return "Usuwanie usługi"
+				+"<br><br>Podaj id usługi: <input type='text' name='id'>"
+		
+				+"<br><input type='button' value='Submit'></form>";
 		return "";
-	}
-	
-
-	@RequestMapping(value = "/removeServicesSend")
-	@ResponseBody
-	public String removeServices(HttpSession h, String id){
-		FixCommision fixCommision = repository.getById(Integer.parseInt(id));
-		repository.delete(fixCommision);
-		return "Usunięto";
+		
 	}
 	
 	@RequestMapping(value = "/checkCurrentTasks")
@@ -124,16 +115,11 @@ public class workshopController {
 	public String checkCurrentTasks(HttpSession h){
 		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan)){
-			String html = "<!DOCTYPE html><html><body>";
-			List<FixCommision> commisions = repository.findTrue();
-			for(FixCommision fc : commisions){
-				html += "<p>" + fc.getId()+ " " + fc.getName()+ " " + fc.getInProgress()+ " " + fc.getAdditionalInfo() + " " + fc.getDateStarted()+ " " + fc.getDateEnded() + "</p>";
-			}
-			return html + "</body></html>";
-		}
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan))
+		return  "Aktualne zadania:";
+
+		return "";
 		
-	return "";
 	}
 	
 	@RequestMapping(value = "/checkAllTasks")
@@ -141,16 +127,11 @@ public class workshopController {
 	public String checkAllTasks(HttpSession h){
 		
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan)){
-			String html = "<!DOCTYPE html><html><body>";
-			List<FixCommision> commisions = repository.findAll();
-			for(FixCommision fc : commisions){
-				html += "<p>" + fc.getId()+ " " + fc.getName()+ " " + fc.getInProgress()+ " " + fc.getAdditionalInfo() + " " + fc.getDateStarted()+ " " + fc.getDateEnded() + "</p>";
-			}
-			return html + "</body></html>";
-		}
+				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan))
+		return "Wszystkie zadania:";
 
 		return "";
+		
 	}
 	
 	@RequestMapping(value = "/employeeAssignment")

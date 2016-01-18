@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import io.access.InnerUser;
 import io.access.PermissionType;
 import io.crew.exceptions.DuplicateCertificateException;
+import io.crew.exceptions.DuplicateSkillException;
 import io.crew.exceptions.UnassignableEmployeeException;
 import io.general.App;
 import io.services.Service;
@@ -19,7 +20,6 @@ public class StaffDeployment {
 	private ArrayList<Employee> employees = new ArrayList<Employee>();
 	private ArrayList<EmployeeAssignment> assignments = new ArrayList<EmployeeAssignment>();
 	private ArrayList<SkillType> possibleSkills = new ArrayList<SkillType>();
-	private boolean timeIndependant;
 	
 	/**
 	 * R�bcie z tym co chcecie.
@@ -112,7 +112,18 @@ public class StaffDeployment {
 		
 	}
 	
-
+	public void addSkill(SkillType skill) throws DuplicateSkillException
+	{
+		for(int i=0; i<possibleSkills.size();i++)
+		{
+			if(possibleSkills.get(i).getName().equalsIgnoreCase(skill.getName()))
+			{
+				throw new DuplicateSkillException();
+			}
+		}
+		
+		possibleSkills.add(skill);
+	}
 
 	public List<Employee> returnEmployees() {
 		
