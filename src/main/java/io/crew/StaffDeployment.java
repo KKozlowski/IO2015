@@ -42,7 +42,7 @@ public class StaffDeployment {
 		
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster))
 		{
-			EmployeeAssignment assignment = new EmployeeAssignment(beginDate, endDate, timeIndependant, reqSkills, service, notes);
+			EmployeeAssignment assignment = new EmployeeAssignment(beginDate, endDate, timeIndependent, reqSkills, service, notes);
 			assignments.add(assignment);
 		}
 		
