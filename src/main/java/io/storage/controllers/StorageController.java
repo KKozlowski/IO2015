@@ -2,15 +2,21 @@ package io.storage.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.access.PermissionType;
 import io.general.App;
+import io.storage.models.StorageDao;
 
 @Controller
 public class StorageController {
+
+	@Autowired
+	public static StorageDao db;
+
 	@RequestMapping(value = "/storage")
 	@ResponseBody
 	public String storage(HttpSession h) {
@@ -25,6 +31,7 @@ public class StorageController {
 			return "Witaj w Akwilonie"
 					+ "<br><br><a href='/reserveBoat'>Zarezerwuj statek</a>"
 					+ "<br><a href='/reserveMooringPlace'>Zarezerwuj cume</a>";
+
 		}
 
 		else {
