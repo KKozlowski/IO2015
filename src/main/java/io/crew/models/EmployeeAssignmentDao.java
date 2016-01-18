@@ -16,6 +16,7 @@ import io.services.ServiceType;
 @Transactional
 public class EmployeeAssignmentDao {
 	
+	/*
 	public void create(EmployeeAssignment assignment) {
 	    entityManager.persist(assignment);
 	    return;
@@ -45,5 +46,5 @@ public class EmployeeAssignmentDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	*/
 }
