@@ -217,4 +217,16 @@ public class StaffDeployment {
 	public void setCertificates(ArrayList<Certificate> certificates) {
 		this.certificates = certificates;
 	}
+
+
+
+	public ArrayList<SkillType> getPossibleSkills() {
+		return possibleSkills;
+	}
+
+
+
+	public void setPossibleSkills(ArrayList<SkillType> possibleSkills) {
+		this.possibleSkills = possibleSkills;
+	}
 }

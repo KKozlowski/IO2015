@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.access.PermissionType;
+import io.crew.Certificate;
 import io.crew.Employee;
 import io.crew.EmployeeAssignment;
+import io.crew.SkillType;
+import io.crew.exceptions.DuplicateSkillException;
 import io.general.App;
 
 @Controller
@@ -57,6 +60,11 @@ public class CrewMasterController {
 		{
 			String result="<!DOCTYPE html><html><body>"
 					+"<p>Stwórz nowy certyfikat</p>";
+			List<Certificate> certs=App.getInstance().getCrew().getCertificates();
+			for(Certificate cert : certs)
+			{
+				result+="<br />"+cert.getCertificateID()+" "+cert.getName();
+			}
 			result+="<form id='frm1' action='NewCert'>"
 					+ "<br>ID certyfikatu: <input type='text' name='id'><br>"
 					+ "Nazwa certyfikatu: <input type='text' name='nazwa'><br><br>"
@@ -76,7 +84,8 @@ public class CrewMasterController {
 	public String NewCert(HttpSession h, String id, String nazwa)
 	{
 		//TODO zapis do bazy itd.
-		//Integer.parseInt(id);
+		Certificate newCert = new Certificate(Integer.parseInt(id),nazwa);
+		App.getInstance().getCrew().getCertificates().add(newCert);
 		return "Utworzono certyfikat "+nazwa+" o ID: "+id;
 	}
 	@RequestMapping("/AddCertificate")
@@ -123,6 +132,11 @@ public class CrewMasterController {
 		{
 			String result="<!DOCTYPE html><html><body>"
 					+"<p>Tworzenie umiejętności</p>";
+			List<SkillType> skills=App.getInstance().getCrew().getPossibleSkills();
+			for(SkillType skill : skills)
+			{
+				result+="<br />"+skill.getId()+" "+skill.getName();
+			}
 			result+="<form id='frm1' action='AddSkill'>"
 					+ "<br>ID umiejętności: <input type='text' name='id'><br>"
 					+ "Nazwa umiejętności: <input type='text' name='skill'><br><br>"
@@ -141,7 +155,12 @@ public class CrewMasterController {
 	public String AddSkill(HttpSession h, String id, String skill)
 	{
 		//TODO brakująca funkcja w staffdeployment
-		//Integer.parseInt(id);
+		SkillType newSkill = new SkillType(Integer.parseInt(id), skill);
+		try {
+			App.getInstance().getCrew().addSkill(newSkill);
+		} catch (DuplicateSkillException e) {
+			e.printStackTrace();
+		}
 		return "Stworzono umiejętność "+skill+" o ID: "+id;
 	}
 	@RequestMapping("/AddTask")
