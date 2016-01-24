@@ -20,6 +20,7 @@ public class StaffDeployment {
 	private ArrayList<Employee> employees = new ArrayList<Employee>();
 	private ArrayList<EmployeeAssignment> assignments = new ArrayList<EmployeeAssignment>();
 	private ArrayList<SkillType> possibleSkills = new ArrayList<SkillType>();
+	private ArrayList<Certificate> certificates = new ArrayList<Certificate>();
 	
 	/**
 	 * R�bcie z tym co chcecie.
@@ -203,5 +204,17 @@ public class StaffDeployment {
 		{
 			assignments.remove(nr);
 		}	
+	}
+
+
+
+	public ArrayList<Certificate> getCertificates() {
+		return certificates;
+	}
+
+
+
+	public void setCertificates(ArrayList<Certificate> certificates) {
+		this.certificates = certificates;
 	}
 }

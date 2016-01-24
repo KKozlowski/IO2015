@@ -36,9 +36,10 @@ public class MainController {
 			}
 			if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(),PermissionType.crewMaster))
 				  result+="<br /><a href='/MasterPanel'>Zarządzaj zadaniami</a>  -  " +
-					  		"<a href='/CreateCertificate'>Przypisz certyfikat</a>  -  " +
-					  		"<a href='/AddCertificate'>Dodaj certyfkat</a>  -  " +
-					  		"<a href='/NewSkillType'>Dodaj typ umiejętności</a>";
+					  		"<a href='/AddCertificate'>Przypisz certyfikat pracownikowi</a>  -  " +
+					  		"<a href='/CreateCertificate'>Dodaj nowy certyfkat</a>  -  " +
+					  		"<a href='/NewSkillType'>Dodaj typ umiejętności</a>  -  " +
+					  		"<a href='/AddTask'>Dodaj zadanie</a>";
 			if (App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.workshopMan)) {
 				result += "<br>Witaj Lordzie Administratorze! Chwała wielkiej administraturze!<br>Oto twoje specjalne uprawnienia:<br>"
 						+ "<br><a href='/workshop'>Przejdź do serwisu</a><br>";
