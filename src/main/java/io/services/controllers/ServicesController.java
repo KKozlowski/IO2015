@@ -132,13 +132,12 @@ public class ServicesController {
 	@RequestMapping("/deleteServiceSend")
 	public boolean deleteServiceSend(@RequestParam(value="id") int id, HttpSession h) {
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
-			try {
-		    	serviceDao.delete(serviceDao.getById(id));
-		    	return true;
-		    }
-		    catch (Exception ex) {
-		      return false;
-		    }
+			Service service = serviceDao.getById(id);
+			if (service == null) {
+				return false;
+			}
+		    serviceDao.delete(service);
+		    return true;
 		} else {
 			return false;
 		}
@@ -160,13 +159,12 @@ public class ServicesController {
 	@RequestMapping("/deleteServiceTypeSend")
 	public boolean deleteServiceTypeSend(@RequestParam(value="id") int id, HttpSession h) {
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
-			try {
-		    	serviceTypeDao.delete(serviceTypeDao.getById(id));
-		    	return true;
-		    }
-		    catch (Exception ex) {
-		      return false;
-		    }
+			ServiceType serviceType = serviceTypeDao.getById(id);
+			if (serviceType == null) {
+				return false;
+			}
+		    serviceTypeDao.delete(serviceType);
+		    return true;
 		} else {
 			return false;
 		}
