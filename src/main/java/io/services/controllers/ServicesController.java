@@ -66,7 +66,7 @@ public class ServicesController {
 				result += (result.length() != 0 ? "\n" : "") + s.getName();
 			return result;
 		} else {
-			return "Brak serwisów";
+			return "Brak usług/rejsów";
 		}
 	}
 	
@@ -182,7 +182,7 @@ public class ServicesController {
 					result += (result.length() != 0 ? "\n" : "") + s.getName();
 				return result;
 			} else {
-				return "Brak serwisów";
+				return "Brak typów usług/rejsów";
 			}
 		} else {
 			return NO_PERMISSIONS;
@@ -262,12 +262,8 @@ public class ServicesController {
 		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
 				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
 		return "<!DOCTYPE html><html><body><p>Rezerwacja:</p>"
-				+"<form id='frm1' action='/services/insertSend' method='POST'>"
-				+"<br /><br>ID: <input type='text' name='serviceType'/>"
-				+"<br />Nazwa: <input type='text' name='name'/>"
-				+"<br />Dodatkowe informacje: <input type='text' name='additionalInfo'/>"
-				+"<br />Data Rozpoczoczecia: <input type='text' name='dateStarted'/>"
-				+"<br />Data Zakonczenia: <input type='text' name='dateEnded'/><br />"
+				+"<form id='frm1' action='/services/makeReservationSend' method='POST'>"
+				+"<br /><br>ID usługi: <input type='text' name='serviceID'/><br />"
 				+"<br /><button type='submit'>OK</button></form>"
 				+"</body></html>";
 		else
@@ -275,7 +271,7 @@ public class ServicesController {
 	}
 
 	@RequestMapping("/makeReservationSend")
-	public String makeReservationSend(HttpSession h, @RequestParam(value="serviceid") int serviceID) {
+	public String makeReservationSend(HttpSession h, int serviceID) {
 		if(App.getInstance().getUsers().isUserLogged(h.getId())) {
 			Service service = serviceDao.getById(serviceID);
 			service.getReservations().add(new UserEntity(App.getInstance().getUsers().getUserBySessionID(h.getId()).getID()));
