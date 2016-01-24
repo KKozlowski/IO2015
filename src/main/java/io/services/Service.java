@@ -22,17 +22,6 @@ public class Service {
 
 	public Service() {}
 	
-	public Service(int id, ServiceType serviceType, String name, Date begginingDate, Date endingDate,
-			float price, int usersLimit) {
-		super();
-		this.serviceType = serviceType;
-		this.name = name;
-		this.endingDate = endingDate;
-		this.price = price;
-		this.begginingDate = begginingDate;
-		this.usersLimit = usersLimit;
-	}
-	
 	public Service(ServiceType serviceType, String name, Date begginingDate, Date endingDate,
 			float price, int usersLimit) {
 		super();
@@ -42,6 +31,7 @@ public class Service {
 		this.price = price;
 		this.begginingDate = begginingDate;
 		this.usersLimit = usersLimit;
+		this.ticketClass = "";
 	}
 
 	@Id

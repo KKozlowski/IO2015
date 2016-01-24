@@ -33,6 +33,7 @@ public class ServicesController {
 	public ServiceTypeDao serviceTypeDao;
 	
 	private final String NO_PERMISSIONS = "YOU DON'T HAVE MATCHING PERMISSIONS";
+	private final String BACK = "<br><br><a href='/services/hello'>Wróć</a>";
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
@@ -54,7 +55,7 @@ public class ServicesController {
 					+"<br><a href='/services/listAllServiceTypes'>Znajdź wszystkie typy usług</a>"
 					+"<br><br><a href='/services/makeReservation'>Dokonaj rezerwacji</a>";		
 		else 
-			 return NO_PERMISSIONS;
+			 return NO_PERMISSIONS + BACK;
 	}
 
 	@RequestMapping("/listAllServices")
@@ -64,9 +65,10 @@ public class ServicesController {
 			String result = "";
 			for(Service s : list)
 				result += (result.length() != 0 ? "\n" : "") + s.getName();
+			result += BACK;
 			return result;
 		} else {
-			return "Brak usług/rejsów";
+			return "Brak usług/rejsów" + BACK;
 		}
 	}
 	
@@ -77,19 +79,20 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Znajdź usługę po ID:</p>"
 				+"<form id='frm1' action='/services/getByIdSend' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/getByIdSend")
 	public String getByIdSend(int id) {
 		Service service = serviceDao.getById(id);
 		if (service != null) {
-			return service.getName();
+			return service.getName() + BACK;
 		} else {
-			return "Nie znaleziono usługi o podanym ID";
+			return "Nie znaleziono usługi o podanym ID" + BACK;
 		}
 	}
 	
@@ -100,19 +103,20 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Znajdź usługę po ID:</p>"
 				+"<form id='frm1' action='/services/getTypeByIdSend' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/getTypeByIdSend")
 	public String getTypeByIdSend(int id) {
 		ServiceType serviceType = serviceTypeDao.getById(id);
 		if (serviceType != null) {
-			return serviceType.getName();
+			return serviceType.getName() + BACK;
 		} else {
-			return "Nie znaleziono usługi o podanym ID";
+			return "Nie znaleziono usługi o podanym ID" + BACK;
 		}
 	}
 	
@@ -123,23 +127,24 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Usuń usługę o ID:</p>"
 				+"<form id='frm1' action='/services/deleteServiceSend' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/deleteServiceSend")
-	public boolean deleteServiceSend(@RequestParam(value="id") int id, HttpSession h) {
+	public String deleteServiceSend(@RequestParam(value="id") int id, HttpSession h) {
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
 			Service service = serviceDao.getById(id);
 			if (service == null) {
-				return false;
+				return "Złe ID!" + BACK;
 			}
 		    serviceDao.delete(service);
-		    return true;
+		    return "OK" + BACK;
 		} else {
-			return false;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -150,23 +155,24 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Usuń typ usługi o ID:</p>"
 				+"<form id='frm1' action='/services/deleteServiceTypeSend' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+"<br /><a href='/services/hello'>Wróć</a></form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/deleteServiceTypeSend")
-	public boolean deleteServiceTypeSend(@RequestParam(value="id") int id, HttpSession h) {
+	public String deleteServiceTypeSend(@RequestParam(value="id") int id, HttpSession h) {
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
 			ServiceType serviceType = serviceTypeDao.getById(id);
 			if (serviceType == null) {
-				return false;
+				return "Złe ID!" + BACK;
 			}
 		    serviceTypeDao.delete(serviceType);
-		    return true;
+		    return "OK" + BACK;
 		} else {
-			return false;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -178,12 +184,13 @@ public class ServicesController {
 			if (!list.isEmpty() && list.size() > 0) {
 				for(ServiceType s : list)
 					result += (result.length() != 0 ? "\n" : "") + s.getName();
+				result += BACK;
 				return result;
 			} else {
-				return "Brak typów usług/rejsów";
+				return "Brak typów usług/rejsów" + BACK;
 			}
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -199,10 +206,11 @@ public class ServicesController {
 				+"<br />Data Rozpoczoczecia: <input type='text' name='endingDate'/>"
 				+"<br />Cena: <input type='text' name='price'/>"
 				+"<br />Limit osób: <input type='text' name='usersLimit'/><br />"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 
 	@RequestMapping("/insertSend")
@@ -213,21 +221,21 @@ public class ServicesController {
 				Date start = sdf.parse(begginingDate);
 				Date end = sdf.parse(endingDate);
 				if (start.after(end)) {
-					return "Początek usługi musi być wcześniej niż koniec!";
+					return "Początek usługi musi być wcześniej niż koniec!" + BACK;
 				}
 				ServiceType sType = serviceTypeDao.getById(serviceType);
 				if (sType == null) {
-					return "Złe ID typu usługi!";
+					return "Złe ID typu usługi!" + BACK;
 				}
 				Service service = new Service(sType, name, start, end, price,  usersLimit);
 				serviceDao.create(service);
-				return "OK";
+				return "OK" + BACK;
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "ERROR";
+				return "ERROR" + BACK;
 			}
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -238,10 +246,11 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Dodawanie typu usługi:</p>"
 				+"<form id='frm1' action='/services/insertTypeSend' method='POST'>"
 				+"<br /><br>Nazwa: <input type='text' name='name'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;	
+			return NO_PERMISSIONS + BACK;	
 	}
 	
 	@RequestMapping("/insertTypeSend")
@@ -249,9 +258,9 @@ public class ServicesController {
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
 			ServiceType serviceType = new ServiceType(name);
 			serviceTypeDao.create(serviceType);
-			return "OK";
+			return "OK" + BACK;
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -262,10 +271,11 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Rezerwacja:</p>"
 				+"<form id='frm1' action='/services/makeReservationSend' method='POST'>"
 				+"<br /><br>ID usługi: <input type='text' name='serviceID'/><br />"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 
 	@RequestMapping("/makeReservationSend")
@@ -274,9 +284,9 @@ public class ServicesController {
 			Service service = serviceDao.getById(serviceID);
 			service.getReservations().add(new UserEntity(App.getInstance().getUsers().getUserBySessionID(h.getId()).getID()));
 			serviceDao.update(service);
-			return "OK";
+			return "OK" + BACK;
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -287,10 +297,11 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Modyfikacja usługi:</p>"
 				+"<form id='frm1' action='/services/updateServiceForm' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/updateServiceForm")
@@ -299,7 +310,7 @@ public class ServicesController {
 				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
 			Service service = serviceDao.getById(id);
 			if (service == null) {
-				return "Złe ID!";
+				return "Złe ID!" + BACK;
 			}
 			return "<!DOCTYPE html><html><body><p>Modyfikacja usługi:</p>"
 					+"<form id='frm1' action='/services/updateServiceSend' method='POST'>"
@@ -313,10 +324,11 @@ public class ServicesController {
 					+"<br />ID rejsu: <input type='text' name='cruiseId' value='" + service.getCruiseId() + "'/>"
 					+"<br />Klasa biletu: <input type='text' name='ticketClass' value='" + service.getTicketClass() + "'/>"
 					+"<br />ID pokoju: <input type='text' name='roomId' value='" + service.getRoomID() + "'><br />"
-					+"<br /><button type='submit'>OK</button></form>"
+					+"<br /><button type='submit'>OK</button>"
+					+ BACK + "</form>"
 					+"</body></html>";
 		} else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/updateServiceSend")
@@ -327,7 +339,7 @@ public class ServicesController {
 				Service service = serviceDao.getById(serviceId);
 				ServiceType sType = serviceTypeDao.getById(serviceTypeId);
 				if (sType == null) {
-					return "Złe ID typu usługi!";
+					return "Złe ID typu usługi!" + BACK;
 				}
 				service.setServiceType(sType);
 				service.setName(name);
@@ -339,12 +351,12 @@ public class ServicesController {
 				service.setTicketClass(ticketClass);
 				service.setRoomID(roomId);
 				serviceDao.update(service);
-				return "OK";
+				return "OK" + BACK;
 			} catch (Exception e) {
-				return "ERROR";
+				return "ERROR" + BACK;
 			}
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 	
@@ -355,10 +367,11 @@ public class ServicesController {
 		return "<!DOCTYPE html><html><body><p>Modyfikacja typu usługi:</p>"
 				+"<form id='frm1' action='/services/updateServiceTypeForm' method='POST'>"
 				+"<br /><br>ID: <input type='text' name='id'/>"
-				+"<br /><button type='submit'>OK</button></form>"
+				+"<br /><button type='submit'>OK</button>"
+				+ BACK + "</form>"
 				+"</body></html>";
 		else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/updateServiceTypeForm")
@@ -373,10 +386,11 @@ public class ServicesController {
 					+"<form id='frm1' action='/services/updateServiceTypeSend' method='POST'>"
 					+"<input type='hidden' name='id' value='" + id + "'/>"
 					+"<br />Nazwa: <input type='text' name='name' value='" + serviceType.getName() + "'/>"
-					+"<br /><button type='submit'>OK</button></form>"
+					+"<br /><button type='submit'>OK</button>"
+					+ BACK + "</form>"
 					+"</body></html>";
 		} else
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 	}
 	
 	@RequestMapping("/updateServiceTypeSend")
@@ -385,9 +399,9 @@ public class ServicesController {
 			ServiceType serviceType = serviceTypeDao.getById(id);
 			serviceType.setName(name);
 			serviceTypeDao.update(serviceType);
-			return "OK";
+			return "OK" + BACK;
 		} else {
-			return NO_PERMISSIONS;
+			return NO_PERMISSIONS + BACK;
 		}
 	}
 }
