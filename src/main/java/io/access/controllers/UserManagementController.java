@@ -114,12 +114,12 @@ public class UserManagementController {
 				  //+"document.getElementById('frm1').submit(); "
 				  +"urrl+='&"+iu.getNick()+"';"
 				  +"window.open(urrl,'_self');"
-				  +"} </script>"
+				  +"} </script><br><a href='/'>Wróć</a>"
 				  +"</body></html>";
 				  return result;
 	}
 	else {
-		return "YOU DON'T HAVE MATCHING PERMISSIONS";
+		return "<a href='/'>Wróć</a>";
 	}
   }
   
@@ -139,6 +139,7 @@ public class UserManagementController {
 			  }
 			  iterator++;
 		  }
+		  App.getInstance().getUsers().logout(iu.getID());
 	  }
 	  return editPermissionsUser(h, nick);
   }

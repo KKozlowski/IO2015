@@ -16,7 +16,8 @@ import io.services.ServiceType;
 @Repository
 @Transactional
 public class EmployeeDao {
-
+	
+	/*
 	public void create(Employee employee) {
 	    entityManager.persist(employee);
 	    return;
@@ -32,7 +33,7 @@ public class EmployeeDao {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public List<ServiceType> findAll() {
+	public List<Employee> findAll() {
 	    return entityManager.createQuery("from Employee").getResultList();
 	}
 	
@@ -46,6 +47,7 @@ public class EmployeeDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	*/
 }
 
 
