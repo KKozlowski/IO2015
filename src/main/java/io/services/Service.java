@@ -33,10 +33,10 @@ public class Service {
 		this.usersLimit = usersLimit;
 	}
 	
-	public Service(int serviceTypeID, String name, Date begginingDate, Date endingDate,
+	public Service(ServiceType serviceType, String name, Date begginingDate, Date endingDate,
 			float price, int usersLimit) {
 		super();
-		this.serviceType = new ServiceType(serviceTypeID);
+		this.serviceType = serviceType;
 		this.name = name;
 		this.endingDate = endingDate;
 		this.price = price;
