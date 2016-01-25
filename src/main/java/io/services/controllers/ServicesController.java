@@ -64,7 +64,7 @@ public class ServicesController {
 		if (!list.isEmpty() && list.size() > 0) {
 			String result = "";
 			for(Service s : list)
-				result += (result.length() != 0 ? "\n" : "") + s.getName();
+				result += (result.length() != 0 ? "\n" : "") + s.toString();
 			result += BACK;
 			return result;
 		} else {
@@ -90,7 +90,7 @@ public class ServicesController {
 	public String getByIdSend(int id) {
 		Service service = serviceDao.getById(id);
 		if (service != null) {
-			return service.getName() + BACK;
+			return service.toString() + BACK;
 		} else {
 			return "Nie znaleziono usługi o podanym ID" + BACK;
 		}
@@ -114,7 +114,7 @@ public class ServicesController {
 	public String getTypeByIdSend(int id) {
 		ServiceType serviceType = serviceTypeDao.getById(id);
 		if (serviceType != null) {
-			return serviceType.getName() + BACK;
+			return serviceType.toString() + BACK;
 		} else {
 			return "Nie znaleziono usługi o podanym ID" + BACK;
 		}
@@ -183,7 +183,7 @@ public class ServicesController {
 			String result = "";
 			if (!list.isEmpty() && list.size() > 0) {
 				for(ServiceType s : list)
-					result += (result.length() != 0 ? "\n" : "") + s.getName();
+					result += (result.length() != 0 ? "\n" : "") + s.toString();
 				result += BACK;
 				return result;
 			} else {
@@ -202,8 +202,8 @@ public class ServicesController {
 				+"<form id='frm1' action='/services/insertSend' method='POST'>"
 				+"<br /><br>ID typu usługi: <input type='text' name='serviceType'/>"
 				+"<br />Nazwa: <input type='text' name='name'/>"
-				+"<br />Data rozpoczęcia: <input type='text' name='begginingDate'/>"
-				+"<br />Data Rozpoczoczecia: <input type='text' name='endingDate'/>"
+				+"<br />Data Rozpoczęcia: <input type='text' name='begginingDate'/>"
+				+"<br />Data Zakonczenia: <input type='text' name='endingDate'/>"
 				+"<br />Cena: <input type='text' name='price'/>"
 				+"<br />Limit osób: <input type='text' name='usersLimit'/><br />"
 				+"<br /><button type='submit'>OK</button>"
@@ -266,14 +266,13 @@ public class ServicesController {
 	
 	@RequestMapping("/makeReservation")
 	public String makeReservation(HttpSession h){
-		if (App.getInstance().getUsers().isCurrentUserAdmin(h.getId()) 
-				   || App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan))
-		return "<!DOCTYPE html><html><body><p>Rezerwacja:</p>"
-				+"<form id='frm1' action='/services/makeReservationSend' method='POST'>"
-				+"<br /><br>ID usługi: <input type='text' name='serviceID'/><br />"
-				+"<br /><button type='submit'>OK</button>"
-				+ BACK + "</form>"
-				+"</body></html>";
+		if(App.getInstance().getUsers().isUserLogged(h.getId()))
+			return "<!DOCTYPE html><html><body><p>Rezerwacja:</p>"
+					+"<form id='frm1' action='/services/makeReservationSend' method='POST'>"
+					+"<br /><br>ID usługi: <input type='text' name='serviceID'/><br />"
+					+"<br /><button type='submit'>OK</button>"
+					+ BACK + "</form>"
+					+"</body></html>";
 		else
 			return NO_PERMISSIONS + BACK;
 	}

@@ -50,6 +50,7 @@ public class MainController {
 
 			if (App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.netUser)) {
 				result += "<br><br><a href='/storage'>Kliknij aby dokonac rezerwacji</a>";
+				result += "<br><br><a href='/services/makeReservation'>Kliknij aby zarezerwować usługę</a>";
 			}
 			if (App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.serviceMan)) {
 				result += "<br><br><a href='/services/hello'>Zarzadzanie uslugami</a>";

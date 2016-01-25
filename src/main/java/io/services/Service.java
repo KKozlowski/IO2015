@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import io.access.models.UserEntity;
-import io.crew.EmployeeAssignment;
-import io.storage.ItemAssignment;
 
 @Entity
 @Table(name = "services")

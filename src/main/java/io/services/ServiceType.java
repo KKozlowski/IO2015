@@ -47,4 +47,8 @@ public class ServiceType {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "ServiceType [id=" + id + ", name=" + name + "]";
+	}
 }
