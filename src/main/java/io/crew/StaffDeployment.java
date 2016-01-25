@@ -219,4 +219,28 @@ public class StaffDeployment {
 	public void setPossibleSkills(ArrayList<SkillType> possibleSkills) {
 		this.possibleSkills = possibleSkills;
 	}
+
+
+
+	public ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+
+
+
+	public void setEmployees(ArrayList<Employee> employees) {
+		this.employees = employees;
+	}
+
+
+
+	public ArrayList<EmployeeAssignment> getAssignments() {
+		return assignments;
+	}
+
+
+
+	public void setAssignments(ArrayList<EmployeeAssignment> assignments) {
+		this.assignments = assignments;
+	}
 }

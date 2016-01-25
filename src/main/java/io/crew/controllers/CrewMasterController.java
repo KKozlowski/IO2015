@@ -34,14 +34,20 @@ public class CrewMasterController {
 		{
 			String result="<!DOCTYPE html><html><body>"
 					+"<p>Wybierz zadanie</p>";
-			List<EmployeeAssignment> assignments=App.getInstance().getCrew().returnEmployeeAssignments(App.getInstance().getUsers().getCurrentUser().getPersonalData().getPESEL());
-			for(EmployeeAssignment assignment : assignments)
+			List<EmployeeAssignment> assignments=App.getInstance().getCrew().getAssignments();
+			for(int i=0; i<assignments.size();i++)
 			{
-				result+="<br />"+assignment.getNote();
+				result+="<br />"+i+" "+assignments.get(i).getNote()+" "+assignments.get(i).getReqSkills().get(0).getName();
+			}
+			result+="<br><br>Pracownicy:";
+			List<Employee> employees = App.getInstance().getCrew().returnEmployees();
+			for(Employee emlpoyee : employees)
+			{
+				result+="<br>"+emlpoyee.getPersonalData().getCardID()+" "+emlpoyee.getPersonalData().getName()+" "+emlpoyee.getPersonalData().getSurname();
 			}
 			result+="<form id='frm1' action='Assing'>"
-					+ "<br>ID zadania: <input type='text' name='id'><br>"
-					+ "Pracownik: <input type='text' name='pracownik'><br><br>"
+					+ "<br>Numer zadania: <input type='text' name='nrZad'><br>"
+					+ "Wybierz id pracownika: <input type='text' name='pracownik'><br><br>"
 					+ "<input type='button' onclick='myFunction()' value='Submit'></form>"
 					+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>";
 			result+="</body></html>";
@@ -54,11 +60,20 @@ public class CrewMasterController {
 	}
 	@RequestMapping("/Assign")
 	@ResponseBody
-	public String Assign(HttpSession h, String id, String pracownik)
+	public String Assign(HttpSession h, String nrZad, String pracownik)
 	{
 		//TODO zapis do bazy itd.
-		//Integer.parseInt(id);
-		return "Przypisano pracownika "+pracownik+" do zadania: "+id;
+		//Integer.parseInt(nrZad);
+		/*
+		Employee employee = null;
+		for(Employee emp:App.getInstance().getCrew().returnEmployees())
+		{
+			if(pracownik.equals(emp.getPersonalData().getCardID()))
+				employee=emp;
+		}
+		App.getInstance().getCrew().getAssignments().get(Integer.parseInt(nrZad)).addEmployee(employee);
+		*/
+		return "Przypisano pracownika "+pracownik+" do zadania: "+nrZad;
 	}
 	@RequestMapping("/CreateCertificate")
 	@ResponseBody
