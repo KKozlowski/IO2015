@@ -1,6 +1,13 @@
 package io.crew.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +21,7 @@ import io.crew.EmployeeAssignment;
 import io.crew.SkillType;
 import io.crew.exceptions.DuplicateSkillException;
 import io.general.App;
+import io.services.Service;
 
 @Controller
 public class CrewMasterController {
@@ -29,7 +37,7 @@ public class CrewMasterController {
 			List<EmployeeAssignment> assignments=App.getInstance().getCrew().returnEmployeeAssignments(App.getInstance().getUsers().getCurrentUser().getPersonalData().getPESEL());
 			for(EmployeeAssignment assignment : assignments)
 			{
-				result+="<br />"+assignment;
+				result+="<br />"+assignment.getNote();
 			}
 			result+="<form id='frm1' action='Assing'>"
 					+ "<br>ID zadania: <input type='text' name='id'><br>"
@@ -169,9 +177,26 @@ public class CrewMasterController {
 	{
 		if(App.getInstance().getUsers().doesCurrentUserHavePermission(h.getId(), PermissionType.crewMaster))
 		{
-				return "<!DOCTYPE html><html><body>"
-						+ "<p>Utwórz zadanie</p>"
-						  +"</body></html>";
+			String result="<!DOCTYPE html><html><body>"
+					+"<p>Tworzenie zadania</p>";
+			
+			List<SkillType> skills=App.getInstance().getCrew().getPossibleSkills();
+			for(SkillType skill : skills)
+			{
+				result+="<br />"+skill.getId()+" "+skill.getName();
+			}
+			result+="<form id='frm1' action='NewTask'>"
+					+ "<br>Data początkowa: <input type='text' name='dataPoczatkowa'>"
+					+ "<br>Data końcowa: <input type='text' name='dataKonca'>"
+					+ "<br>ID umiejętności: <input type='text' name='wymUmiejetnosci'>"
+					+ "<br>Opis: <input type='text' name='notes'>"
+					+ "<br>Cena: <input type='text' name='cena'>"
+					+ "<br>Limit czasu: <input type='text' name='limitCzasu'>"
+					+ "<br><br>"
+					+ "<input type='button' onclick='myFunction()' value='Submit'></form>"
+					+"<script> function myFunction() { document.getElementById('frm1').submit(); } </script>";
+			result+="</body></html>";
+			return result;
 		}
 		else
 		{
@@ -180,10 +205,30 @@ public class CrewMasterController {
 	}
 	@RequestMapping("/NewTask")
 	@ResponseBody
-	public String NewTask(HttpSession h, String id, String skill)
+	public String NewTask(HttpSession h, String dataPoczatkowa, String dataKonca, String wymUmiejetnosci, String notes, String cena, String limitCzasu)
 	{
-		//TODO brakująca funkcja w staffdeployment
-		//Integer.parseInt(id);
-		return "Zadanie";
+		DateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+		Date beginDate;
+		Date endDate;
+		try {
+			beginDate = format.parse(dataPoczatkowa);
+			endDate = format.parse(dataKonca);
+			ArrayList<SkillType> lista = new ArrayList<SkillType>();
+			for(SkillType skill:App.getInstance().getCrew().getPossibleSkills())
+			{
+				if(skill.getId()==Integer.parseInt(wymUmiejetnosci))
+				{
+					lista.add(skill);
+				}
+			}
+			Service service = new Service(null, notes, beginDate, endDate, Float.parseFloat(cena), Integer.parseInt(limitCzasu));
+			App.getInstance().getCrew().createAssignment(beginDate, endDate, true, lista, service , notes);;
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "Błąd";
+		}
+		
+		return "Zadanie dodano!";
 	}
 }

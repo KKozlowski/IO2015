@@ -40,13 +40,9 @@ public class StaffDeployment {
 	}
 	
 	public void createAssignment(Date beginDate, Date endDate, boolean timeIndependent,List<SkillType> reqSkills, Service service, String notes) {
-		
-		if(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster))
-		{
+
 			EmployeeAssignment assignment = new EmployeeAssignment(beginDate, endDate, timeIndependent, reqSkills, service, notes);
 			assignments.add(assignment);
-		}
-		
 	}
 	
 	public boolean isEmployeeAssignable(Employee employee, EmployeeAssignment assignment)
@@ -82,10 +78,6 @@ public class StaffDeployment {
 	}
 	
 	public void assignEmployee(Employee employee, EmployeeAssignment assignment) throws UnassignableEmployeeException {
-		
-		if(App.getInstance().getUsers().doesCurrentUserHavePermission(PermissionType.crewMaster))
-		{
-			
 			if(isEmployeeAssignable(employee, assignment))
 			{
 				throw new UnassignableEmployeeException();
@@ -94,8 +86,6 @@ public class StaffDeployment {
 			{
 				assignment.addEmployee(employee);
 			}
-				
-		}
 
 	}
 	
